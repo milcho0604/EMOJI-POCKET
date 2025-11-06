@@ -4,7 +4,8 @@ node_modules/
 .modules.yaml
 /.modules.yaml
 modules.yaml
-
+.history
+/.history
 # build output
 dist/
 

@@ -1,77 +1,8 @@
-// 간단한 샘플 데이터(필요 시 자유롭게 늘리면 됨)
-const EMOJIS: { char: string; tags: string[] }[] = [
-  // 😀 얼굴/표정
-  { char: "😀", tags: ["grin","smile","happy"] },
-  { char: "😁", tags: ["smile","happy"] },
-  { char: "😂", tags: ["joy","tears","lol"] },
-  { char: "🤣", tags: ["rofl","laugh"] },
-  { char: "😊", tags: ["blush","happy"] },
-  { char: "😇", tags: ["angel","kind"] },
-  { char: "🙂", tags: ["smile","soft"] },
-  { char: "😉", tags: ["wink"] },
-  { char: "😌", tags: ["relief"] },
-  { char: "😍", tags: ["love","heart","like"] },
-  { char: "😘", tags: ["kiss","love"] },
-  { char: "😗", tags: ["kiss"] },
-  { char: "😜", tags: ["playful","wink"] },
-  { char: "🤪", tags: ["crazy"] },
-  { char: "😎", tags: ["cool","sunglasses"] },
-  { char: "🤓", tags: ["nerd"] },
-  { char: "😭", tags: ["cry"] },
-  { char: "😢", tags: ["sad"] },
-  { char: "😱", tags: ["shock","surprise"] },
-  { char: "😡", tags: ["angry"] },
+import emojiData from "./data/src/data/emoji.json";
+import kaomojiData from "./data/src/data/kaomoji.json";
 
-  // 👍 제스처
-  { char: "👍", tags: ["thumb","up","ok"] },
-  { char: "👎", tags: ["thumb","down","no"] },
-  { char: "🙏", tags: ["pray","please","thanks"] },
-  { char: "👏", tags: ["clap","good"] },
-  { char: "🙌", tags: ["yay","celebrate"] },
-
-  // ❤️ 심볼
-  { char: "❤️", tags: ["heart","love"] },
-  { char: "🧡", tags: ["heart","orange"] },
-  { char: "💛", tags: ["heart","yellow"] },
-  { char: "💚", tags: ["heart","green"] },
-  { char: "💙", tags: ["heart","blue"] },
-  { char: "💜", tags: ["heart","purple"] },
-  { char: "🖤", tags: ["heart","black"] },
-  { char: "🤍", tags: ["heart","white"] },
-
-  // ✨ 효과
-  { char: "✨", tags: ["sparkle"] },
-  { char: "⚡️", tags: ["electric"] },
-  { char: "🔥", tags: ["fire","hot"] },
-  { char: "🎉", tags: ["party","celebrate"] },
-
-  // 🐱 동물
-  { char: "🐱", tags: ["cat"] },
-  { char: "🐶", tags: ["dog"] },
-  { char: "🐹", tags: ["hamster"] },
-  { char: "🐰", tags: ["rabbit"] },
-
-  // 🍔 음식
-  { char: "🍎", tags: ["apple"] },
-  { char: "🍕", tags: ["pizza"] },
-  { char: "🍜", tags: ["ramen"] },
-  { char: "🍣", tags: ["sushi"] },
-  { char: "☕", tags: ["coffee"] },
-  { char: "🍺", tags: ["beer"] },
-];
-
-const KAOMOJI: { char: string; tags: string[] }[] = [
-  { char: "(๑˃̵ᴗ˂̵)ﻭ", tags: ["파이팅", "화이팅", "힘", "win"] },
-  { char: "( •̀ᴗ•́ )و ̑̑", tags: ["파이팅", "화이팅"] },
-  { char: "(ᵔᵕᵔ)", tags: ["스마일", "smile"] },
-  { char: "(｡•̀ᴗ-)✧", tags: ["윙크", "wink"] },
-  { char: "(╯°□°）╯︵ ┻━┻", tags: ["테이블", "분노"] },
-  { char: "¯\\_(ツ)_/¯", tags: ["쩔수없지", "shrug"] },
-  { char: "(๑•̀ㅂ•́)و✧", tags: ["화이팅", "반짝"] },
-  { char: "(>_<)", tags: ["아야", "힘듦"] },
-  { char: "(•ᵕ•)", tags: ["귀여움"] },
-  { char: "(つ˘◡˘)つ", tags: ["포옹", "hug"] },
-];
+const EMOJIS: { char: string; tags: string[] }[] = emojiData;
+const KAOMOJI: { char: string; tags: string[] }[] = kaomojiData;
 
 type Item = { char: string; tags: string[] };
 
