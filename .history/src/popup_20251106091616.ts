@@ -1,6 +1,5 @@
 // 간단한 샘플 데이터(필요 시 자유롭게 늘리면 됨)
 const EMOJIS: { char: string; tags: string[] }[] = [
-  // 😀 얼굴/표정
   { char: "😀", tags: ["grin","smile","happy"] },
   { char: "😁", tags: ["smile","happy"] },
   { char: "😂", tags: ["joy","tears","lol"] },
