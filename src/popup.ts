@@ -4,15 +4,15 @@ type Kaomoji = { char: string; tags: string[] };
 type Item = { char: string; tags: string[]; category?: string };
 
 const CATEGORY_FILES: Record<string, string> = {
-  "표정":      "./data/src/data/emoji/emotion.json",
-  "손동작":    "./data/src/data/emoji/hands.json",
-  "하트":      "./data/src/data/emoji/hearts.json",
-  "동물":      "./data/src/data/emoji/animals.json",
-  "음식":      "./data/src/data/emoji/foods.json",
-  "사물":      "./data/src/data/emoji/objects.json",
-  "자연":      "./data/src/data/emoji/nature.json",
-  "기호":      "./data/src/data/emoji/symbols.json",
-  "행사/기타": "./data/src/data/emoji/events.json",
+  "표정":      "/data/emoji/emotion.json",
+  "손":    "/data/emoji/hands.json",
+  "하트":      "/data/emoji/hearts.json",
+  "동물":      "/data/emoji/animals.json",
+  "음식":      "/data/emoji/foods.json",
+  "사물":      "/data/emoji/objects.json",
+  "자연":      "/data/emoji/nature.json",
+  "기호":      "/data/emoji/symbols.json",
+  "기타": "/data/emoji/events.json",
 };
 
 const CATEGORY_ORDER = Object.keys(CATEGORY_FILES);
@@ -24,9 +24,14 @@ let EMOJIS: Emoji[] = [];            // 합쳐진 전체 이모지 (lazy)
 let LOADED_CATS = new Set<string>(); // 로딩된 카테고리
 let ACTIVE_CAT: string = "전체";      // "전체" 또는 특정 카테고리명
 
-// Kaomoji는 종전처럼 한 파일
-import kaomojiData from "./data/src/data/kaomoji.json";
-const KAOMOJI: Kaomoji[] = kaomojiData;
+// Kaomoji는 동적 로드로 변경
+let KAOMOJI: Kaomoji[] = [];
+
+async function loadKaomoji(): Promise<Kaomoji[]> {
+  const url = chrome.runtime.getURL("data/kaomoji.json");
+  const res = await fetch(url);
+  return await res.json();
+}
 
 // DOM
 const $grid       = document.getElementById("grid") as HTMLDivElement;
@@ -197,7 +202,8 @@ function renderCats() {
 
 // 카테고리 JSON 로드
 async function loadCategory(cat: string): Promise<Emoji[]> {
-  const url = CATEGORY_FILES[cat];
+  const path = CATEGORY_FILES[cat];
+  const url = chrome.runtime.getURL(path);
   const res = await fetch(url);
   const data: Emoji[] = await res.json();
   // 안전하게 category 필드 보정
@@ -221,6 +227,9 @@ async function ensureAllCategoriesLoaded() {
 
 // 초기화
 (async function init() {
+  // Kaomoji 로드
+  KAOMOJI = await loadKaomoji();
+  
   renderCats();
   // 초기에는 가벼운 카테고리만 선로드 (예: 표정, 하트)
   await ensureCategoryLoaded("표정");
