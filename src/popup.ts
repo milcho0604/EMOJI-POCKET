@@ -282,15 +282,46 @@ async function ensureAllItemsLoaded() {
   }
 }
 
+// function getItemsForTab(): Item[] {
+//   if (activeTab === "emoji") {
+//     return [...EMOJIS, ...CUSTOM_EMOJIS];
+//   } else if (activeTab === "kaomoji") {
+//     return [...KAOMOJI, ...CUSTOM_KAOMOJI];
+//   } else if (activeTab === "favorites") {
+//     const favorites = getFavorites();
+//     const allItems = [...EMOJIS, ...KAOMOJI, ...CUSTOM_EMOJIS, ...CUSTOM_KAOMOJI];
+//     return allItems.filter(item => favorites.has(item.char));
+//   } else if (activeTab === "recent") {
+//     const recent = getRecent();
+//     const allItems = [...EMOJIS, ...KAOMOJI, ...CUSTOM_EMOJIS, ...CUSTOM_KAOMOJI];
+//     const itemMap = new Map<string, Item>();
+//     allItems.forEach(item => {
+//       if (!itemMap.has(item.char)) {
+//         itemMap.set(item.char, item);
+//       }
+//     });
+//     return recent.map(char => itemMap.get(char)).filter((item): item is Item => item !== undefined);
+//   }
+//   return [];
+// }
 function getItemsForTab(): Item[] {
   if (activeTab === "emoji") {
     return [...EMOJIS, ...CUSTOM_EMOJIS];
   } else if (activeTab === "kaomoji") {
     return [...KAOMOJI, ...CUSTOM_KAOMOJI];
   } else if (activeTab === "favorites") {
-    const favorites = getFavorites();
+    const favorites = getFavorites(); // Set<string>
     const allItems = [...EMOJIS, ...KAOMOJI, ...CUSTOM_EMOJIS, ...CUSTOM_KAOMOJI];
-    return allItems.filter(item => favorites.has(item.char));
+
+    // ✅ char 기준으로 유니크 맵 구성
+    const byChar = new Map<string, Item>();
+    for (const it of allItems) {
+      if (!byChar.has(it.char)) {
+        byChar.set(it.char, it);
+      }
+    }
+    // 즐겨찾기 대상만 반환 (중복 제거된 목록)
+    return Array.from(byChar.values()).filter((it) => favorites.has(it.char));
   } else if (activeTab === "recent") {
     const recent = getRecent();
     const allItems = [...EMOJIS, ...KAOMOJI, ...CUSTOM_EMOJIS, ...CUSTOM_KAOMOJI];
