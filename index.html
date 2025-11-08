@@ -45,8 +45,8 @@
       .wrap { padding: var(--pad); }
       
       .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-      .tabs { display: flex; gap: 6px; flex: 1; }
-      .tab { flex: 1; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius); text-align: center; cursor: pointer; user-select: none; background: var(--bg); color: var(--text); }
+      .tabs { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+      .tab { flex: 1; min-width: 60px; padding: 8px 6px; border: 1px solid var(--border); border-radius: var(--radius); text-align: center; cursor: pointer; user-select: none; background: var(--bg); color: var(--text); font-size: 12px; }
       .tab.active { background: var(--active-bg); color: var(--active-text); border-color: var(--active-bg); }
 
       .theme-toggle { 
@@ -131,8 +131,29 @@
         user-select: none; 
         background: var(--bg);
         transition: background 0.2s;
+        position: relative;
       }
       .cell:hover { background: var(--hover); }
+      .cell:hover .favorite-btn { opacity: 1; }
+      .favorite-btn {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        width: 20px;
+        height: 20px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+      }
+      .favorite-btn.favorited { opacity: 1; color: #ffd700; }
+      .favorite-btn:hover { opacity: 1 !important; transform: scale(1.2); }
 
       .toast { 
         position: fixed; 
@@ -152,6 +173,105 @@
       [data-theme="dark"] .toast { background: rgba(255,255,255,.9); color: #111; }
 
       .hint { font-size: 12px; color: var(--text-secondary); margin-top: 8px; }
+
+      /* 모달 스타일 */
+      .modal { 
+        display: none; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        background: rgba(0,0,0,0.5); 
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal.show { display: flex; }
+      .modal-content {
+        background: var(--bg);
+        padding: 20px;
+        border-radius: var(--radius);
+        width: 90%;
+        max-width: 300px;
+        border: 1px solid var(--border);
+      }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+      .modal-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: var(--text);
+      }
+      .close-btn {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--text);
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-body {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .modal-input {
+        padding: 8px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--bg);
+        color: var(--text);
+        font-size: 14px;
+      }
+      .modal-input.tags {
+        font-size: 12px;
+      }
+      .modal-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .modal-btn {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--bg);
+        color: var(--text);
+        cursor: pointer;
+      }
+      .modal-btn.primary {
+        background: var(--active-bg);
+        color: var(--active-text);
+      }
+      .modal-btn:hover {
+        background: var(--hover);
+      }
+      .add-emoji-btn {
+        margin-top: 8px;
+        width: 100%;
+        padding: 8px;
+        border: 1px dashed var(--border);
+        border-radius: var(--radius);
+        background: var(--bg);
+        color: var(--text);
+        cursor: pointer;
+        font-size: 12px;
+      }
+      .add-emoji-btn:hover {
+        background: var(--hover);
+        border-color: var(--text-secondary);
+      }
     </style>
   </head>
   <body>
@@ -160,6 +280,8 @@
         <div class="tabs">
           <div class="tab active" data-tab="emoji">Emoji</div>
           <div class="tab" data-tab="kaomoji">Kaomoji</div>
+          <div class="tab" data-tab="favorites">⭐</div>
+          <div class="tab" data-tab="recent">🕐</div>
         </div>
         <button id="themeToggle" class="theme-toggle" title="다크모드 전환">🌙</button>
       </div>
@@ -178,6 +300,25 @@
         <div id="grid" class="grid"></div>
       </div>
       <div class="hint">항목 클릭: 클립보드 복사 • “커서삽입” 클릭: 활성 입력창에 삽입</div>
+      <button id="addEmojiBtn" class="add-emoji-btn">+ 사용자 이모티콘 추가</button>
+    </div>
+
+    <!-- 모달 -->
+    <div id="emojiModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">이모티콘 추가</div>
+          <button class="close-btn" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="emojiInput" class="modal-input" placeholder="이모티콘 (예: 😊)" maxlength="10" />
+          <input type="text" id="tagsInput" class="modal-input tags" placeholder="태그 (쉼표로 구분, 예: 기쁨,웃음,happy)" />
+          <div class="modal-actions">
+            <button class="modal-btn" id="cancelBtn">취소</button>
+            <button class="modal-btn primary" id="saveBtn">저장</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div id="toast" class="toast">Copied</div>

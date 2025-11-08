@@ -43,8 +43,92 @@ const $insertBtn  = document.getElementById("insertBtn") as HTMLButtonElement | 
 const $cats       = document.getElementById("cats") as HTMLDivElement;
 const $themeToggle = document.getElementById("themeToggle") as HTMLButtonElement;
 const $html       = document.documentElement;
+const $addEmojiBtn = document.getElementById("addEmojiBtn") as HTMLButtonElement;
+const $emojiModal = document.getElementById("emojiModal") as HTMLDivElement;
+const $closeModal = document.getElementById("closeModal") as HTMLButtonElement;
+const $cancelBtn = document.getElementById("cancelBtn") as HTMLButtonElement;
+const $saveBtn = document.getElementById("saveBtn") as HTMLButtonElement;
+const $emojiInput = document.getElementById("emojiInput") as HTMLInputElement;
+const $tagsInput = document.getElementById("tagsInput") as HTMLInputElement;
 
-let activeTab: "emoji" | "kaomoji" = "emoji";
+let activeTab: "emoji" | "kaomoji" | "favorites" | "recent" = "emoji";
+
+// 사용자 정의 이모티콘
+let CUSTOM_EMOJIS: Item[] = [];
+let CUSTOM_KAOMOJI: Item[] = [];
+
+// 즐겨찾기 및 최근 사용 관리
+function getFavorites(): Set<string> {
+  const saved = localStorage.getItem("favorites");
+  return saved ? new Set(JSON.parse(saved)) : new Set();
+}
+
+function setFavorites(favorites: Set<string>) {
+  localStorage.setItem("favorites", JSON.stringify(Array.from(favorites)));
+}
+
+function addToFavorites(char: string) {
+  const favorites = getFavorites();
+  favorites.add(char);
+  setFavorites(favorites);
+}
+
+function removeFromFavorites(char: string) {
+  const favorites = getFavorites();
+  favorites.delete(char);
+  setFavorites(favorites);
+}
+
+function isFavorite(char: string): boolean {
+  return getFavorites().has(char);
+}
+
+function getRecent(): string[] {
+  const saved = localStorage.getItem("recent");
+  return saved ? JSON.parse(saved) : [];
+}
+
+function addToRecent(char: string) {
+  const recent = getRecent();
+  // 이미 있으면 제거
+  const index = recent.indexOf(char);
+  if (index > -1) {
+    recent.splice(index, 1);
+  }
+  // 맨 앞에 추가
+  recent.unshift(char);
+  // 최대 50개만 유지
+  const maxRecent = 50;
+  if (recent.length > maxRecent) {
+    recent.splice(maxRecent);
+  }
+  localStorage.setItem("recent", JSON.stringify(recent));
+}
+
+// 사용자 정의 이모티콘 관리
+function getCustomEmojis(): Item[] {
+  const saved = localStorage.getItem("customEmojis");
+  return saved ? JSON.parse(saved) : [];
+}
+
+function getCustomKaomoji(): Item[] {
+  const saved = localStorage.getItem("customKaomoji");
+  return saved ? JSON.parse(saved) : [];
+}
+
+function saveCustomEmoji(char: string, tags: string[]) {
+  const custom = getCustomEmojis();
+  custom.push({ char, tags, category: "사용자" });
+  localStorage.setItem("customEmojis", JSON.stringify(custom));
+  CUSTOM_EMOJIS = custom;
+}
+
+function saveCustomKaomoji(char: string, tags: string[]) {
+  const custom = getCustomKaomoji();
+  custom.push({ char, tags });
+  localStorage.setItem("customKaomoji", JSON.stringify(custom));
+  CUSTOM_KAOMOJI = custom;
+}
 
 // 다크모드 관리
 function getTheme(): "light" | "dark" {
@@ -78,7 +162,12 @@ function toast(msg: string) {
 
 async function copyToClipboard(text: string) {
   await navigator.clipboard.writeText(text);
+  addToRecent(text); // 최근 사용 목록에 추가
   toast("복사됨");
+  // 즐겨찾기 탭이나 최근 탭이면 다시 렌더링
+  if (activeTab === "favorites" || activeTab === "recent") {
+    render();
+  }
 }
 
 // 검색 + 카테고리 필터
@@ -103,47 +192,162 @@ function filterItems(q: string, items: Item[], category?: string, isKaomoji: boo
 }
 
 
-function render() {
-  const items: Item[] = activeTab === "emoji" ? EMOJIS : KAOMOJI;
-  const isKaomoji = activeTab === "kaomoji";
-  const list = filterItems($q.value, items, ACTIVE_CAT, isKaomoji);
+async function ensureAllItemsLoaded() {
+  // 즐겨찾기나 최근 탭을 위해 모든 카테고리 로드
+  if (!LOADED_CATS.has("표정")) {
+    await ensureAllCategoriesLoaded();
+  }
+}
 
+function getItemsForTab(): Item[] {
+  if (activeTab === "emoji") {
+    return [...EMOJIS, ...CUSTOM_EMOJIS];
+  } else if (activeTab === "kaomoji") {
+    return [...KAOMOJI, ...CUSTOM_KAOMOJI];
+  } else if (activeTab === "favorites") {
+    const favorites = getFavorites();
+    const allItems = [...EMOJIS, ...KAOMOJI, ...CUSTOM_EMOJIS, ...CUSTOM_KAOMOJI];
+    return allItems.filter(item => favorites.has(item.char));
+  } else if (activeTab === "recent") {
+    const recent = getRecent();
+    const allItems = [...EMOJIS, ...KAOMOJI, ...CUSTOM_EMOJIS, ...CUSTOM_KAOMOJI];
+    const itemMap = new Map<string, Item>();
+    allItems.forEach(item => {
+      if (!itemMap.has(item.char)) {
+        itemMap.set(item.char, item);
+      }
+    });
+    return recent.map(char => itemMap.get(char)).filter((item): item is Item => item !== undefined);
+  }
+  return [];
+}
+
+async function render() {
+  // 즐겨찾기나 최근 탭이면 모든 카테고리 로드
+  if (activeTab === "favorites" || activeTab === "recent") {
+    await ensureAllItemsLoaded();
+  }
+  
+  let list: Item[] = [];
+  
+  if (activeTab === "favorites" || activeTab === "recent") {
+    list = getItemsForTab();
+    // 검색 필터 적용
+    const s = $q.value.trim().toLowerCase();
+    if (s) {
+      list = list.filter((it) =>
+        it.char.includes(s) || it.tags.some((t) => t.toLowerCase().includes(s))
+      );
+    }
+  } else {
+    const items = getItemsForTab();
+    const isKaomoji = activeTab === "kaomoji";
+    list = filterItems($q.value, items, ACTIVE_CAT, isKaomoji);
+  }
+
+  const favorites = getFavorites();
+  
   $grid.innerHTML = list
-    .map((it, idx) => `<div class="cell" data-i="${idx}" title="${(it.tags || []).join(', ')}">${it.char}</div>`)
+    .map((it, idx) => {
+      const isFav = favorites.has(it.char);
+      return `
+        <div class="cell" data-i="${idx}" data-char="${it.char.replace(/"/g, '&quot;')}" title="${(it.tags || []).join(', ')}">
+          ${it.char}
+          <button class="favorite-btn ${isFav ? 'favorited' : ''}" data-char="${it.char.replace(/"/g, '&quot;')}" title="${isFav ? '즐겨찾기 제거' : '즐겨찾기 추가'}">
+            ${isFav ? '⭐' : '☆'}
+          </button>
+        </div>
+      `;
+    })
     .join("");
 
   // 클릭-복사
   $grid.querySelectorAll<HTMLDivElement>(".cell").forEach((el) => {
-    el.addEventListener("click", () => {
+    el.addEventListener("click", (e) => {
+      // 즐겨찾기 버튼 클릭이면 복사하지 않음
+      if ((e.target as HTMLElement).classList.contains("favorite-btn")) {
+        return;
+      }
       const idx = Number(el.dataset.i);
       const ch = list[idx].char;
       copyToClipboard(ch);
+    });
+  });
+
+  // 즐겨찾기 버튼 클릭
+  $grid.querySelectorAll<HTMLButtonElement>(".favorite-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const char = btn.dataset.char || "";
+      if (isFavorite(char)) {
+        removeFromFavorites(char);
+        btn.classList.remove("favorited");
+        btn.textContent = "☆";
+        btn.title = "즐겨찾기 추가";
+      } else {
+        addToFavorites(char);
+        btn.classList.add("favorited");
+        btn.textContent = "⭐";
+        btn.title = "즐겨찾기 제거";
+      }
+      // 즐겨찾기 탭이면 제거된 항목 숨기기
+      if (activeTab === "favorites") {
+        render();
+      }
     });
   });
 }
 
 // 탭 전환
 $tabs.forEach((t) => {
-  t.addEventListener("click", () => {
+  t.addEventListener("click", async () => {
     $tabs.forEach((x) => x.classList.remove("active"));
     t.classList.add("active");
-    activeTab = (t.dataset.tab as "emoji" | "kaomoji") ?? "emoji";
+    activeTab = (t.dataset.tab as "emoji" | "kaomoji" | "favorites" | "recent") ?? "emoji";
     ACTIVE_CAT = "전체"; // 탭 전환 시 카테고리 초기화
-    renderCats(); // 카테고리 바 다시 렌더링
-    render();
+    
+    // 즐겨찾기나 최근 탭일 때는 카테고리 바 숨기기
+    if (activeTab === "favorites" || activeTab === "recent") {
+      $cats.style.display = "none";
+    } else {
+      $cats.style.display = "grid";
+      renderCats(); // 카테고리 바 다시 렌더링
+    }
+    
+    // 사용자 이모티콘 추가 버튼 표시/숨기기
+    if (activeTab === "emoji" || activeTab === "kaomoji") {
+      $addEmojiBtn.style.display = "block";
+    } else {
+      $addEmojiBtn.style.display = "none";
+    }
+    
+    await render();
   });
 });
 
 // 검색
-$q.addEventListener("input", render);
+$q.addEventListener("input", () => {
+  render(); // await 없이 호출 (비동기지만 즉시 실행)
+});
 
 // (선택) 커서 위치에 삽입
 $insertBtn?.addEventListener("click", async () => {
   const selection = window.getSelection?.()?.toString() ?? "";
-  const items: Item[] = activeTab === "emoji" ? EMOJIS : KAOMOJI;
-  const isKaomoji = activeTab === "kaomoji";
-  const pick = filterItems($q.value, items, ACTIVE_CAT, isKaomoji)[0]?.char
-             ?? (activeTab === "emoji" ? "😀" : "(ᵔᵕᵔ)");
+  let pick: string;
+  
+  if (activeTab === "favorites" || activeTab === "recent") {
+    const list = getItemsForTab();
+    const s = $q.value.trim().toLowerCase();
+    const filtered = s ? list.filter((it) =>
+      it.char.includes(s) || it.tags.some((t) => t.toLowerCase().includes(s))
+    ) : list;
+    pick = filtered[0]?.char ?? "😀";
+  } else {
+    const items = getItemsForTab();
+    const isKaomoji = activeTab === "kaomoji";
+    const filtered = filterItems($q.value, items, ACTIVE_CAT, isKaomoji);
+    pick = filtered[0]?.char ?? (activeTab === "emoji" ? "😀" : "(ᵔᵕᵔ)");
+  }
 
   try {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -182,7 +386,12 @@ $insertBtn?.addEventListener("click", async () => {
       args: [selection || pick],
     });
 
+    addToRecent(pick); // 최근 사용 목록에 추가
     toast("커서에 삽입됨");
+    // 최근 탭이면 다시 렌더링
+    if (activeTab === "recent") {
+      render();
+    }
   } catch {
     toast("권한 없음(복사만 가능)");
   }
@@ -251,10 +460,74 @@ async function ensureAllCategoriesLoaded() {
   if (tasks.length) await Promise.all(tasks);
 }
 
+// 모달 관리
+function openModal() {
+  $emojiModal.classList.add("show");
+  $emojiInput.value = "";
+  $tagsInput.value = "";
+  $emojiInput.focus();
+}
+
+function closeModal() {
+  $emojiModal.classList.remove("show");
+}
+
+$addEmojiBtn.addEventListener("click", openModal);
+$closeModal.addEventListener("click", closeModal);
+$cancelBtn.addEventListener("click", closeModal);
+
+// 모달 배경 클릭 시 닫기
+$emojiModal.addEventListener("click", (e) => {
+  if (e.target === $emojiModal) {
+    closeModal();
+  }
+});
+
+// 저장 버튼
+$saveBtn.addEventListener("click", () => {
+  const char = $emojiInput.value.trim();
+  const tagsStr = $tagsInput.value.trim();
+  
+  if (!char) {
+    toast("이모티콘을 입력해주세요");
+    return;
+  }
+  
+  const tags = tagsStr ? tagsStr.split(",").map(t => t.trim()).filter(t => t) : [];
+  
+  if (activeTab === "emoji") {
+    saveCustomEmoji(char, tags);
+    toast("이모티콘이 추가되었습니다");
+  } else {
+    saveCustomKaomoji(char, tags);
+    toast("Kaomoji가 추가되었습니다");
+  }
+  
+  closeModal();
+  render();
+});
+
+// Enter 키로 저장
+$emojiInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    $saveBtn.click();
+  }
+});
+
+$tagsInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    $saveBtn.click();
+  }
+});
+
 // 초기화
 (async function init() {
   // Kaomoji 로드
   KAOMOJI = await loadKaomoji();
+  
+  // 사용자 정의 이모티콘 로드
+  CUSTOM_EMOJIS = getCustomEmojis();
+  CUSTOM_KAOMOJI = getCustomKaomoji();
   
   renderCats();
   // 초기에는 가벼운 카테고리만 선로드 (예: 표정, 하트)
