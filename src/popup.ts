@@ -1,16 +1,41 @@
-import emojiData from "./data/src/data/emoji.json";
+// 데이터 소스: 카테고리별 분할 JSON (emotion/animals/foods/objects/nature/symbols/hands/hearts/events 등)
+type Emoji = { char: string; tags: string[]; category: string }; // category 한국어명 고정
+type Kaomoji = { char: string; tags: string[] };
+type Item = { char: string; tags: string[]; category?: string };
+
+const CATEGORY_FILES: Record<string, string> = {
+  "표정":      "./data/src/data/emoji/emotion.json",
+  "손동작":    "./data/src/data/emoji/hands.json",
+  "하트":      "./data/src/data/emoji/hearts.json",
+  "동물":      "./data/src/data/emoji/animals.json",
+  "음식":      "./data/src/data/emoji/foods.json",
+  "사물":      "./data/src/data/emoji/objects.json",
+  "자연":      "./data/src/data/emoji/nature.json",
+  "기호":      "./data/src/data/emoji/symbols.json",
+  "행사/기타": "./data/src/data/emoji/events.json",
+};
+
+const CATEGORY_ORDER = Object.keys(CATEGORY_FILES);
+
+// Kaomoji 카테고리 (태그 기반)
+const KAOMOJI_CATEGORIES = ["기쁨", "슬픔", "화남", "사랑", "파이팅", "당황", "무관심", "피곤"];
+
+let EMOJIS: Emoji[] = [];            // 합쳐진 전체 이모지 (lazy)
+let LOADED_CATS = new Set<string>(); // 로딩된 카테고리
+let ACTIVE_CAT: string = "전체";      // "전체" 또는 특정 카테고리명
+
+// Kaomoji는 종전처럼 한 파일
 import kaomojiData from "./data/src/data/kaomoji.json";
+const KAOMOJI: Kaomoji[] = kaomojiData;
 
-const EMOJIS: { char: string; tags: string[] }[] = emojiData;
-const KAOMOJI: { char: string; tags: string[] }[] = kaomojiData;
-
-type Item = { char: string; tags: string[] };
-
-const $grid = document.getElementById("grid") as HTMLDivElement;
-const $tabs = Array.from(document.querySelectorAll<HTMLDivElement>(".tab"));
-const $q = document.getElementById("q") as HTMLInputElement;
-const $toast = document.getElementById("toast") as HTMLDivElement;
-const $insertBtn = document.getElementById("insertBtn") as HTMLButtonElement;
+// DOM
+const $grid       = document.getElementById("grid") as HTMLDivElement;
+const $gridScroll = document.getElementById("grid-scroll") as HTMLDivElement;
+const $tabs       = Array.from(document.querySelectorAll<HTMLDivElement>(".tab"));
+const $q          = document.getElementById("q") as HTMLInputElement;
+const $toast      = document.getElementById("toast") as HTMLDivElement;
+const $insertBtn  = document.getElementById("insertBtn") as HTMLButtonElement | null;
+const $cats       = document.getElementById("cats") as HTMLDivElement;
 
 let activeTab: "emoji" | "kaomoji" = "emoji";
 
@@ -25,17 +50,35 @@ async function copyToClipboard(text: string) {
   toast("복사됨");
 }
 
-function filterItems(q: string, items: Item[]) {
+// 검색 + 카테고리 필터
+function filterItems(q: string, items: Item[], category?: string, isKaomoji: boolean = false) {
   const s = q.trim().toLowerCase();
-  if (!s) return items;
-  return items.filter((it) => it.char.includes(s) || it.tags.some(t => t.toLowerCase().includes(s)));
+  let list = items;
+
+  if (category && category !== "전체") {
+    if (isKaomoji) {
+      // Kaomoji는 태그로 필터링
+      list = list.filter((it) => it.tags.includes(category));
+    } else {
+      // Emoji는 category 필드로 필터링
+      list = list.filter((it) => (it as Emoji).category === category);
+    }
+  }
+  if (!s) return list;
+
+  return list.filter((it) =>
+    it.char.includes(s) || it.tags.some((t) => t.toLowerCase().includes(s))
+  );
 }
 
+
 function render() {
-  const items = activeTab === "emoji" ? EMOJIS : KAOMOJI;
-  const list = filterItems($q.value, items);
+  const items: Item[] = activeTab === "emoji" ? EMOJIS : KAOMOJI;
+  const isKaomoji = activeTab === "kaomoji";
+  const list = filterItems($q.value, items, ACTIVE_CAT, isKaomoji);
+
   $grid.innerHTML = list
-    .map((it, idx) => `<div class="cell" data-i="${idx}">${it.char}</div>`)
+    .map((it, idx) => `<div class="cell" data-i="${idx}" title="${(it.tags || []).join(', ')}">${it.char}</div>`)
     .join("");
 
   // 클릭-복사
@@ -54,6 +97,8 @@ $tabs.forEach((t) => {
     $tabs.forEach((x) => x.classList.remove("active"));
     t.classList.add("active");
     activeTab = (t.dataset.tab as "emoji" | "kaomoji") ?? "emoji";
+    ACTIVE_CAT = "전체"; // 탭 전환 시 카테고리 초기화
+    renderCats(); // 카테고리 바 다시 렌더링
     render();
   });
 });
@@ -62,12 +107,13 @@ $tabs.forEach((t) => {
 $q.addEventListener("input", render);
 
 // (선택) 커서 위치에 삽입
-$insertBtn.addEventListener("click", async () => {
+$insertBtn?.addEventListener("click", async () => {
   const selection = window.getSelection?.()?.toString() ?? "";
-  const items = activeTab === "emoji" ? EMOJIS : KAOMOJI;
-  const pick = filterItems($q.value, items)[0]?.char ?? (activeTab === "emoji" ? "😀" : "(ᵔᵕᵔ)");
+  const items: Item[] = activeTab === "emoji" ? EMOJIS : KAOMOJI;
+  const isKaomoji = activeTab === "kaomoji";
+  const pick = filterItems($q.value, items, ACTIVE_CAT, isKaomoji)[0]?.char
+             ?? (activeTab === "emoji" ? "😀" : "(ᵔᵕᵔ)");
 
-  // chrome.scripting 사용(권한 필요). 권한이 없다면 무시.
   try {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tab?.id) return;
@@ -75,26 +121,21 @@ $insertBtn.addEventListener("click", async () => {
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
       func: (text: string) => {
-        // 활성 입력창에 삽입 시도
         const el = document.activeElement as (HTMLInputElement | HTMLTextAreaElement | HTMLElement | null);
-        const isEditable =
-          (el && ("value" in el || (el as HTMLElement).isContentEditable)) ? true : false;
-
+        const isEditable = !!(el && ("value" in el || (el as HTMLElement).isContentEditable));
         if (isEditable) {
-          // input/textarea
           if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
-            const input = el as HTMLInputElement | HTMLTextAreaElement;
+            const input = el;
             const start = input.selectionStart ?? input.value.length;
             const end = input.selectionEnd ?? input.value.length;
             const before = input.value.slice(0, start);
-            const after = input.value.slice(end);
+            const after  = input.value.slice(end);
             input.value = before + text + after;
             const pos = start + text.length;
             input.setSelectionRange(pos, pos);
             input.dispatchEvent(new Event("input", { bubbles: true }));
             return true;
           }
-          // contentEditable
           if ((el as HTMLElement).isContentEditable) {
             const sel = window.getSelection();
             if (sel && sel.rangeCount > 0) {
@@ -116,5 +157,73 @@ $insertBtn.addEventListener("click", async () => {
   }
 });
 
-// 초기 렌더
-render();
+// 카테고리 바 렌더
+function renderCats() {
+  const isKaomoji = activeTab === "kaomoji";
+  const all = isKaomoji 
+    ? ["전체", ...KAOMOJI_CATEGORIES]
+    : ["전체", ...CATEGORY_ORDER];
+  
+  $cats.innerHTML = all
+    .map((c) => `<div class="cat ${c === ACTIVE_CAT ? "active" : ""}" data-cat="${c}">${c}</div>`)
+    .join("");
+
+  $cats.querySelectorAll<HTMLDivElement>(".cat").forEach((el) => {
+    el.addEventListener("click", async () => {
+      const next = el.dataset.cat!;
+      const currentIsKaomoji = activeTab === "kaomoji";
+      
+      if (currentIsKaomoji) {
+        // Kaomoji는 카테고리만 변경 (로드 불필요)
+        ACTIVE_CAT = next;
+      } else {
+        // Emoji는 카테고리 로드 필요
+        if (next === "전체") {
+          await ensureAllCategoriesLoaded();
+        } else {
+          await ensureCategoryLoaded(next);
+        }
+        ACTIVE_CAT = next;
+      }
+      
+      $cats.querySelectorAll(".cat").forEach((x) => x.classList.remove("active"));
+      el.classList.add("active");
+      render();
+      // 스크롤 상단 고정
+      $gridScroll.scrollTo({ top: 0 });
+    });
+  });
+}
+
+// 카테고리 JSON 로드
+async function loadCategory(cat: string): Promise<Emoji[]> {
+  const url = CATEGORY_FILES[cat];
+  const res = await fetch(url);
+  const data: Emoji[] = await res.json();
+  // 안전하게 category 필드 보정
+  return data.map((d) => ({ ...d, category: cat }));
+}
+
+async function ensureCategoryLoaded(cat: string) {
+  if (cat === "전체") return;
+  if (LOADED_CATS.has(cat)) return;
+  const part = await loadCategory(cat);
+  EMOJIS = EMOJIS.concat(part);
+  LOADED_CATS.add(cat);
+}
+
+async function ensureAllCategoriesLoaded() {
+  const tasks = CATEGORY_ORDER
+    .filter((c) => !LOADED_CATS.has(c))
+    .map((c) => ensureCategoryLoaded(c));
+  if (tasks.length) await Promise.all(tasks);
+}
+
+// 초기화
+(async function init() {
+  renderCats();
+  // 초기에는 가벼운 카테고리만 선로드 (예: 표정, 하트)
+  await ensureCategoryLoaded("표정");
+  await ensureCategoryLoaded("하트");
+  render();
+})();
