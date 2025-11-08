@@ -5,37 +5,163 @@
     <title>Emoji Picker</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <style>
-      :root { --w: 320px; --pad: 12px; --radius: 10px; }
-      body { margin: 0; font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto; width: var(--w); color: #111; }
+      :root { 
+        --w: 320px; 
+        --pad: 12px; 
+        --radius: 10px;
+        /* Light mode colors */
+        --bg: #fff;
+        --text: #111;
+        --border: #ddd;
+        --border-light: #e5e5e5;
+        --border-lighter: #eee;
+        --hover: #f5f5f5;
+        --text-secondary: #666;
+        --active-bg: #111;
+        --active-text: #fff;
+      }
+
+      [data-theme="dark"] {
+        /* Dark mode colors */
+        --bg: #1a1a1a;
+        --text: #e0e0e0;
+        --border: #333;
+        --border-light: #2a2a2a;
+        --border-lighter: #2a2a2a;
+        --hover: #2a2a2a;
+        --text-secondary: #999;
+        --active-bg: #fff;
+        --active-text: #111;
+      }
+
+      body { 
+        margin: 0; 
+        font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto; 
+        width: var(--w); 
+        color: var(--text);
+        background: var(--bg);
+        transition: background 0.2s, color 0.2s;
+      }
       .wrap { padding: var(--pad); }
-      .tabs { display: flex; gap: 6px; margin-bottom: 10px; }
-      .tab { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: var(--radius); text-align: center; cursor: pointer; user-select: none; }
-      .tab.active { background: #111; color: #fff; border-color: #111; }
+      
+      .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+      .tabs { display: flex; gap: 6px; flex: 1; }
+      .tab { flex: 1; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius); text-align: center; cursor: pointer; user-select: none; background: var(--bg); color: var(--text); }
+      .tab.active { background: var(--active-bg); color: var(--active-text); border-color: var(--active-bg); }
+
+      .theme-toggle { 
+        width: 32px; 
+        height: 32px; 
+        border: 1px solid var(--border); 
+        border-radius: var(--radius); 
+        background: var(--bg); 
+        cursor: pointer; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        font-size: 18px;
+        transition: all 0.2s;
+      }
+      .theme-toggle:hover { background: var(--hover); }
 
       .toolbar { display: flex; gap: 8px; margin-bottom: 8px; }
-      .toolbar input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: var(--radius); }
-      .toolbar button { padding: 8px 10px; border: 1px solid #ddd; border-radius: var(--radius); background: #fff; cursor: pointer; }
+      .toolbar input { 
+        flex: 1; 
+        padding: 8px; 
+        border: 1px solid var(--border); 
+        border-radius: var(--radius); 
+        background: var(--bg);
+        color: var(--text);
+      }
+      .toolbar button { 
+        padding: 8px 10px; 
+        border: 1px solid var(--border); 
+        border-radius: var(--radius); 
+        background: var(--bg); 
+        color: var(--text);
+        cursor: pointer; 
+      }
+      .toolbar button:hover { background: var(--hover); }
 
       .cats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin: 8px 0 10px; }
-      .cat { padding: 6px; border: 1px solid #e5e5e5; border-radius: 999px; text-align: center; cursor: pointer; user-select: none; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-      .cat.active { background: #111; color: #fff; border-color: #111; }
+      .cat { 
+        padding: 6px; 
+        border: 1px solid var(--border-light); 
+        border-radius: 999px; 
+        text-align: center; 
+        cursor: pointer; 
+        user-select: none; 
+        font-size: 12px; 
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .cat.active { background: var(--active-bg); color: var(--active-text); border-color: var(--active-bg); }
+      .cat:hover { background: var(--hover); }
 
-      .grid-scroll { max-height: 280px; overflow-y: auto; padding-right: 4px; }
+      .grid-scroll { 
+        max-height: 280px; 
+        overflow-y: auto; 
+        padding-right: 4px;
+      }
+      .grid-scroll::-webkit-scrollbar {
+        width: 6px;
+      }
+      .grid-scroll::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .grid-scroll::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 3px;
+      }
+      .grid-scroll::-webkit-scrollbar-thumb:hover {
+        background: var(--text-secondary);
+      }
       .grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
-      .cell { font-size: 20px; display: grid; place-items: center; padding: 8px 0; border: 1px solid #eee; border-radius: 8px; cursor: pointer; user-select: none; }
-      .cell:hover { background: #f5f5f5; }
+      .cell { 
+        font-size: 20px; 
+        display: grid; 
+        place-items: center; 
+        padding: 8px 0; 
+        border: 1px solid var(--border-lighter); 
+        border-radius: 8px; 
+        cursor: pointer; 
+        user-select: none; 
+        background: var(--bg);
+        transition: background 0.2s;
+      }
+      .cell:hover { background: var(--hover); }
 
-      .toast { position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,.8); color: #fff; padding: 6px 10px; border-radius: 999px; font-size: 12px; opacity: 0; transition: opacity .2s; }
+      .toast { 
+        position: fixed; 
+        bottom: 8px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        background: rgba(0,0,0,.8); 
+        color: #fff; 
+        padding: 6px 10px; 
+        border-radius: 999px; 
+        font-size: 12px; 
+        opacity: 0; 
+        transition: opacity .2s; 
+      }
       .toast.show { opacity: 1; }
 
-      .hint { font-size: 12px; color: #666; margin-top: 8px; }
+      [data-theme="dark"] .toast { background: rgba(255,255,255,.9); color: #111; }
+
+      .hint { font-size: 12px; color: var(--text-secondary); margin-top: 8px; }
     </style>
   </head>
   <body>
     <div class="wrap">
-      <div class="tabs">
-        <div class="tab active" data-tab="emoji">Emoji</div>
-        <div class="tab" data-tab="kaomoji">Kaomoji</div>
+      <div class="header">
+        <div class="tabs">
+          <div class="tab active" data-tab="emoji">Emoji</div>
+          <div class="tab" data-tab="kaomoji">Kaomoji</div>
+        </div>
+        <button id="themeToggle" class="theme-toggle" title="다크모드 전환">🌙</button>
       </div>
 
       <div class="toolbar">

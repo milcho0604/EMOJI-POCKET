@@ -41,8 +41,34 @@ const $q          = document.getElementById("q") as HTMLInputElement;
 const $toast      = document.getElementById("toast") as HTMLDivElement;
 const $insertBtn  = document.getElementById("insertBtn") as HTMLButtonElement | null;
 const $cats       = document.getElementById("cats") as HTMLDivElement;
+const $themeToggle = document.getElementById("themeToggle") as HTMLButtonElement;
+const $html       = document.documentElement;
 
 let activeTab: "emoji" | "kaomoji" = "emoji";
+
+// 다크모드 관리
+function getTheme(): "light" | "dark" {
+  const saved = localStorage.getItem("theme") as "light" | "dark" | null;
+  return saved || "light";
+}
+
+function setTheme(theme: "light" | "dark") {
+  localStorage.setItem("theme", theme);
+  $html.setAttribute("data-theme", theme);
+  $themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+}
+
+function toggleTheme() {
+  const current = getTheme();
+  const next = current === "dark" ? "light" : "dark";
+  setTheme(next);
+}
+
+// 다크모드 초기화
+setTheme(getTheme());
+
+// 다크모드 토글 버튼
+$themeToggle.addEventListener("click", toggleTheme);
 
 function toast(msg: string) {
   $toast.textContent = msg;
