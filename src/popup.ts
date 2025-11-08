@@ -27,13 +27,114 @@ let ACTIVE_CAT: string = "전체";      // "전체" 또는 특정 카테고리�
 // Kaomoji는 동적 로드로 변경
 let KAOMOJI: Kaomoji[] = [];
 
-async function loadKaomoji(): Promise<Kaomoji[]> {
-  const url = chrome.runtime.getURL("data/kaomoji.json");
-  const res = await fetch(url);
-  return await res.json();
+// ======== [동기화 저장소 유틸 + 캐시] ========
+type ThemeMode = "light" | "dark";
+
+// 캐시 (렌더 성능 및 동기화 반영 용이)
+let FAVORITES = new Set<string>();
+let RECENT: string[] = [];
+let CUSTOM_EMOJIS: Item[] = [];
+let CUSTOM_KAOMOJI: Item[] = [];
+let THEME: ThemeMode = "light";
+
+// storage helper
+const syncGet = <T = any>(keys?: string[] | Record<string, any>) =>
+  new Promise<T>((resolve, reject) => {
+    chrome.storage.sync.get(keys as any, (res) => {
+      const err = chrome.runtime.lastError;
+      err ? reject(err) : resolve(res as T);
+    });
+  });
+
+const syncSet = (items: Record<string, any>) =>
+  new Promise<void>((resolve, reject) => {
+    chrome.storage.sync.set(items, () => {
+      const err = chrome.runtime.lastError;
+      err ? reject(err) : resolve();
+    });
+  });
+
+// 기존 localStorage 데이터를 1회 동기화로 이관
+async function migrateLocalOnce() {
+  const flag = localStorage.getItem("__migrated_to_sync__");
+  if (flag === "1") return;
+
+  const lFav = localStorage.getItem("favorites");
+  const lRecent = localStorage.getItem("recent");
+  const lTheme = (localStorage.getItem("theme") as ThemeMode | null) || null;
+  const lCustomEmojis = localStorage.getItem("customEmojis");
+  const lCustomKaomoji = localStorage.getItem("customKaomoji");
+
+  const payload: Record<string, any> = {};
+  if (lFav) payload.favorites = JSON.parse(lFav);
+  if (lRecent) payload.recent = JSON.parse(lRecent);
+  if (lTheme) payload.theme = lTheme;
+  if (lCustomEmojis) payload.customEmojis = JSON.parse(lCustomEmojis);
+  if (lCustomKaomoji) payload.customKaomoji = JSON.parse(lCustomKaomoji);
+
+  if (Object.keys(payload).length) {
+    await syncSet(payload);
+  }
+  localStorage.setItem("__migrated_to_sync__", "1");
 }
 
-// DOM
+// 동기화 값 로드 → 캐시에 반영
+async function loadFromSync() {
+  const {
+    favorites = [],
+    recent = [],
+    theme = "light",
+    customEmojis = [],
+    customKaomoji = [],
+  } = await syncGet<{
+    favorites?: string[];
+    recent?: string[];
+    theme?: ThemeMode;
+    customEmojis?: Item[];
+    customKaomoji?: Item[];
+  }>({ favorites: [], recent: [], theme: "light", customEmojis: [], customKaomoji: [] });
+
+  FAVORITES = new Set<string>(favorites);
+  RECENT = Array.isArray(recent) ? recent : [];
+  CUSTOM_EMOJIS = Array.isArray(customEmojis) ? customEmojis : [];
+  CUSTOM_KAOMOJI = Array.isArray(customKaomoji) ? customKaomoji : [];
+  THEME = theme === "dark" ? "dark" : "light";
+}
+
+// storage 변경 감지 → 캐시 갱신 → 필요시 재렌더
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area !== "sync") return;
+
+  let needRender = false;
+
+  if (changes.favorites) {
+    const next = changes.favorites.newValue as string[] | undefined;
+    FAVORITES = new Set(next || []);
+    needRender = true;
+  }
+  if (changes.recent) {
+    RECENT = (changes.recent.newValue as string[]) || [];
+    needRender = true;
+  }
+  if (changes.customEmojis) {
+    CUSTOM_EMOJIS = (changes.customEmojis.newValue as Item[]) || [];
+    needRender = true;
+  }
+  if (changes.customKaomoji) {
+    CUSTOM_KAOMOJI = (changes.customKaomoji.newValue as Item[]) || [];
+    needRender = true;
+  }
+  if (changes.theme) {
+    THEME = (changes.theme.newValue as ThemeMode) || "light";
+    applyTheme();
+  }
+
+  if (needRender) {
+    render();
+  }
+});
+
+// ======== DOM ========
 const $grid       = document.getElementById("grid") as HTMLDivElement;
 const $gridScroll = document.getElementById("grid-scroll") as HTMLDivElement;
 const $tabs       = Array.from(document.querySelectorAll<HTMLDivElement>(".tab"));
@@ -53,118 +154,101 @@ const $tagsInput = document.getElementById("tagsInput") as HTMLInputElement;
 
 let activeTab: "emoji" | "kaomoji" | "favorites" | "recent" = "emoji";
 
-// 사용자 정의 이모티콘
-let CUSTOM_EMOJIS: Item[] = [];
-let CUSTOM_KAOMOJI: Item[] = [];
-
-// 즐겨찾기 및 최근 사용 관리
+// ======== 즐겨찾기/최근 (캐시 기반 동기화) ========
 function getFavorites(): Set<string> {
-  const saved = localStorage.getItem("favorites");
-  return saved ? new Set(JSON.parse(saved)) : new Set();
+  return FAVORITES;
 }
 
-function setFavorites(favorites: Set<string>) {
-  localStorage.setItem("favorites", JSON.stringify(Array.from(favorites)));
+async function setFavorites(next: Set<string>) {
+  FAVORITES = new Set(next);
+  await syncSet({ favorites: Array.from(FAVORITES) });
 }
 
-function addToFavorites(char: string) {
-  const favorites = getFavorites();
-  favorites.add(char);
-  setFavorites(favorites);
+async function addToFavorites(char: string) {
+  if (FAVORITES.has(char)) return;
+  FAVORITES.add(char);
+  await syncSet({ favorites: Array.from(FAVORITES) });
 }
 
-function removeFromFavorites(char: string) {
-  const favorites = getFavorites();
-  favorites.delete(char);
-  setFavorites(favorites);
+async function removeFromFavorites(char: string) {
+  if (!FAVORITES.has(char)) return;
+  FAVORITES.delete(char);
+  await syncSet({ favorites: Array.from(FAVORITES) });
 }
 
 function isFavorite(char: string): boolean {
-  return getFavorites().has(char);
+  return FAVORITES.has(char);
 }
 
 function getRecent(): string[] {
-  const saved = localStorage.getItem("recent");
-  return saved ? JSON.parse(saved) : [];
+  return RECENT;
 }
 
-function addToRecent(char: string) {
-  const recent = getRecent();
-  // 이미 있으면 제거
-  const index = recent.indexOf(char);
-  if (index > -1) {
-    recent.splice(index, 1);
-  }
-  // 맨 앞에 추가
-  recent.unshift(char);
-  // 최대 50개만 유지
+async function addToRecent(char: string) {
+  const list = [...RECENT];
+  const idx = list.indexOf(char);
+  if (idx > -1) list.splice(idx, 1);
+  list.unshift(char);
   const maxRecent = 50;
-  if (recent.length > maxRecent) {
-    recent.splice(maxRecent);
-  }
-  localStorage.setItem("recent", JSON.stringify(recent));
+  if (list.length > maxRecent) list.splice(maxRecent);
+  RECENT = list;
+  await syncSet({ recent: list });
 }
 
-// 사용자 정의 이모티콘 관리
+// ======== 사용자 정의 이모티콘 (캐시 기반 동기화) ========
 function getCustomEmojis(): Item[] {
-  const saved = localStorage.getItem("customEmojis");
-  return saved ? JSON.parse(saved) : [];
+  return CUSTOM_EMOJIS;
 }
 
 function getCustomKaomoji(): Item[] {
-  const saved = localStorage.getItem("customKaomoji");
-  return saved ? JSON.parse(saved) : [];
+  return CUSTOM_KAOMOJI;
 }
 
 async function saveCustomEmoji(char: string, tags: string[]) {
-  const custom = await getCustomEmojis();
-  custom.push({ char, tags, category: "사용자" });
-  chrome.storage.sync.set({ customEmojis: custom });
-  CUSTOM_EMOJIS = custom;
+  const next = [...CUSTOM_EMOJIS, { char, tags, category: "사용자" }];
+  CUSTOM_EMOJIS = next;
+  await syncSet({ customEmojis: next });
 }
 
 async function saveCustomKaomoji(char: string, tags: string[]) {
-  const custom = await getCustomKaomoji();
-  custom.push({ char, tags });
-  chrome.storage.sync.set({ customKaomoji: custom });
-  CUSTOM_KAOMOJI = custom;
+  const next = [...CUSTOM_KAOMOJI, { char, tags }];
+  CUSTOM_KAOMOJI = next;
+  await syncSet({ customKaomoji: next });
 }
 
-// 다크모드 관리
-function getTheme(): "light" | "dark" {
-  const saved = localStorage.getItem("theme") as "light" | "dark" | null;
-  return saved || "light";
+// ======== 테마 (캐시 기반 동기화) ========
+function applyTheme() {
+  $html.setAttribute("data-theme", THEME);
+  $themeToggle.textContent = THEME === "dark" ? "☀️" : "🌙";
 }
 
-function setTheme(theme: "light" | "dark") {
-  localStorage.setItem("theme", theme);
-  $html.setAttribute("data-theme", theme);
-  $themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+function getTheme(): ThemeMode {
+  return THEME;
 }
 
-function toggleTheme() {
-  const current = getTheme();
-  const next = current === "dark" ? "light" : "dark";
-  setTheme(next);
+async function setTheme(theme: ThemeMode) {
+  THEME = theme;
+  applyTheme();
+  await syncSet({ theme });
 }
 
-// 다크모드 초기화
-setTheme(getTheme());
+async function toggleTheme() {
+  const next: ThemeMode = getTheme() === "dark" ? "light" : "dark";
+  await setTheme(next);
+}
 
-// 다크모드 토글 버튼
-$themeToggle.addEventListener("click", toggleTheme);
-
+// 토스트
 function toast(msg: string) {
   $toast.textContent = msg;
   $toast.classList.add("show");
   setTimeout(() => $toast.classList.remove("show"), 800);
 }
 
+// 클립보드 복사
 async function copyToClipboard(text: string) {
   await navigator.clipboard.writeText(text);
-  addToRecent(text); // 최근 사용 목록에 추가
+  await addToRecent(text); // 최근 사용 목록에 추가 (동기화)
   toast("복사됨");
-  // 즐겨찾기 탭이나 최근 탭이면 다시 렌더링
   if (activeTab === "favorites" || activeTab === "recent") {
     render();
   }
@@ -190,7 +274,6 @@ function filterItems(q: string, items: Item[], category?: string, isKaomoji: boo
     it.char.includes(s) || it.tags.some((t) => t.toLowerCase().includes(s))
   );
 }
-
 
 async function ensureAllItemsLoaded() {
   // 즐겨찾기나 최근 탭을 위해 모든 카테고리 로드
@@ -264,7 +347,6 @@ async function render() {
   // 클릭-복사
   $grid.querySelectorAll<HTMLDivElement>(".cell").forEach((el) => {
     el.addEventListener("click", (e) => {
-      // 즐겨찾기 버튼 클릭이면 복사하지 않음
       if ((e.target as HTMLElement).classList.contains("favorite-btn")) {
         return;
       }
@@ -276,21 +358,20 @@ async function render() {
 
   // 즐겨찾기 버튼 클릭
   $grid.querySelectorAll<HTMLButtonElement>(".favorite-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", async (e) => {
       e.stopPropagation();
       const char = btn.dataset.char || "";
       if (isFavorite(char)) {
-        removeFromFavorites(char);
+        await removeFromFavorites(char);
         btn.classList.remove("favorited");
         btn.textContent = "☆";
         btn.title = "즐겨찾기 추가";
       } else {
-        addToFavorites(char);
+        await addToFavorites(char);
         btn.classList.add("favorited");
         btn.textContent = "⭐";
         btn.title = "즐겨찾기 제거";
       }
-      // 즐겨찾기 탭이면 제거된 항목 숨기기
       if (activeTab === "favorites") {
         render();
       }
@@ -327,7 +408,12 @@ $tabs.forEach((t) => {
 
 // 검색
 $q.addEventListener("input", () => {
-  render(); // await 없이 호출 (비동기지만 즉시 실행)
+  render();
+});
+
+// 테마 토글
+$themeToggle.addEventListener("click", () => {
+  toggleTheme();
 });
 
 // (선택) 커서 위치에 삽입
@@ -386,9 +472,8 @@ $insertBtn?.addEventListener("click", async () => {
       args: [selection || pick],
     });
 
-    addToRecent(pick); // 최근 사용 목록에 추가
+    await addToRecent(pick); // 최근 사용 목록에 동기화 반영
     toast("커서에 삽입됨");
-    // 최근 탭이면 다시 렌더링
     if (activeTab === "recent") {
       render();
     }
@@ -484,7 +569,7 @@ $emojiModal.addEventListener("click", (e) => {
 });
 
 // 저장 버튼
-$saveBtn.addEventListener("click", () => {
+$saveBtn.addEventListener("click", async () => {
   const char = $emojiInput.value.trim();
   const tagsStr = $tagsInput.value.trim();
   
@@ -496,10 +581,10 @@ $saveBtn.addEventListener("click", () => {
   const tags = tagsStr ? tagsStr.split(",").map(t => t.trim()).filter(t => t) : [];
   
   if (activeTab === "emoji") {
-    saveCustomEmoji(char, tags);
+    await saveCustomEmoji(char, tags);
     toast("이모티콘이 추가되었습니다");
   } else {
-    saveCustomKaomoji(char, tags);
+    await saveCustomKaomoji(char, tags);
     toast("Kaomoji가 추가되었습니다");
   }
   
@@ -522,16 +607,26 @@ $tagsInput.addEventListener("keypress", (e) => {
 
 // 초기화
 (async function init() {
-  // Kaomoji 로드
+  // 0) 기존 localStorage 값을 동기화로 1회 이관
+  await migrateLocalOnce();
+
+  // 1) 동기화 데이터 로드 → 캐시 반영 + 테마 적용
+  await loadFromSync();
+  applyTheme();
+
+  // 2) Kaomoji 로드
   KAOMOJI = await loadKaomoji();
   
-  // 사용자 정의 이모티콘 로드
-  CUSTOM_EMOJIS = getCustomEmojis();
-  CUSTOM_KAOMOJI = getCustomKaomoji();
-  
+  // 3) UI 렌더 준비
   renderCats();
-  // 초기에는 가벼운 카테고리만 선로드 (예: 표정, 하트)
   await ensureCategoryLoaded("표정");
   await ensureCategoryLoaded("하트");
   render();
 })();
+
+// 원본 로직: Kaomoji 로더
+async function loadKaomoji(): Promise<Kaomoji[]> {
+  const url = chrome.runtime.getURL("data/kaomoji.json");
+  const res = await fetch(url);
+  return await res.json();
+}
