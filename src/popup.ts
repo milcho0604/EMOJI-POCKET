@@ -116,17 +116,17 @@ function getCustomKaomoji(): Item[] {
   return saved ? JSON.parse(saved) : [];
 }
 
-function saveCustomEmoji(char: string, tags: string[]) {
-  const custom = getCustomEmojis();
+async function saveCustomEmoji(char: string, tags: string[]) {
+  const custom = await getCustomEmojis();
   custom.push({ char, tags, category: "사용자" });
-  localStorage.setItem("customEmojis", JSON.stringify(custom));
+  chrome.storage.sync.set({ customEmojis: custom });
   CUSTOM_EMOJIS = custom;
 }
 
-function saveCustomKaomoji(char: string, tags: string[]) {
-  const custom = getCustomKaomoji();
+async function saveCustomKaomoji(char: string, tags: string[]) {
+  const custom = await getCustomKaomoji();
   custom.push({ char, tags });
-  localStorage.setItem("customKaomoji", JSON.stringify(custom));
+  chrome.storage.sync.set({ customKaomoji: custom });
   CUSTOM_KAOMOJI = custom;
 }
 
