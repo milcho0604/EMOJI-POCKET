@@ -1,10 +1,12 @@
-# ch-pop
+# EMOJI-POCKET
+
+[📢 크롬 확장팩 링크](https://chromewebstore.google.com/detail/%EC%9D%B4%EB%AA%A8%EC%A7%80-%ED%8F%AC%EC%BC%93/nopjdllffljcogdfcilmhhbjjjanoccj?hl=ko)
 
 Chrome 브라우저 확장 프로그램용 이모지 및 카오모지(Kaomoji) 선택기입니다.
 
 ## 주요 기능
 
-- 🎨 **다양한 이모지 카테고리**: 표정, 손, 하트, 동물, 음식, 사물, 자연, 기호, 기타 등
+- 🎨 **다양한 이모지 카테고리**: 표정, 손, 하트, 동물, 음식, 사물, 자연, 기호, 기타 등(사용자 추가 가능!)
 - 😊 **카오모지 지원**: 다양한 감정 표현 카오모지 제공
 - ⭐ **즐겨찾기**: 자주 사용하는 이모지를 즐겨찾기에 추가
 - 🕐 **최근 사용**: 최근에 사용한 이모지 목록 자동 저장
@@ -12,7 +14,7 @@ Chrome 브라우저 확장 프로그램용 이모지 및 카오모지(Kaomoji) �
 - 🌓 **다크/라이트 모드**: 테마 전환 지원
 - ➕ **사용자 정의 이모지**: 직접 이모지와 카오모지를 추가 가능
 - 📋 **클립보드 복사**: 클릭 한 번으로 클립보드에 복사
-- 💾 **동기화**: Chrome 동기화 스토리지를 통한 데이터 동기화
+- 💾 **동기화**: Chrome 동기화 스토리지를 통한 계정 간 데이터 동기화
 
 ## 기술 스택
 
@@ -28,7 +30,7 @@ Chrome 브라우저 확장 프로그램용 이모지 및 카오모지(Kaomoji) �
 
 ```bash
 git clone <repository-url>
-cd ch-pop
+cd EMOJI-POCKET
 ```
 
 2. 의존성 설치:
@@ -139,4 +141,4 @@ ch-pop/
 
 ## 라이선스
 
-ISC
+Creative Commons NonCommercial (CC BY-NC) - 상업적 이용 금지
