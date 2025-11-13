@@ -18,7 +18,7 @@ const CATEGORY_FILES: Record<string, string> = {
 const CATEGORY_ORDER = Object.keys(CATEGORY_FILES);
 
 // Kaomoji 카테고리 (태그 기반)
-const KAOMOJI_CATEGORIES = ["기쁨", "슬픔", "화남", "사랑", "파이팅", "당황", "무관심", "피곤"];
+const KAOMOJI_CATEGORIES = ["기쁨", "슬픔", "화남", "사랑", "파이팅", "당황", "무심", "피곤"];
 
 let EMOJIS: Emoji[] = [];            // 합쳐진 전체 이모지 (lazy)
 let LOADED_CATS = new Set<string>(); // 로딩된 카테고리
