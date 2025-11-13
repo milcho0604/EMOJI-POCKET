@@ -166,6 +166,9 @@ const $html = document.documentElement;
 const $addEmojiBtn = document.getElementById(
   'addEmojiBtn'
 ) as HTMLButtonElement;
+const $devBlogLink = document.getElementById(
+  'dev-blog-link'
+) as HTMLButtonElement;
 const $emojiModal = document.getElementById('emojiModal') as HTMLDivElement;
 const $closeModal = document.getElementById('closeModal') as HTMLButtonElement;
 const $cancelBtn = document.getElementById('cancelBtn') as HTMLButtonElement;
@@ -529,6 +532,15 @@ $q.addEventListener('input', () => {
 // 테마 토글
 $themeToggle.addEventListener('click', () => {
   toggleTheme();
+});
+
+// 개발자 블로그 링크
+$devBlogLink.addEventListener('click', () => {
+  window.open(
+    'https://velog.io/@milcho0604/posts',
+    '_blank',
+    'noopener,noreferrer'
+  );
 });
 
 // (선택) 커서 위치에 삽입

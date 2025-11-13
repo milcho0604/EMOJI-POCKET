@@ -1,13 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title>Emoji Picker</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <style>
-      :root { 
-        --w: 320px; 
-        --pad: 12px; 
+      :root {
+        --w: 320px;
+        --pad: 12px;
         --radius: 10px;
         /* Light mode colors */
         --bg: #fff;
@@ -21,7 +21,7 @@
         --active-text: #fff;
       }
 
-      [data-theme="dark"] {
+      [data-theme='dark'] {
         /* Dark mode colors */
         --bg: #1a1a1a;
         --text: #e0e0e0;
@@ -34,76 +34,123 @@
         --active-text: #111;
       }
 
-      body { 
-        margin: 0; 
-        font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto; 
-        width: var(--w); 
+      body {
+        margin: 0;
+        font: 14px/1.4 system-ui, -apple-system, 'Segoe UI', Roboto;
+        width: var(--w);
         color: var(--text);
         background: var(--bg);
         transition: background 0.2s, color 0.2s;
       }
-      .wrap { padding: var(--pad); }
-      
-      .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-      .tabs { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
-      .tab { flex: 1; min-width: 60px; padding: 8px 6px; border: 1px solid var(--border); border-radius: var(--radius); text-align: center; cursor: pointer; user-select: none; background: var(--bg); color: var(--text); font-size: 12px; }
-      .tab.active { background: var(--active-bg); color: var(--active-text); border-color: var(--active-bg); }
+      .wrap {
+        padding: var(--pad);
+      }
 
-      .theme-toggle { 
-        width: 32px; 
-        height: 32px; 
-        border: 1px solid var(--border); 
-        border-radius: var(--radius); 
-        background: var(--bg); 
-        cursor: pointer; 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .tabs {
+        display: flex;
+        gap: 6px;
+        flex: 1;
+        flex-wrap: wrap;
+      }
+      .tab {
+        flex: 1;
+        min-width: 60px;
+        padding: 8px 6px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+        background: var(--bg);
+        color: var(--text);
+        font-size: 12px;
+      }
+      .tab.active {
+        background: var(--active-bg);
+        color: var(--active-text);
+        border-color: var(--active-bg);
+      }
+
+      .theme-toggle {
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--bg);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 18px;
         transition: all 0.2s;
       }
-      .theme-toggle:hover { background: var(--hover); }
+      .theme-toggle:hover {
+        background: var(--hover);
+      }
 
-      .toolbar { display: flex; gap: 8px; margin-bottom: 8px; }
-      .toolbar input { 
-        flex: 1; 
-        padding: 8px; 
-        border: 1px solid var(--border); 
-        border-radius: var(--radius); 
+      .toolbar {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .toolbar input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
         background: var(--bg);
         color: var(--text);
       }
-      .toolbar button { 
-        padding: 8px 10px; 
-        border: 1px solid var(--border); 
-        border-radius: var(--radius); 
-        background: var(--bg); 
+      .toolbar button {
+        padding: 8px 10px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--bg);
         color: var(--text);
-        cursor: pointer; 
+        cursor: pointer;
       }
-      .toolbar button:hover { background: var(--hover); }
+      .toolbar button:hover {
+        background: var(--hover);
+      }
 
-      .cats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin: 8px 0 10px; }
-      .cat { 
-        padding: 6px; 
-        border: 1px solid var(--border-light); 
-        border-radius: 999px; 
-        text-align: center; 
-        cursor: pointer; 
-        user-select: none; 
-        font-size: 12px; 
-        white-space: nowrap; 
-        overflow: hidden; 
+      .cats {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 6px;
+        margin: 8px 0 10px;
+      }
+      .cat {
+        padding: 6px;
+        border: 1px solid var(--border-light);
+        border-radius: 999px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
         text-overflow: ellipsis;
         background: var(--bg);
         color: var(--text);
       }
-      .cat.active { background: var(--active-bg); color: var(--active-text); border-color: var(--active-bg); }
-      .cat:hover { background: var(--hover); }
+      .cat.active {
+        background: var(--active-bg);
+        color: var(--active-text);
+        border-color: var(--active-bg);
+      }
+      .cat:hover {
+        background: var(--hover);
+      }
 
-      .grid-scroll { 
-        max-height: 280px; 
-        overflow-y: auto; 
+      .grid-scroll {
+        max-height: 200px;
+        overflow-y: auto;
         padding-right: 4px;
       }
       .grid-scroll::-webkit-scrollbar {
@@ -119,17 +166,23 @@
       .grid-scroll::-webkit-scrollbar-thumb:hover {
         background: var(--text-secondary);
       }
-      .grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
-      .grid.kaomoji { grid-template-columns: repeat(3, 1fr); }
-      .cell { 
-        font-size: 20px; 
-        display: grid; 
-        place-items: center; 
-        padding: 8px 0; 
-        border: 1px solid var(--border-lighter); 
-        border-radius: 8px; 
-        cursor: pointer; 
-        user-select: none; 
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 6px;
+      }
+      .grid.kaomoji {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .cell {
+        font-size: 20px;
+        display: grid;
+        place-items: center;
+        padding: 8px 0;
+        border: 1px solid var(--border-lighter);
+        border-radius: 8px;
+        cursor: pointer;
+        user-select: none;
         background: var(--bg);
         transition: background 0.2s;
         position: relative;
@@ -149,8 +202,12 @@
         max-width: 100%;
         display: block;
       }
-      .cell:hover { background: var(--hover); }
-      .cell:hover .favorite-btn { opacity: 1; }
+      .cell:hover {
+        background: var(--hover);
+      }
+      .cell:hover .favorite-btn {
+        opacity: 1;
+      }
       .favorite-btn {
         position: absolute;
         top: 4px;
@@ -168,42 +225,59 @@
         justify-content: center;
         z-index: 10;
       }
-      .favorite-btn.favorited { opacity: 1; color: #ffd700; }
-      .favorite-btn:hover { opacity: 1 !important; transform: scale(1.2); }
-
-      .toast { 
-        position: fixed; 
-        bottom: 8px; 
-        left: 50%; 
-        transform: translateX(-50%); 
-        background: rgba(0,0,0,.8); 
-        color: #fff; 
-        padding: 6px 10px; 
-        border-radius: 999px; 
-        font-size: 12px; 
-        opacity: 0; 
-        transition: opacity .2s; 
+      .favorite-btn.favorited {
+        opacity: 1;
+        color: #ffd700;
       }
-      .toast.show { opacity: 1; }
+      .favorite-btn:hover {
+        opacity: 1 !important;
+        transform: scale(1.2);
+      }
 
-      [data-theme="dark"] .toast { background: rgba(255,255,255,.9); color: #111; }
+      .toast {
+        position: fixed;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .toast.show {
+        opacity: 1;
+      }
 
-      .hint { font-size: 12px; color: var(--text-secondary); margin-top: 8px; }
+      [data-theme='dark'] .toast {
+        background: rgba(255, 255, 255, 0.9);
+        color: #111;
+      }
+
+      .hint {
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-top: 8px;
+      }
 
       /* 모달 스타일 */
-      .modal { 
-        display: none; 
-        position: fixed; 
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%; 
-        background: rgba(0,0,0,0.5); 
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
         z-index: 1000;
         align-items: center;
         justify-content: center;
       }
-      .modal.show { display: flex; }
+      .modal.show {
+        display: flex;
+      }
       .modal-content {
         background: var(--bg);
         padding: 20px;
@@ -288,6 +362,25 @@
         background: var(--hover);
         border-color: var(--text-secondary);
       }
+      .dev-blog-link {
+        margin-top: 8px;
+        width: 100%;
+        padding: 8px;
+        border: 1px dashed var(--border);
+        border-radius: var(--radius);
+        background: var(--bg);
+        color: var(--text);
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 12px;
+        transition: all 0.2s;
+      }
+      .dev-blog-link:hover {
+        background: var(--hover);
+        border-color: var(--text-secondary);
+      }
     </style>
   </head>
   <body>
@@ -303,7 +396,9 @@
 
       <div class="toolbar">
         <input id="q" placeholder="검색 (예: heart, happy, (웃음))" />
-        <button id="themeToggle" class="theme-toggle" title="다크모드 전환">🌙</button>
+        <button id="themeToggle" class="theme-toggle" title="다크모드 전환">
+          🌙
+        </button>
         <!-- <button id="insertBtn" title="현재 커서 위치에 삽입">커서삽입</button> -->
       </div>
 
@@ -315,8 +410,18 @@
       <div id="grid-scroll" class="grid-scroll">
         <div id="grid" class="grid"></div>
       </div>
-      <div class="hint">항목 클릭: 클립보드 복사 • “커서삽입” 클릭: 활성 입력창에 삽입</div>
-      <button id="addEmojiBtn" class="add-emoji-btn">+ 사용자 이모티콘 추가</button>
+      <div class="hint">항목 클릭: 클립보드 복사</div>
+      <button id="addEmojiBtn" class="add-emoji-btn">
+        + 사용자 이모티콘 추가
+      </button>
+      <!-- <a
+        href="https://velog.io/@milcho0604/posts"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dev-blog-link"
+        >개발자 블로그</a
+      > -->
+      <button id="dev-blog-link" class="add-emoji-btn">개발자 블로그</button>
     </div>
 
     <!-- 모달 -->
@@ -327,8 +432,19 @@
           <button class="close-btn" id="closeModal">&times;</button>
         </div>
         <div class="modal-body">
-          <input type="text" id="emojiInput" class="modal-input" placeholder="이모티콘 (예: 😊)" maxlength="10" />
-          <input type="text" id="tagsInput" class="modal-input tags" placeholder="태그 (쉼표로 구분, 예: 기쁨,웃음,happy)" />
+          <input
+            type="text"
+            id="emojiInput"
+            class="modal-input"
+            placeholder="이모티콘 (예: 😊)"
+            maxlength="10"
+          />
+          <input
+            type="text"
+            id="tagsInput"
+            class="modal-input tags"
+            placeholder="태그 (쉼표로 구분, 예: 기쁨,웃음,happy)"
+          />
           <div class="modal-actions">
             <button class="modal-btn" id="cancelBtn">취소</button>
             <button class="modal-btn primary" id="saveBtn">저장</button>
