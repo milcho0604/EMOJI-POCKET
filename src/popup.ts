@@ -293,7 +293,22 @@ function filterItems(
       // Emoji는 category 필드로 필터링
       list = list.filter((it) => (it as Emoji).category === category);
     }
+  } else if (!isKaomoji && category === '전체') {
+    // 전체 선택 시 카테고리 순서대로 정렬
+    const categoryOrder = new Map(CATEGORY_ORDER.map((cat, idx) => [cat, idx]));
+    list = list.sort((a, b) => {
+      const catA = (a as Emoji).category || '';
+      const catB = (b as Emoji).category || '';
+      const orderA = categoryOrder.get(catA) ?? 999;
+      const orderB = categoryOrder.get(catB) ?? 999;
+      if (orderA !== orderB) {
+        return orderA - orderB;
+      }
+      // 같은 카테고리 내에서는 char로 정렬
+      return a.char.localeCompare(b.char);
+    });
   }
+
   if (!s) return list;
 
   return list.filter(
@@ -397,7 +412,14 @@ async function render() {
   } else {
     const items = getItemsForTab();
     const isKaomoji = activeTab === 'kaomoji';
+    // 카테고리 필터링 및 정렬
     list = filterItems($q.value, items, ACTIVE_CAT, isKaomoji);
+
+    // 카테고리별 정렬 보장 (전체가 아닐 때도)
+    if (!isKaomoji && ACTIVE_CAT !== '전체') {
+      // 특정 카테고리 선택 시에도 정렬
+      list = list.sort((a, b) => a.char.localeCompare(b.char));
+    }
   }
 
   const favorites = getFavorites();

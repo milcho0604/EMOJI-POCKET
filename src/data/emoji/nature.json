@@ -1,135 +1,1028 @@
 [
-  { "char": "🌲", "tags": ["evergreen", "tree", "나무", "상록수"] },
-  { "char": "🌳", "tags": ["deciduous", "tree", "나무", "낙엽수"] },
-  { "char": "🌴", "tags": ["palm", "tree", "야자수"] },
-  { "char": "🌵", "tags": ["cactus", "선인장"] },
-  { "char": "🌾", "tags": ["sheaf", "rice", "벼"] },
-  { "char": "🌿", "tags": ["herb", "허브"] },
-  { "char": "☘️", "tags": ["shamrock", "클로버"] },
-  { "char": "🍀", "tags": ["four", "leaf", "clover", "네잎클로버"] },
-  { "char": "🍁", "tags": ["maple", "leaf", "단풍"] },
-  { "char": "🍂", "tags": ["fallen", "leaf", "낙엽"] },
-  { "char": "🍃", "tags": ["leaf", "fluttering", "wind", "잎"] },
-  { "char": "🌱", "tags": ["seedling", "새싹"] },
-  { "char": "🌰", "tags": ["chestnut", "밤"] },
-  { "char": "🌍", "tags": ["globe", "showing", "europe", "africa", "지구"] },
-  { "char": "🌎", "tags": ["globe", "showing", "americas", "지구"] },
-  { "char": "🌏", "tags": ["globe", "showing", "asia", "australia", "지구"] },
-  { "char": "🌐", "tags": ["globe", "meridians", "지구"] },
-  { "char": "🗺️", "tags": ["world", "map", "지도"] },
-  { "char": "🗾", "tags": ["map", "japan", "일본", "지도"] },
-  { "char": "🧭", "tags": ["compass", "나침반"] },
-  { "char": "🏔️", "tags": ["snow", "capped", "mountain", "산"] },
-  { "char": "⛰️", "tags": ["mountain", "산"] },
-  { "char": "🌋", "tags": ["volcano", "화산"] },
-  { "char": "🗻", "tags": ["mount", "fuji", "후지산"] },
-  { "char": "🏕️", "tags": ["camping", "캠핑"] },
-  { "char": "🏖️", "tags": ["beach", "umbrella", "해변"] },
-  { "char": "🏜️", "tags": ["desert", "사막"] },
-  { "char": "🏝️", "tags": ["desert", "island", "무인도"] },
-  { "char": "🏞️", "tags": ["national", "park", "국립공원"] },
-  { "char": "🏟️", "tags": ["stadium", "경기장"] },
-  { "char": "🏛️", "tags": ["classical", "building", "건물"] },
-  { "char": "🏗️", "tags": ["building", "construction", "건설"] },
-  { "char": "🧱", "tags": ["brick", "벽돌"] },
-  { "char": "🏘️", "tags": ["houses", "주택가"] },
-  { "char": "🏚️", "tags": ["derelict", "house", "폐가"] },
-  { "char": "🏠", "tags": ["house", "집"] },
-  { "char": "🏡", "tags": ["house", "garden", "집", "정원"] },
-  { "char": "🏢", "tags": ["office", "building", "사무실"] },
-  { "char": "🏣", "tags": ["japanese", "post", "office", "우체국"] },
-  { "char": "🏤", "tags": ["post", "office", "우체국"] },
-  { "char": "🏥", "tags": ["hospital", "병원"] },
-  { "char": "🏦", "tags": ["bank", "은행"] },
-  { "char": "🏨", "tags": ["hotel", "호텔"] },
-  { "char": "🏩", "tags": ["love", "hotel", "러브호텔"] },
-  { "char": "🏪", "tags": ["convenience", "store", "편의점"] },
-  { "char": "🏫", "tags": ["school", "학교"] },
-  { "char": "🏬", "tags": ["department", "store", "백화점"] },
-  { "char": "🏭", "tags": ["factory", "공장"] },
-  { "char": "🏯", "tags": ["japanese", "castle", "성"] },
-  { "char": "🏰", "tags": ["castle", "성"] },
-  { "char": "💒", "tags": ["wedding", "결혼식"] },
-  { "char": "🗼", "tags": ["tokyo", "tower", "도쿄타워"] },
-  { "char": "🗽", "tags": ["statue", "liberty", "자유의여신상"] },
-  { "char": "⛪", "tags": ["church", "교회"] },
-  { "char": "🕌", "tags": ["mosque", "모스크"] },
-  { "char": "🛕", "tags": ["hindu", "temple", "사원"] },
-  { "char": "🕍", "tags": ["synagogue", "회당"] },
-  { "char": "⛩️", "tags": ["shinto", "shrine", "신사"] },
-  { "char": "🕋", "tags": ["kaaba", "카바"] },
-  { "char": "⛲", "tags": ["fountain", "분수"] },
-  { "char": "⛺", "tags": ["tent", "텐트"] },
-  { "char": "🌁", "tags": ["foggy", "안개"] },
-  { "char": "🌃", "tags": ["night", "stars", "밤", "별"] },
-  { "char": "🏙️", "tags": ["cityscape", "도시"] },
-  { "char": "🌄", "tags": ["sunrise", "mountains", "일출"] },
-  { "char": "🌅", "tags": ["sunrise", "일출"] },
-  { "char": "🌆", "tags": ["cityscape", "dusk", "도시", "황혼"] },
-  { "char": "🌇", "tags": ["sunset", "일몰"] },
-  { "char": "🌉", "tags": ["bridge", "night", "다리", "밤"] },
-  { "char": "♨️", "tags": ["hot", "springs", "온천"] },
-  { "char": "🎠", "tags": ["carousel", "horse", "회전목마"] },
-  { "char": "🎡", "tags": ["ferris", "wheel", "관람차"] },
-  { "char": "🎢", "tags": ["roller", "coaster", "롤러코스터"] },
-  { "char": "💈", "tags": ["barber", "pole", "이발소"] },
-  { "char": "🎪", "tags": ["circus", "tent", "서커스"] },
-  { "char": "🚂", "tags": ["locomotive", "기차"] },
-  { "char": "🚃", "tags": ["railway", "car", "전철"] },
-  { "char": "🚄", "tags": ["high", "speed", "train", "고속철도"] },
-  { "char": "🚅", "tags": ["bullet", "train", "고속철도"] },
-  { "char": "🚆", "tags": ["train", "기차"] },
-  { "char": "🚇", "tags": ["metro", "지하철"] },
-  { "char": "🚈", "tags": ["light", "rail", "경전철"] },
-  { "char": "🚉", "tags": ["station", "역"] },
-  { "char": "🚊", "tags": ["tram", "트램"] },
-  { "char": "🚝", "tags": ["monorail", "모노레일"] },
-  { "char": "🚞", "tags": ["mountain", "railway", "산악철도"] },
-  { "char": "🚋", "tags": ["tram", "car", "트램"] },
-  { "char": "🚌", "tags": ["bus", "버스"] },
-  { "char": "🚍", "tags": ["oncoming", "bus", "버스"] },
-  { "char": "🚎", "tags": ["trolleybus", "트롤리버스"] },
-  { "char": "🚐", "tags": ["minibus", "미니버스"] },
-  { "char": "🚑", "tags": ["ambulance", "구급차"] },
-  { "char": "🚒", "tags": ["fire", "engine", "소방차"] },
-  { "char": "🚓", "tags": ["police", "car", "경찰차"] },
-  { "char": "🚔", "tags": ["oncoming", "police", "car", "경찰차"] },
-  { "char": "🚕", "tags": ["taxi", "택시"] },
-  { "char": "🚖", "tags": ["oncoming", "taxi", "택시"] },
-  { "char": "🚗", "tags": ["automobile", "자동차"] },
-  { "char": "🚘", "tags": ["oncoming", "automobile", "자동차"] },
-  { "char": "🚙", "tags": ["sport", "utility", "vehicle", "SUV"] },
-  { "char": "🚚", "tags": ["delivery", "truck", "트럭"] },
-  { "char": "🚛", "tags": ["articulated", "lorry", "트럭"] },
-  { "char": "🚜", "tags": ["tractor", "트랙터"] },
-  { "char": "🏎️", "tags": ["racing", "car", "레이싱카"] },
-  { "char": "🏍️", "tags": ["motorcycle", "오토바이"] },
-  { "char": "🛵", "tags": ["motor", "scooter", "스쿠터"] },
-  { "char": "🦽", "tags": ["manual", "wheelchair", "휠체어"] },
-  { "char": "🦼", "tags": ["motorized", "wheelchair", "휠체어"] },
-  { "char": "🛴", "tags": ["kick", "scooter", "킥보드"] },
-  { "char": "🚲", "tags": ["bicycle", "자전거"] },
-  { "char": "🛺", "tags": ["auto", "rickshaw", "인력거"] },
-  { "char": "🛹", "tags": ["skateboard", "스케이트보드"] },
-  { "char": "🛼", "tags": ["roller", "skate", "롤러스케이트"] },
-  { "char": "🚁", "tags": ["helicopter", "헬리콥터"] },
-  { "char": "🛸", "tags": ["flying", "saucer", "UFO"] },
-  { "char": "✈️", "tags": ["airplane", "비행기"] },
-  { "char": "🛩️", "tags": ["small", "airplane", "작은비행기"] },
-  { "char": "🛫", "tags": ["airplane", "departure", "비행기", "출발"] },
-  { "char": "🛬", "tags": ["airplane", "arrival", "비행기", "도착"] },
-  { "char": "🪂", "tags": ["parachute", "낙하산"] },
-  { "char": "💺", "tags": ["seat", "좌석"] },
-  { "char": "🚀", "tags": ["rocket", "로켓"] },
-  { "char": "🛶", "tags": ["canoe", "카누"] },
-  { "char": "⛵", "tags": ["sailboat", "요트"] },
-  { "char": "🛥️", "tags": ["motor", "boat", "모터보트"] },
-  { "char": "🛳️", "tags": ["passenger", "ship", "여객선"] },
-  { "char": "⛴️", "tags": ["ferry", "페리"] },
-  { "char": "🚢", "tags": ["ship", "배"] },
-  { "char": "⚓", "tags": ["anchor", "닻"] },
-  { "char": "⛽", "tags": ["fuel", "pump", "주유소"] },
-  { "char": "🚤", "tags": ["speedboat", "고속보트"] },
-  { "char": "🛟", "tags": ["ring", "buoy", "부표"] },
-  { "char": "🚧", "tags": ["construction", "공사중"] }
+  {
+    "char": "☘️",
+    "tags": [
+      "shamrock",
+      "클로버"
+    ]
+  },
+  {
+    "char": "♨️",
+    "tags": [
+      "hot",
+      "springs",
+      "온천"
+    ]
+  },
+  {
+    "char": "⚓",
+    "tags": [
+      "anchor",
+      "닻"
+    ]
+  },
+  {
+    "char": "⛩️",
+    "tags": [
+      "shinto",
+      "shrine",
+      "신사"
+    ]
+  },
+  {
+    "char": "⛪",
+    "tags": [
+      "church",
+      "교회"
+    ]
+  },
+  {
+    "char": "⛰️",
+    "tags": [
+      "mountain",
+      "산"
+    ]
+  },
+  {
+    "char": "⛲",
+    "tags": [
+      "fountain",
+      "분수"
+    ]
+  },
+  {
+    "char": "⛴️",
+    "tags": [
+      "ferry",
+      "페리"
+    ]
+  },
+  {
+    "char": "⛵",
+    "tags": [
+      "sailboat",
+      "요트"
+    ]
+  },
+  {
+    "char": "⛺",
+    "tags": [
+      "tent",
+      "텐트"
+    ]
+  },
+  {
+    "char": "⛽",
+    "tags": [
+      "fuel",
+      "pump",
+      "주유소"
+    ]
+  },
+  {
+    "char": "✈️",
+    "tags": [
+      "airplane",
+      "비행기"
+    ]
+  },
+  {
+    "char": "🌁",
+    "tags": [
+      "foggy",
+      "안개"
+    ]
+  },
+  {
+    "char": "🌃",
+    "tags": [
+      "night",
+      "stars",
+      "밤",
+      "별"
+    ]
+  },
+  {
+    "char": "🌄",
+    "tags": [
+      "sunrise",
+      "mountains",
+      "일출"
+    ]
+  },
+  {
+    "char": "🌅",
+    "tags": [
+      "sunrise",
+      "일출"
+    ]
+  },
+  {
+    "char": "🌆",
+    "tags": [
+      "cityscape",
+      "dusk",
+      "도시",
+      "황혼"
+    ]
+  },
+  {
+    "char": "🌇",
+    "tags": [
+      "sunset",
+      "일몰"
+    ]
+  },
+  {
+    "char": "🌉",
+    "tags": [
+      "bridge",
+      "night",
+      "다리",
+      "밤"
+    ]
+  },
+  {
+    "char": "🌋",
+    "tags": [
+      "volcano",
+      "화산"
+    ]
+  },
+  {
+    "char": "🌍",
+    "tags": [
+      "globe",
+      "showing",
+      "europe",
+      "africa",
+      "지구"
+    ]
+  },
+  {
+    "char": "🌎",
+    "tags": [
+      "globe",
+      "showing",
+      "americas",
+      "지구"
+    ]
+  },
+  {
+    "char": "🌏",
+    "tags": [
+      "globe",
+      "showing",
+      "asia",
+      "australia",
+      "지구"
+    ]
+  },
+  {
+    "char": "🌐",
+    "tags": [
+      "globe",
+      "meridians",
+      "지구"
+    ]
+  },
+  {
+    "char": "🌰",
+    "tags": [
+      "chestnut",
+      "밤"
+    ]
+  },
+  {
+    "char": "🌱",
+    "tags": [
+      "seedling",
+      "새싹"
+    ]
+  },
+  {
+    "char": "🌲",
+    "tags": [
+      "evergreen",
+      "tree",
+      "나무",
+      "상록수"
+    ]
+  },
+  {
+    "char": "🌳",
+    "tags": [
+      "deciduous",
+      "tree",
+      "나무",
+      "낙엽수"
+    ]
+  },
+  {
+    "char": "🌴",
+    "tags": [
+      "palm",
+      "tree",
+      "야자수"
+    ]
+  },
+  {
+    "char": "🌵",
+    "tags": [
+      "cactus",
+      "선인장"
+    ]
+  },
+  {
+    "char": "🌾",
+    "tags": [
+      "sheaf",
+      "rice",
+      "벼"
+    ]
+  },
+  {
+    "char": "🌿",
+    "tags": [
+      "herb",
+      "허브"
+    ]
+  },
+  {
+    "char": "🍀",
+    "tags": [
+      "four",
+      "leaf",
+      "clover",
+      "네잎클로버"
+    ]
+  },
+  {
+    "char": "🍁",
+    "tags": [
+      "maple",
+      "leaf",
+      "단풍"
+    ]
+  },
+  {
+    "char": "🍂",
+    "tags": [
+      "fallen",
+      "leaf",
+      "낙엽"
+    ]
+  },
+  {
+    "char": "🍃",
+    "tags": [
+      "leaf",
+      "fluttering",
+      "wind",
+      "잎"
+    ]
+  },
+  {
+    "char": "🎠",
+    "tags": [
+      "carousel",
+      "horse",
+      "회전목마"
+    ]
+  },
+  {
+    "char": "🎡",
+    "tags": [
+      "ferris",
+      "wheel",
+      "관람차"
+    ]
+  },
+  {
+    "char": "🎢",
+    "tags": [
+      "roller",
+      "coaster",
+      "롤러코스터"
+    ]
+  },
+  {
+    "char": "🎪",
+    "tags": [
+      "circus",
+      "tent",
+      "서커스"
+    ]
+  },
+  {
+    "char": "🏍️",
+    "tags": [
+      "motorcycle",
+      "오토바이"
+    ]
+  },
+  {
+    "char": "🏎️",
+    "tags": [
+      "racing",
+      "car",
+      "레이싱카"
+    ]
+  },
+  {
+    "char": "🏔️",
+    "tags": [
+      "snow",
+      "capped",
+      "mountain",
+      "산"
+    ]
+  },
+  {
+    "char": "🏕️",
+    "tags": [
+      "camping",
+      "캠핑"
+    ]
+  },
+  {
+    "char": "🏖️",
+    "tags": [
+      "beach",
+      "umbrella",
+      "해변"
+    ]
+  },
+  {
+    "char": "🏗️",
+    "tags": [
+      "building",
+      "construction",
+      "건설"
+    ]
+  },
+  {
+    "char": "🏘️",
+    "tags": [
+      "houses",
+      "주택가"
+    ]
+  },
+  {
+    "char": "🏙️",
+    "tags": [
+      "cityscape",
+      "도시"
+    ]
+  },
+  {
+    "char": "🏚️",
+    "tags": [
+      "derelict",
+      "house",
+      "폐가"
+    ]
+  },
+  {
+    "char": "🏛️",
+    "tags": [
+      "classical",
+      "building",
+      "건물"
+    ]
+  },
+  {
+    "char": "🏜️",
+    "tags": [
+      "desert",
+      "사막"
+    ]
+  },
+  {
+    "char": "🏝️",
+    "tags": [
+      "desert",
+      "island",
+      "무인도"
+    ]
+  },
+  {
+    "char": "🏞️",
+    "tags": [
+      "national",
+      "park",
+      "국립공원"
+    ]
+  },
+  {
+    "char": "🏟️",
+    "tags": [
+      "stadium",
+      "경기장"
+    ]
+  },
+  {
+    "char": "🏠",
+    "tags": [
+      "house",
+      "집"
+    ]
+  },
+  {
+    "char": "🏡",
+    "tags": [
+      "house",
+      "garden",
+      "집",
+      "정원"
+    ]
+  },
+  {
+    "char": "🏢",
+    "tags": [
+      "office",
+      "building",
+      "사무실"
+    ]
+  },
+  {
+    "char": "🏣",
+    "tags": [
+      "japanese",
+      "post",
+      "office",
+      "우체국"
+    ]
+  },
+  {
+    "char": "🏤",
+    "tags": [
+      "post",
+      "office",
+      "우체국"
+    ]
+  },
+  {
+    "char": "🏥",
+    "tags": [
+      "hospital",
+      "병원"
+    ]
+  },
+  {
+    "char": "🏦",
+    "tags": [
+      "bank",
+      "은행"
+    ]
+  },
+  {
+    "char": "🏨",
+    "tags": [
+      "hotel",
+      "호텔"
+    ]
+  },
+  {
+    "char": "🏩",
+    "tags": [
+      "love",
+      "hotel",
+      "러브호텔"
+    ]
+  },
+  {
+    "char": "🏪",
+    "tags": [
+      "convenience",
+      "store",
+      "편의점"
+    ]
+  },
+  {
+    "char": "🏫",
+    "tags": [
+      "school",
+      "학교"
+    ]
+  },
+  {
+    "char": "🏬",
+    "tags": [
+      "department",
+      "store",
+      "백화점"
+    ]
+  },
+  {
+    "char": "🏭",
+    "tags": [
+      "factory",
+      "공장"
+    ]
+  },
+  {
+    "char": "🏯",
+    "tags": [
+      "japanese",
+      "castle",
+      "성"
+    ]
+  },
+  {
+    "char": "🏰",
+    "tags": [
+      "castle",
+      "성"
+    ]
+  },
+  {
+    "char": "💈",
+    "tags": [
+      "barber",
+      "pole",
+      "이발소"
+    ]
+  },
+  {
+    "char": "💒",
+    "tags": [
+      "wedding",
+      "결혼식"
+    ]
+  },
+  {
+    "char": "💺",
+    "tags": [
+      "seat",
+      "좌석"
+    ]
+  },
+  {
+    "char": "🕋",
+    "tags": [
+      "kaaba",
+      "카바"
+    ]
+  },
+  {
+    "char": "🕌",
+    "tags": [
+      "mosque",
+      "모스크"
+    ]
+  },
+  {
+    "char": "🕍",
+    "tags": [
+      "synagogue",
+      "회당"
+    ]
+  },
+  {
+    "char": "🗺️",
+    "tags": [
+      "world",
+      "map",
+      "지도"
+    ]
+  },
+  {
+    "char": "🗻",
+    "tags": [
+      "mount",
+      "fuji",
+      "후지산"
+    ]
+  },
+  {
+    "char": "🗼",
+    "tags": [
+      "tokyo",
+      "tower",
+      "도쿄타워"
+    ]
+  },
+  {
+    "char": "🗽",
+    "tags": [
+      "statue",
+      "liberty",
+      "자유의여신상"
+    ]
+  },
+  {
+    "char": "🗾",
+    "tags": [
+      "map",
+      "japan",
+      "일본",
+      "지도"
+    ]
+  },
+  {
+    "char": "🦼",
+    "tags": [
+      "motorized",
+      "wheelchair",
+      "휠체어"
+    ]
+  },
+  {
+    "char": "🦽",
+    "tags": [
+      "manual",
+      "wheelchair",
+      "휠체어"
+    ]
+  },
+  {
+    "char": "🧭",
+    "tags": [
+      "compass",
+      "나침반"
+    ]
+  },
+  {
+    "char": "🧱",
+    "tags": [
+      "brick",
+      "벽돌"
+    ]
+  },
+  {
+    "char": "🪂",
+    "tags": [
+      "parachute",
+      "낙하산"
+    ]
+  },
+  {
+    "char": "🚀",
+    "tags": [
+      "rocket",
+      "로켓"
+    ]
+  },
+  {
+    "char": "🚁",
+    "tags": [
+      "helicopter",
+      "헬리콥터"
+    ]
+  },
+  {
+    "char": "🚂",
+    "tags": [
+      "locomotive",
+      "기차"
+    ]
+  },
+  {
+    "char": "🚃",
+    "tags": [
+      "railway",
+      "car",
+      "전철"
+    ]
+  },
+  {
+    "char": "🚄",
+    "tags": [
+      "high",
+      "speed",
+      "train",
+      "고속철도"
+    ]
+  },
+  {
+    "char": "🚅",
+    "tags": [
+      "bullet",
+      "train",
+      "고속철도"
+    ]
+  },
+  {
+    "char": "🚆",
+    "tags": [
+      "train",
+      "기차"
+    ]
+  },
+  {
+    "char": "🚇",
+    "tags": [
+      "metro",
+      "지하철"
+    ]
+  },
+  {
+    "char": "🚈",
+    "tags": [
+      "light",
+      "rail",
+      "경전철"
+    ]
+  },
+  {
+    "char": "🚉",
+    "tags": [
+      "station",
+      "역"
+    ]
+  },
+  {
+    "char": "🚊",
+    "tags": [
+      "tram",
+      "트램"
+    ]
+  },
+  {
+    "char": "🚋",
+    "tags": [
+      "tram",
+      "car",
+      "트램"
+    ]
+  },
+  {
+    "char": "🚌",
+    "tags": [
+      "bus",
+      "버스"
+    ]
+  },
+  {
+    "char": "🚍",
+    "tags": [
+      "oncoming",
+      "bus",
+      "버스"
+    ]
+  },
+  {
+    "char": "🚎",
+    "tags": [
+      "trolleybus",
+      "트롤리버스"
+    ]
+  },
+  {
+    "char": "🚐",
+    "tags": [
+      "minibus",
+      "미니버스"
+    ]
+  },
+  {
+    "char": "🚑",
+    "tags": [
+      "ambulance",
+      "구급차"
+    ]
+  },
+  {
+    "char": "🚒",
+    "tags": [
+      "fire",
+      "engine",
+      "소방차"
+    ]
+  },
+  {
+    "char": "🚓",
+    "tags": [
+      "police",
+      "car",
+      "경찰차"
+    ]
+  },
+  {
+    "char": "🚔",
+    "tags": [
+      "oncoming",
+      "police",
+      "car",
+      "경찰차"
+    ]
+  },
+  {
+    "char": "🚕",
+    "tags": [
+      "taxi",
+      "택시"
+    ]
+  },
+  {
+    "char": "🚖",
+    "tags": [
+      "oncoming",
+      "taxi",
+      "택시"
+    ]
+  },
+  {
+    "char": "🚗",
+    "tags": [
+      "automobile",
+      "자동차"
+    ]
+  },
+  {
+    "char": "🚘",
+    "tags": [
+      "oncoming",
+      "automobile",
+      "자동차"
+    ]
+  },
+  {
+    "char": "🚙",
+    "tags": [
+      "sport",
+      "utility",
+      "vehicle",
+      "SUV"
+    ]
+  },
+  {
+    "char": "🚚",
+    "tags": [
+      "delivery",
+      "truck",
+      "트럭"
+    ]
+  },
+  {
+    "char": "🚛",
+    "tags": [
+      "articulated",
+      "lorry",
+      "트럭"
+    ]
+  },
+  {
+    "char": "🚜",
+    "tags": [
+      "tractor",
+      "트랙터"
+    ]
+  },
+  {
+    "char": "🚝",
+    "tags": [
+      "monorail",
+      "모노레일"
+    ]
+  },
+  {
+    "char": "🚞",
+    "tags": [
+      "mountain",
+      "railway",
+      "산악철도"
+    ]
+  },
+  {
+    "char": "🚢",
+    "tags": [
+      "ship",
+      "배"
+    ]
+  },
+  {
+    "char": "🚤",
+    "tags": [
+      "speedboat",
+      "고속보트"
+    ]
+  },
+  {
+    "char": "🚧",
+    "tags": [
+      "construction",
+      "공사중"
+    ]
+  },
+  {
+    "char": "🚲",
+    "tags": [
+      "bicycle",
+      "자전거"
+    ]
+  },
+  {
+    "char": "🛕",
+    "tags": [
+      "hindu",
+      "temple",
+      "사원"
+    ]
+  },
+  {
+    "char": "🛟",
+    "tags": [
+      "ring",
+      "buoy",
+      "부표"
+    ]
+  },
+  {
+    "char": "🛥️",
+    "tags": [
+      "motor",
+      "boat",
+      "모터보트"
+    ]
+  },
+  {
+    "char": "🛩️",
+    "tags": [
+      "small",
+      "airplane",
+      "작은비행기"
+    ]
+  },
+  {
+    "char": "🛫",
+    "tags": [
+      "airplane",
+      "departure",
+      "비행기",
+      "출발"
+    ]
+  },
+  {
+    "char": "🛬",
+    "tags": [
+      "airplane",
+      "arrival",
+      "비행기",
+      "도착"
+    ]
+  },
+  {
+    "char": "🛳️",
+    "tags": [
+      "passenger",
+      "ship",
+      "여객선"
+    ]
+  },
+  {
+    "char": "🛴",
+    "tags": [
+      "kick",
+      "scooter",
+      "킥보드"
+    ]
+  },
+  {
+    "char": "🛵",
+    "tags": [
+      "motor",
+      "scooter",
+      "스쿠터"
+    ]
+  },
+  {
+    "char": "🛶",
+    "tags": [
+      "canoe",
+      "카누"
+    ]
+  },
+  {
+    "char": "🛸",
+    "tags": [
+      "flying",
+      "saucer",
+      "UFO"
+    ]
+  },
+  {
+    "char": "🛹",
+    "tags": [
+      "skateboard",
+      "스케이트보드"
+    ]
+  },
+  {
+    "char": "🛺",
+    "tags": [
+      "auto",
+      "rickshaw",
+      "인력거"
+    ]
+  },
+  {
+    "char": "🛼",
+    "tags": [
+      "roller",
+      "skate",
+      "롤러스케이트"
+    ]
+  }
 ]

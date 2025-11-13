@@ -1,112 +1,848 @@
 [
-  { "char": "🍏", "tags": ["green", "apple", "사과", "초록"] },
-  { "char": "🍎", "tags": ["red", "apple", "사과", "빨강"] },
-  { "char": "🍐", "tags": ["pear", "배"] },
-  { "char": "🍊", "tags": ["tangerine", "orange", "오렌지"] },
-  { "char": "🍋", "tags": ["lemon", "레몬"] },
-  { "char": "🍌", "tags": ["banana", "바나나"] },
-  { "char": "🍉", "tags": ["watermelon", "수박"] },
-  { "char": "🍇", "tags": ["grapes", "포도"] },
-  { "char": "🍓", "tags": ["strawberry", "딸기"] },
-  { "char": "🍈", "tags": ["melon", "멜론"] },
-  { "char": "🍒", "tags": ["cherries", "체리"] },
-  { "char": "🍑", "tags": ["peach", "복숭아"] },
-  { "char": "🥭", "tags": ["mango", "망고"] },
-  { "char": "🍍", "tags": ["pineapple", "파인애플"] },
-  { "char": "🥥", "tags": ["coconut", "코코넛"] },
-  { "char": "🥑", "tags": ["avocado", "아보카도"] },
-  { "char": "🍆", "tags": ["eggplant", "가지"] },
-  { "char": "🥔", "tags": ["potato", "감자"] },
-  { "char": "🥕", "tags": ["carrot", "당근"] },
-  { "char": "🌽", "tags": ["ear", "corn", "옥수수"] },
-  { "char": "🌶️", "tags": ["hot", "pepper", "고추"] },
-  { "char": "🫑", "tags": ["bell", "pepper", "피망"] },
-  { "char": "🥒", "tags": ["cucumber", "오이"] },
-  { "char": "🥬", "tags": ["leafy", "green", "채소"] },
-  { "char": "🥦", "tags": ["broccoli", "브로콜리"] },
-  { "char": "🧄", "tags": ["garlic", "마늘"] },
-  { "char": "🧅", "tags": ["onion", "양파"] },
-  { "char": "🍄", "tags": ["mushroom", "버섯"] },
-  { "char": "🥜", "tags": ["peanuts", "땅콩"] },
-  { "char": "🌰", "tags": ["chestnut", "밤"] },
-  { "char": "🍞", "tags": ["bread", "빵"] },
-  { "char": "🥐", "tags": ["croissant", "크루아상"] },
-  { "char": "🥖", "tags": ["baguette", "바게트"] },
-  { "char": "🫓", "tags": ["flatbread", "납작빵"] },
-  { "char": "🥨", "tags": ["pretzel", "프레첼"] },
-  { "char": "🥯", "tags": ["bagel", "베이글"] },
-  { "char": "🥞", "tags": ["pancakes", "팬케이크"] },
-  { "char": "🧇", "tags": ["waffle", "와플"] },
-  { "char": "🍳", "tags": ["cooking", "요리"] },
-  { "char": "🥓", "tags": ["bacon", "베이컨"] },
-  { "char": "🥩", "tags": ["cut", "meat", "고기"] },
-  { "char": "🍗", "tags": ["poultry", "leg", "닭다리"] },
-  { "char": "🍖", "tags": ["meat", "bone", "고기", "뼈"] },
-  { "char": "🌭", "tags": ["hot", "dog", "핫도그"] },
-  { "char": "🍔", "tags": ["hamburger", "햄버거"] },
-  { "char": "🍟", "tags": ["french", "fries", "프렌치", "프라이"] },
-  { "char": "🍕", "tags": ["pizza", "피자"] },
-  { "char": "🫔", "tags": ["tamale", "타말레"] },
-  { "char": "🥪", "tags": ["sandwich", "샌드위치"] },
-  { "char": "🥙", "tags": ["stuffed", "flatbread", "샌드위치"] },
-  { "char": "🧆", "tags": ["falafel", "팔라펠"] },
-  { "char": "🌮", "tags": ["taco", "타코"] },
-  { "char": "🌯", "tags": ["burrito", "부리토"] },
-  { "char": "🥗", "tags": ["green", "salad", "샐러드"] },
-  { "char": "🥘", "tags": ["shallow", "pan", "food", "음식"] },
-  { "char": "🫕", "tags": ["fondue", "퐁듀"] },
-  { "char": "🥫", "tags": ["canned", "food", "통조림"] },
-  { "char": "🍝", "tags": ["spaghetti", "스파게티"] },
-  { "char": "🍜", "tags": ["steaming", "bowl", "라면"] },
-  { "char": "🍲", "tags": ["pot", "food", "전골"] },
-  { "char": "🍛", "tags": ["curry", "rice", "카레"] },
-  { "char": "🍣", "tags": ["sushi", "스시"] },
-  { "char": "🍱", "tags": ["bento", "box", "도시락"] },
-  { "char": "🍘", "tags": ["rice", "cracker", "과자"] },
-  { "char": "🍙", "tags": ["rice", "ball", "주먹밥"] },
-  { "char": "🍚", "tags": ["cooked", "rice", "밥"] },
-  { "char": "🍠", "tags": ["roasted", "sweet", "potato", "고구마"] },
-  { "char": "🍢", "tags": ["oden", "오뎅"] },
-  { "char": "🍡", "tags": ["dango", "단고"] },
-  { "char": "🥟", "tags": ["dumpling", "만두"] },
-  { "char": "🥠", "tags": ["fortune", "cookie", "포춘", "쿠키"] },
-  { "char": "🥡", "tags": ["takeout", "box", "포장"] },
-  { "char": "🦀", "tags": ["crab", "게"] },
-  { "char": "🦞", "tags": ["lobster", "랍스터"] },
-  { "char": "🦐", "tags": ["shrimp", "새우"] },
-  { "char": "🦑", "tags": ["squid", "오징어"] },
-  { "char": "🦪", "tags": ["oyster", "굴"] },
-  { "char": "🍦", "tags": ["soft", "ice", "cream", "아이스크림"] },
-  { "char": "🍧", "tags": ["shaved", "ice", "빙수"] },
-  { "char": "🍨", "tags": ["ice", "cream", "아이스크림"] },
-  { "char": "🍩", "tags": ["doughnut", "도넛"] },
-  { "char": "🍪", "tags": ["cookie", "쿠키"] },
-  { "char": "🎂", "tags": ["birthday", "cake", "생일케이크"] },
-  { "char": "🍰", "tags": ["shortcake", "케이크"] },
-  { "char": "🧁", "tags": ["cupcake", "컵케이크"] },
-  { "char": "🥧", "tags": ["pie", "파이"] },
-  { "char": "🍫", "tags": ["chocolate", "bar", "초콜릿"] },
-  { "char": "🍬", "tags": ["candy", "사탕"] },
-  { "char": "🍭", "tags": ["lollipop", "막대사탕"] },
-  { "char": "🍮", "tags": ["custard", "푸딩"] },
-  { "char": "🍯", "tags": ["honey", "pot", "꿀"] },
-  { "char": "🍼", "tags": ["baby", "bottle", "젖병"] },
-  { "char": "🥛", "tags": ["glass", "milk", "우유"] },
-  { "char": "☕", "tags": ["hot", "beverage", "coffee", "커피"] },
-  { "char": "🫖", "tags": ["teapot", "찻주전자"] },
-  { "char": "🍵", "tags": ["teacup", "without", "handle", "차"] },
-  { "char": "🍶", "tags": ["sake", "사케"] },
-  { "char": "🍾", "tags": ["bottle", "popping", "cork", "샴페인"] },
-  { "char": "🍷", "tags": ["wine", "glass", "와인"] },
-  { "char": "🍸", "tags": ["cocktail", "glass", "칵테일"] },
-  { "char": "🍹", "tags": ["tropical", "drink", "칵테일"] },
-  { "char": "🍺", "tags": ["beer", "mug", "맥주"] },
-  { "char": "🍻", "tags": ["clinking", "beer", "mugs", "맥주", "건배"] },
-  { "char": "🥂", "tags": ["clinking", "glasses", "건배"] },
-  { "char": "🥃", "tags": ["tumbler", "glass", "술"] },
-  { "char": "🥤", "tags": ["cup", "straw", "음료"] },
-  { "char": "🧋", "tags": ["bubble", "tea", "버블티"] },
-  { "char": "🧃", "tags": ["beverage", "box", "음료"] },
-  { "char": "🧉", "tags": ["mate", "음료"] },
-  { "char": "🧊", "tags": ["ice", "얼음"] }
+  {
+    "char": "☕",
+    "tags": [
+      "hot",
+      "beverage",
+      "coffee",
+      "커피"
+    ]
+  },
+  {
+    "char": "🌭",
+    "tags": [
+      "hot",
+      "dog",
+      "핫도그"
+    ]
+  },
+  {
+    "char": "🌮",
+    "tags": [
+      "taco",
+      "타코"
+    ]
+  },
+  {
+    "char": "🌯",
+    "tags": [
+      "burrito",
+      "부리토"
+    ]
+  },
+  {
+    "char": "🌰",
+    "tags": [
+      "chestnut",
+      "밤"
+    ]
+  },
+  {
+    "char": "🌶️",
+    "tags": [
+      "hot",
+      "pepper",
+      "고추"
+    ]
+  },
+  {
+    "char": "🌽",
+    "tags": [
+      "ear",
+      "corn",
+      "옥수수"
+    ]
+  },
+  {
+    "char": "🍄",
+    "tags": [
+      "mushroom",
+      "버섯"
+    ]
+  },
+  {
+    "char": "🍆",
+    "tags": [
+      "eggplant",
+      "가지"
+    ]
+  },
+  {
+    "char": "🍇",
+    "tags": [
+      "grapes",
+      "포도"
+    ]
+  },
+  {
+    "char": "🍈",
+    "tags": [
+      "melon",
+      "멜론"
+    ]
+  },
+  {
+    "char": "🍉",
+    "tags": [
+      "watermelon",
+      "수박"
+    ]
+  },
+  {
+    "char": "🍊",
+    "tags": [
+      "tangerine",
+      "orange",
+      "오렌지"
+    ]
+  },
+  {
+    "char": "🍋",
+    "tags": [
+      "lemon",
+      "레몬"
+    ]
+  },
+  {
+    "char": "🍌",
+    "tags": [
+      "banana",
+      "바나나"
+    ]
+  },
+  {
+    "char": "🍍",
+    "tags": [
+      "pineapple",
+      "파인애플"
+    ]
+  },
+  {
+    "char": "🍎",
+    "tags": [
+      "red",
+      "apple",
+      "사과",
+      "빨강"
+    ]
+  },
+  {
+    "char": "🍏",
+    "tags": [
+      "green",
+      "apple",
+      "사과",
+      "초록"
+    ]
+  },
+  {
+    "char": "🍐",
+    "tags": [
+      "pear",
+      "배"
+    ]
+  },
+  {
+    "char": "🍑",
+    "tags": [
+      "peach",
+      "복숭아"
+    ]
+  },
+  {
+    "char": "🍒",
+    "tags": [
+      "cherries",
+      "체리"
+    ]
+  },
+  {
+    "char": "🍓",
+    "tags": [
+      "strawberry",
+      "딸기"
+    ]
+  },
+  {
+    "char": "🍔",
+    "tags": [
+      "hamburger",
+      "햄버거"
+    ]
+  },
+  {
+    "char": "🍕",
+    "tags": [
+      "pizza",
+      "피자"
+    ]
+  },
+  {
+    "char": "🍖",
+    "tags": [
+      "meat",
+      "bone",
+      "고기",
+      "뼈"
+    ]
+  },
+  {
+    "char": "🍗",
+    "tags": [
+      "poultry",
+      "leg",
+      "닭다리"
+    ]
+  },
+  {
+    "char": "🍘",
+    "tags": [
+      "rice",
+      "cracker",
+      "과자"
+    ]
+  },
+  {
+    "char": "🍙",
+    "tags": [
+      "rice",
+      "ball",
+      "주먹밥"
+    ]
+  },
+  {
+    "char": "🍚",
+    "tags": [
+      "cooked",
+      "rice",
+      "밥"
+    ]
+  },
+  {
+    "char": "🍛",
+    "tags": [
+      "curry",
+      "rice",
+      "카레"
+    ]
+  },
+  {
+    "char": "🍜",
+    "tags": [
+      "steaming",
+      "bowl",
+      "라면"
+    ]
+  },
+  {
+    "char": "🍝",
+    "tags": [
+      "spaghetti",
+      "스파게티"
+    ]
+  },
+  {
+    "char": "🍞",
+    "tags": [
+      "bread",
+      "빵"
+    ]
+  },
+  {
+    "char": "🍟",
+    "tags": [
+      "french",
+      "fries",
+      "프렌치",
+      "프라이"
+    ]
+  },
+  {
+    "char": "🍠",
+    "tags": [
+      "roasted",
+      "sweet",
+      "potato",
+      "고구마"
+    ]
+  },
+  {
+    "char": "🍡",
+    "tags": [
+      "dango",
+      "단고"
+    ]
+  },
+  {
+    "char": "🍢",
+    "tags": [
+      "oden",
+      "오뎅"
+    ]
+  },
+  {
+    "char": "🍣",
+    "tags": [
+      "sushi",
+      "스시"
+    ]
+  },
+  {
+    "char": "🍦",
+    "tags": [
+      "soft",
+      "ice",
+      "cream",
+      "아이스크림"
+    ]
+  },
+  {
+    "char": "🍧",
+    "tags": [
+      "shaved",
+      "ice",
+      "빙수"
+    ]
+  },
+  {
+    "char": "🍨",
+    "tags": [
+      "ice",
+      "cream",
+      "아이스크림"
+    ]
+  },
+  {
+    "char": "🍩",
+    "tags": [
+      "doughnut",
+      "도넛"
+    ]
+  },
+  {
+    "char": "🍪",
+    "tags": [
+      "cookie",
+      "쿠키"
+    ]
+  },
+  {
+    "char": "🍫",
+    "tags": [
+      "chocolate",
+      "bar",
+      "초콜릿"
+    ]
+  },
+  {
+    "char": "🍬",
+    "tags": [
+      "candy",
+      "사탕"
+    ]
+  },
+  {
+    "char": "🍭",
+    "tags": [
+      "lollipop",
+      "막대사탕"
+    ]
+  },
+  {
+    "char": "🍮",
+    "tags": [
+      "custard",
+      "푸딩"
+    ]
+  },
+  {
+    "char": "🍯",
+    "tags": [
+      "honey",
+      "pot",
+      "꿀"
+    ]
+  },
+  {
+    "char": "🍰",
+    "tags": [
+      "shortcake",
+      "케이크"
+    ]
+  },
+  {
+    "char": "🍱",
+    "tags": [
+      "bento",
+      "box",
+      "도시락"
+    ]
+  },
+  {
+    "char": "🍲",
+    "tags": [
+      "pot",
+      "food",
+      "전골"
+    ]
+  },
+  {
+    "char": "🍳",
+    "tags": [
+      "cooking",
+      "요리"
+    ]
+  },
+  {
+    "char": "🍵",
+    "tags": [
+      "teacup",
+      "without",
+      "handle",
+      "차"
+    ]
+  },
+  {
+    "char": "🍶",
+    "tags": [
+      "sake",
+      "사케"
+    ]
+  },
+  {
+    "char": "🍷",
+    "tags": [
+      "wine",
+      "glass",
+      "와인"
+    ]
+  },
+  {
+    "char": "🍸",
+    "tags": [
+      "cocktail",
+      "glass",
+      "칵테일"
+    ]
+  },
+  {
+    "char": "🍹",
+    "tags": [
+      "tropical",
+      "drink",
+      "칵테일"
+    ]
+  },
+  {
+    "char": "🍺",
+    "tags": [
+      "beer",
+      "mug",
+      "맥주"
+    ]
+  },
+  {
+    "char": "🍻",
+    "tags": [
+      "clinking",
+      "beer",
+      "mugs",
+      "맥주",
+      "건배"
+    ]
+  },
+  {
+    "char": "🍼",
+    "tags": [
+      "baby",
+      "bottle",
+      "젖병"
+    ]
+  },
+  {
+    "char": "🍾",
+    "tags": [
+      "bottle",
+      "popping",
+      "cork",
+      "샴페인"
+    ]
+  },
+  {
+    "char": "🎂",
+    "tags": [
+      "birthday",
+      "cake",
+      "생일케이크"
+    ]
+  },
+  {
+    "char": "🥂",
+    "tags": [
+      "clinking",
+      "glasses",
+      "건배"
+    ]
+  },
+  {
+    "char": "🥃",
+    "tags": [
+      "tumbler",
+      "glass",
+      "술"
+    ]
+  },
+  {
+    "char": "🥐",
+    "tags": [
+      "croissant",
+      "크루아상"
+    ]
+  },
+  {
+    "char": "🥑",
+    "tags": [
+      "avocado",
+      "아보카도"
+    ]
+  },
+  {
+    "char": "🥒",
+    "tags": [
+      "cucumber",
+      "오이"
+    ]
+  },
+  {
+    "char": "🥓",
+    "tags": [
+      "bacon",
+      "베이컨"
+    ]
+  },
+  {
+    "char": "🥔",
+    "tags": [
+      "potato",
+      "감자"
+    ]
+  },
+  {
+    "char": "🥕",
+    "tags": [
+      "carrot",
+      "당근"
+    ]
+  },
+  {
+    "char": "🥖",
+    "tags": [
+      "baguette",
+      "바게트"
+    ]
+  },
+  {
+    "char": "🥗",
+    "tags": [
+      "green",
+      "salad",
+      "샐러드"
+    ]
+  },
+  {
+    "char": "🥘",
+    "tags": [
+      "shallow",
+      "pan",
+      "food",
+      "음식"
+    ]
+  },
+  {
+    "char": "🥙",
+    "tags": [
+      "stuffed",
+      "flatbread",
+      "샌드위치"
+    ]
+  },
+  {
+    "char": "🥚",
+    "tags": [
+      "egg",
+      "계란",
+      "달걀"
+    ]
+  },
+  {
+    "char": "🥛",
+    "tags": [
+      "glass",
+      "milk",
+      "우유"
+    ]
+  },
+  {
+    "char": "🥜",
+    "tags": [
+      "peanuts",
+      "땅콩"
+    ]
+  },
+  {
+    "char": "🥞",
+    "tags": [
+      "pancakes",
+      "팬케이크"
+    ]
+  },
+  {
+    "char": "🥟",
+    "tags": [
+      "dumpling",
+      "만두"
+    ]
+  },
+  {
+    "char": "🥠",
+    "tags": [
+      "fortune",
+      "cookie",
+      "포춘",
+      "쿠키"
+    ]
+  },
+  {
+    "char": "🥡",
+    "tags": [
+      "takeout",
+      "box",
+      "포장"
+    ]
+  },
+  {
+    "char": "🥤",
+    "tags": [
+      "cup",
+      "straw",
+      "음료"
+    ]
+  },
+  {
+    "char": "🥥",
+    "tags": [
+      "coconut",
+      "코코넛"
+    ]
+  },
+  {
+    "char": "🥦",
+    "tags": [
+      "broccoli",
+      "브로콜리"
+    ]
+  },
+  {
+    "char": "🥧",
+    "tags": [
+      "pie",
+      "파이"
+    ]
+  },
+  {
+    "char": "🥨",
+    "tags": [
+      "pretzel",
+      "프레첼"
+    ]
+  },
+  {
+    "char": "🥩",
+    "tags": [
+      "cut",
+      "meat",
+      "고기"
+    ]
+  },
+  {
+    "char": "🥪",
+    "tags": [
+      "sandwich",
+      "샌드위치"
+    ]
+  },
+  {
+    "char": "🥫",
+    "tags": [
+      "canned",
+      "food",
+      "통조림"
+    ]
+  },
+  {
+    "char": "🥬",
+    "tags": [
+      "leafy",
+      "green",
+      "채소"
+    ]
+  },
+  {
+    "char": "🥭",
+    "tags": [
+      "mango",
+      "망고"
+    ]
+  },
+  {
+    "char": "🥯",
+    "tags": [
+      "bagel",
+      "베이글"
+    ]
+  },
+  {
+    "char": "🦀",
+    "tags": [
+      "crab",
+      "게"
+    ]
+  },
+  {
+    "char": "🦐",
+    "tags": [
+      "shrimp",
+      "새우"
+    ]
+  },
+  {
+    "char": "🦑",
+    "tags": [
+      "squid",
+      "오징어"
+    ]
+  },
+  {
+    "char": "🦞",
+    "tags": [
+      "lobster",
+      "랍스터"
+    ]
+  },
+  {
+    "char": "🦪",
+    "tags": [
+      "oyster",
+      "굴"
+    ]
+  },
+  {
+    "char": "🧀",
+    "tags": [
+      "cheese",
+      "치즈",
+      "유제품"
+    ]
+  },
+  {
+    "char": "🧁",
+    "tags": [
+      "cupcake",
+      "컵케이크"
+    ]
+  },
+  {
+    "char": "🧃",
+    "tags": [
+      "beverage",
+      "box",
+      "음료"
+    ]
+  },
+  {
+    "char": "🧄",
+    "tags": [
+      "garlic",
+      "마늘"
+    ]
+  },
+  {
+    "char": "🧅",
+    "tags": [
+      "onion",
+      "양파"
+    ]
+  },
+  {
+    "char": "🧆",
+    "tags": [
+      "falafel",
+      "팔라펠"
+    ]
+  },
+  {
+    "char": "🧇",
+    "tags": [
+      "waffle",
+      "와플"
+    ]
+  },
+  {
+    "char": "🧉",
+    "tags": [
+      "mate",
+      "음료"
+    ]
+  },
+  {
+    "char": "🧊",
+    "tags": [
+      "ice",
+      "얼음"
+    ]
+  },
+  {
+    "char": "🧋",
+    "tags": [
+      "bubble",
+      "tea",
+      "버블티"
+    ]
+  },
+  {
+    "char": "🫑",
+    "tags": [
+      "bell",
+      "pepper",
+      "피망"
+    ]
+  },
+  {
+    "char": "🫓",
+    "tags": [
+      "flatbread",
+      "납작빵"
+    ]
+  },
+  {
+    "char": "🫔",
+    "tags": [
+      "tamale",
+      "타말레"
+    ]
+  },
+  {
+    "char": "🫕",
+    "tags": [
+      "fondue",
+      "퐁듀"
+    ]
+  },
+  {
+    "char": "🫖",
+    "tags": [
+      "teapot",
+      "찻주전자"
+    ]
+  }
 ]
