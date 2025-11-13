@@ -120,6 +120,7 @@
         background: var(--text-secondary);
       }
       .grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
+      .grid.kaomoji { grid-template-columns: repeat(3, 1fr); }
       .cell { 
         font-size: 20px; 
         display: grid; 
@@ -132,6 +133,21 @@
         background: var(--bg);
         transition: background 0.2s;
         position: relative;
+      }
+      .cell.kaomoji {
+        font-size: 14px;
+        padding: 8px 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+      }
+      .cell.kaomoji .kaomoji-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+        display: block;
       }
       .cell:hover { background: var(--hover); }
       .cell:hover .favorite-btn { opacity: 1; }
