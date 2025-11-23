@@ -15,7 +15,7 @@ const CATEGORY_FILES: Record<string, string> = {
   기타: '/data/emoji/events.json',
 };
 
-const CATEGORY_ORDER = Object.keys(CATEGORY_FILES);
+const CATEGORY_ORDER = [...Object.keys(CATEGORY_FILES), '추가'];
 
 // Kaomoji 카테고리 (태그 기반)
 const KAOMOJI_CATEGORIES = [
@@ -27,6 +27,7 @@ const KAOMOJI_CATEGORIES = [
   '당황',
   '무심',
   '피곤',
+  '추가',
 ];
 
 let EMOJIS: Emoji[] = []; // 합쳐진 전체 이모지 (lazy)
@@ -175,6 +176,9 @@ const $cancelBtn = document.getElementById('cancelBtn') as HTMLButtonElement;
 const $saveBtn = document.getElementById('saveBtn') as HTMLButtonElement;
 const $emojiInput = document.getElementById('emojiInput') as HTMLInputElement;
 const $tagsInput = document.getElementById('tagsInput') as HTMLInputElement;
+const $categorySelect = document.getElementById(
+  'categorySelect'
+) as HTMLSelectElement;
 
 let activeTab: 'emoji' | 'kaomoji' | 'favorites' | 'recent' = 'emoji';
 
@@ -228,8 +232,8 @@ function getCustomKaomoji(): Item[] {
   return CUSTOM_KAOMOJI;
 }
 
-async function saveCustomEmoji(char: string, tags: string[]) {
-  const next = [...CUSTOM_EMOJIS, { char, tags, category: '사용자' }];
+async function saveCustomEmoji(char: string, tags: string[], category: string) {
+  const next = [...CUSTOM_EMOJIS, { char, tags, category }];
   CUSTOM_EMOJIS = next;
   await syncSet({ customEmojis: next });
 }
@@ -289,7 +293,14 @@ function filterItems(
   let list = items;
 
   if (category && category !== '전체') {
-    if (isKaomoji) {
+    if (category === '추가') {
+      // '추가' 카테고리는 CUSTOM_EMOJIS 또는 CUSTOM_KAOMOJI만 표시
+      if (isKaomoji) {
+        list = list.filter((it) => CUSTOM_KAOMOJI.some((custom) => custom.char === it.char));
+      } else {
+        list = list.filter((it) => CUSTOM_EMOJIS.some((custom) => custom.char === it.char));
+      }
+    } else if (isKaomoji) {
       // Kaomoji는 태그로 필터링
       list = list.filter((it) => it.tags.includes(category));
     } else {
@@ -654,6 +665,9 @@ function renderCats() {
         // Emoji는 카테고리 로드 필요
         if (next === '전체') {
           await ensureAllCategoriesLoaded();
+        } else if (next === '추가') {
+          // '추가' 카테고리는 JSON 파일이 없으므로 로드 불필요
+          ACTIVE_CAT = next;
         } else {
           await ensureCategoryLoaded(next);
         }
@@ -690,7 +704,7 @@ async function ensureCategoryLoaded(cat: string) {
 }
 
 async function ensureAllCategoriesLoaded() {
-  const tasks = CATEGORY_ORDER.filter((c) => !LOADED_CATS.has(c)).map((c) =>
+  const tasks = CATEGORY_ORDER.filter((c) => c !== '추가' && !LOADED_CATS.has(c)).map((c) =>
     ensureCategoryLoaded(c)
   );
   if (tasks.length) await Promise.all(tasks);
@@ -701,6 +715,21 @@ function openModal() {
   $emojiModal.classList.add('show');
   $emojiInput.value = '';
   $tagsInput.value = '';
+
+  // 카테고리 옵션 생성
+  $categorySelect.style.display = 'block';
+  if (activeTab === 'emoji') {
+    $categorySelect.innerHTML = Object.keys(CATEGORY_FILES)
+      .map((cat) => `<option value="${cat}">${cat}</option>`)
+      .join('') + '<option value="추가">추가</option>';
+  } else if (activeTab === 'kaomoji') {
+    $categorySelect.innerHTML = KAOMOJI_CATEGORIES
+      .map((cat) => `<option value="${cat}">${cat}</option>`)
+      .join('');
+  } else {
+    $categorySelect.style.display = 'none';
+  }
+
   $emojiInput.focus();
 }
 
@@ -737,10 +766,16 @@ $saveBtn.addEventListener('click', async () => {
     : [];
 
   if (activeTab === 'emoji') {
-    await saveCustomEmoji(char, tags);
+    const category = $categorySelect.value || '추가';
+    await saveCustomEmoji(char, tags, category);
     toast('이모티콘이 추가되었습니다');
   } else {
-    await saveCustomKaomoji(char, tags);
+    const category = $categorySelect.value || '추가';
+    // 카오모지는 태그 기반으로 카테고리 필터링하므로 카테고리를 태그 맨 앞에 추가
+    const kamojiTags = category !== '추가' && !tags.includes(category)
+      ? [category, ...tags]
+      : tags;
+    await saveCustomKaomoji(char, kamojiTags);
     toast('Kaomoji가 추가되었습니다');
   }
 
