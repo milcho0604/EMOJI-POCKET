@@ -534,7 +534,7 @@ pnpm run dev
 
 **밀초 (Milcho)**
 
-- 📧 Email: milcho0604@example.com
+- 📧 Email: milcho0604@gmail.com
 - 📝 Blog: [https://velog.io/@milcho0604/posts](https://velog.io/@milcho0604/posts)
 - 💼 GitHub: [@milcho0604](https://github.com/milcho0604)
 
