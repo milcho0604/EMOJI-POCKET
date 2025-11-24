@@ -140,8 +140,8 @@ Chrome 동기화 스토리지를 사용하여 다음 데이터가 자동으로 �
 
 1. **저장소 클론**
    ```bash
-   git clone https://github.com/yourusername/emoji-pocket.git
-   cd emoji-pocket
+   git clone https://github.com/milcho0604/EMOJI-POCKET.git
+   cd EMOJI-POCKET
    ```
 
 2. **의존성 설치**
