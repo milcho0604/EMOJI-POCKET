@@ -885,157 +885,740 @@
     ]
   },
   {
-    "char": "🈂️",
+    "char": "⬆️",
     "tags": [
-      "japanese",
-      "service",
-      "charge",
-      "button",
-      "일본어"
+      "up",
+      "arrow",
+      "화살표",
+      "위"
     ]
   },
   {
-    "char": "🈹",
+    "char": "⬇️",
     "tags": [
-      "japanese",
-      "discount",
-      "button",
-      "일본어"
+      "down",
+      "arrow",
+      "화살표",
+      "아래"
     ]
   },
   {
-    "char": "🉑",
+    "char": "⬅️",
     "tags": [
-      "acceptable",
-      "button",
-      "좋음"
+      "left",
+      "arrow",
+      "화살표",
+      "왼쪽"
     ]
   },
   {
-    "char": "🈴",
+    "char": "➡️",
     "tags": [
-      "japanese",
-      "passing",
-      "grade",
-      "button",
-      "일본어"
+      "right",
+      "arrow",
+      "화살표",
+      "오른쪽"
     ]
   },
   {
-    "char": "🈺",
+    "char": "↗️",
     "tags": [
-      "japanese",
-      "open",
-      "business",
-      "button",
-      "일본어"
+      "up",
+      "right",
+      "arrow",
+      "화살표",
+      "오른쪽위"
     ]
   },
   {
-    "char": "🉐",
+    "char": "↘️",
     "tags": [
-      "japanese",
-      "bargain",
-      "button",
-      "일본어"
+      "down",
+      "right",
+      "arrow",
+      "화살표",
+      "오른쪽아래"
     ]
   },
   {
-    "char": "🈯",
+    "char": "↙️",
     "tags": [
-      "japanese",
-      "reserved",
-      "button",
-      "일본어"
+      "down",
+      "left",
+      "arrow",
+      "화살표",
+      "왼쪽아래"
     ]
   },
   {
-    "char": "🈷️",
+    "char": "↖️",
     "tags": [
-      "japanese",
-      "monthly",
-      "amount",
-      "button",
-      "일본어"
+      "up",
+      "left",
+      "arrow",
+      "화살표",
+      "왼쪽위"
     ]
   },
   {
-    "char": "🈶",
+    "char": "↕️",
     "tags": [
-      "japanese",
-      "not",
-      "free",
-      "charge",
-      "button",
-      "일본어"
+      "up",
+      "down",
+      "arrow",
+      "화살표",
+      "상하"
     ]
   },
   {
-    "char": "🈵",
+    "char": "↔️",
     "tags": [
-      "japanese",
-      "no",
-      "vacancy",
-      "button",
-      "일본어"
+      "left",
+      "right",
+      "arrow",
+      "화살표",
+      "좌우"
     ]
   },
   {
-    "char": "🈚",
+    "char": "↩️",
     "tags": [
-      "japanese",
-      "free",
-      "charge",
-      "button",
-      "일본어"
+      "right",
+      "arrow",
+      "curving",
+      "left",
+      "화살표",
+      "되돌아가기"
     ]
   },
   {
-    "char": "🈸",
+    "char": "↪️",
     "tags": [
-      "japanese",
-      "application",
-      "button",
-      "일본어"
+      "left",
+      "arrow",
+      "curving",
+      "right",
+      "화살표",
+      "되돌아가기"
     ]
   },
   {
-    "char": "㊗️",
+    "char": "⤴️",
     "tags": [
-      "japanese",
-      "congratulations",
-      "button",
-      "일본어",
-      "축하"
+      "right",
+      "arrow",
+      "curving",
+      "up",
+      "화살표",
+      "위로"
     ]
   },
   {
-    "char": "🈲",
+    "char": "⤵️",
     "tags": [
-      "japanese",
-      "prohibited",
-      "button",
-      "일본어",
-      "금지"
+      "right",
+      "arrow",
+      "curving",
+      "down",
+      "화살표",
+      "아래로"
     ]
   },
   {
-    "char": "㊙️",
+    "char": "🔀",
     "tags": [
-      "japanese",
-      "secret",
+      "shuffle",
+      "tracks",
       "button",
-      "일본어",
-      "비밀"
+      "섞기",
+      "화살표"
     ]
   },
   {
-    "char": "🈳",
+    "char": "🔁",
     "tags": [
-      "japanese",
-      "vacancy",
+      "repeat",
       "button",
-      "일본어"
+      "반복",
+      "화살표"
+    ]
+  },
+  {
+    "char": "🔂",
+    "tags": [
+      "repeat",
+      "single",
+      "button",
+      "한번반복",
+      "화살표"
+    ]
+  },
+  {
+    "char": "🔺",
+    "tags": [
+      "red",
+      "triangle",
+      "pointed",
+      "up",
+      "삼각형",
+      "위",
+      "화살표"
+    ]
+  },
+  {
+    "char": "🔻",
+    "tags": [
+      "red",
+      "triangle",
+      "pointed",
+      "down",
+      "삼각형",
+      "아래",
+      "화살표"
+    ]
+  },
+  {
+    "char": "◀️",
+    "tags": [
+      "reverse",
+      "button",
+      "뒤로",
+      "화살표"
+    ]
+  },
+  {
+    "char": "▶️",
+    "tags": [
+      "play",
+      "button",
+      "재생",
+      "화살표"
+    ]
+  },
+  {
+    "char": "⏩",
+    "tags": [
+      "fast",
+      "forward",
+      "button",
+      "빨리감기",
+      "화살표"
+    ]
+  },
+  {
+    "char": "⏪",
+    "tags": [
+      "fast",
+      "reverse",
+      "button",
+      "되감기",
+      "화살표"
+    ]
+  },
+  {
+    "char": "⏫",
+    "tags": [
+      "fast",
+      "up",
+      "button",
+      "위로",
+      "화살표"
+    ]
+  },
+  {
+    "char": "⏬",
+    "tags": [
+      "fast",
+      "down",
+      "button",
+      "아래로",
+      "화살표"
+    ]
+  },
+  {
+    "char": "🔽",
+    "tags": [
+      "downwards",
+      "button",
+      "아래",
+      "화살표"
+    ]
+  },
+  {
+    "char": "🔼",
+    "tags": [
+      "upwards",
+      "button",
+      "위",
+      "화살표"
+    ]
+  },
+  {
+    "char": "⏭️",
+    "tags": [
+      "next",
+      "track",
+      "button",
+      "다음",
+      "화살표"
+    ]
+  },
+  {
+    "char": "⏮️",
+    "tags": [
+      "last",
+      "track",
+      "button",
+      "이전",
+      "화살표"
+    ]
+  },
+  {
+    "char": "🔴",
+    "tags": [
+      "red",
+      "circle",
+      "원",
+      "기호"
+    ]
+  },
+  {
+    "char": "🟠",
+    "tags": [
+      "orange",
+      "circle",
+      "원",
+      "기호"
+    ]
+  },
+  {
+    "char": "🟡",
+    "tags": [
+      "yellow",
+      "circle",
+      "원",
+      "기호"
+    ]
+  },
+  {
+    "char": "🟢",
+    "tags": [
+      "green",
+      "circle",
+      "원",
+      "기호"
+    ]
+  },
+  {
+    "char": "🔵",
+    "tags": [
+      "blue",
+      "circle",
+      "원",
+      "기호"
+    ]
+  },
+  {
+    "char": "🟣",
+    "tags": [
+      "purple",
+      "circle",
+      "원",
+      "기호"
+    ]
+  },
+  {
+    "char": "🟤",
+    "tags": [
+      "brown",
+      "circle",
+      "원",
+      "기호"
+    ]
+  },
+  {
+    "char": "⚫",
+    "tags": [
+      "black",
+      "circle",
+      "원",
+      "기호"
+    ]
+  },
+  {
+    "char": "⚪",
+    "tags": [
+      "white",
+      "circle",
+      "원",
+      "기호"
+    ]
+  },
+  {
+    "char": "⬛",
+    "tags": [
+      "black",
+      "large",
+      "square",
+      "사각형",
+      "기호"
+    ]
+  },
+  {
+    "char": "⬜",
+    "tags": [
+      "white",
+      "large",
+      "square",
+      "사각형",
+      "기호"
+    ]
+  },
+  {
+    "char": "◼️",
+    "tags": [
+      "black",
+      "medium",
+      "square",
+      "사각형",
+      "기호"
+    ]
+  },
+  {
+    "char": "◻️",
+    "tags": [
+      "white",
+      "medium",
+      "square",
+      "사각형",
+      "기호"
+    ]
+  },
+  {
+    "char": "◾",
+    "tags": [
+      "black",
+      "medium",
+      "small",
+      "square",
+      "사각형",
+      "기호"
+    ]
+  },
+  {
+    "char": "◽",
+    "tags": [
+      "white",
+      "medium",
+      "small",
+      "square",
+      "사각형",
+      "기호"
+    ]
+  },
+  {
+    "char": "▪️",
+    "tags": [
+      "black",
+      "small",
+      "square",
+      "사각형",
+      "기호"
+    ]
+  },
+  {
+    "char": "▫️",
+    "tags": [
+      "white",
+      "small",
+      "square",
+      "사각형",
+      "기호"
+    ]
+  },
+  {
+    "char": "🔶",
+    "tags": [
+      "large",
+      "orange",
+      "diamond",
+      "다이아몬드",
+      "기호"
+    ]
+  },
+  {
+    "char": "🔷",
+    "tags": [
+      "large",
+      "blue",
+      "diamond",
+      "다이아몬드",
+      "기호"
+    ]
+  },
+  {
+    "char": "🔸",
+    "tags": [
+      "small",
+      "orange",
+      "diamond",
+      "다이아몬드",
+      "기호"
+    ]
+  },
+  {
+    "char": "🔹",
+    "tags": [
+      "small",
+      "blue",
+      "diamond",
+      "다이아몬드",
+      "기호"
+    ]
+  },
+  {
+    "char": "🔘",
+    "tags": [
+      "radio",
+      "button",
+      "라디오",
+      "기호"
+    ]
+  },
+  {
+    "char": "🔳",
+    "tags": [
+      "white",
+      "square",
+      "button",
+      "사각형",
+      "기호"
+    ]
+  },
+  {
+    "char": "🔲",
+    "tags": [
+      "black",
+      "square",
+      "button",
+      "사각형",
+      "기호"
+    ]
+  },
+  {
+    "char": "➕",
+    "tags": [
+      "plus",
+      "sign",
+      "더하기",
+      "기호"
+    ]
+  },
+  {
+    "char": "➖",
+    "tags": [
+      "minus",
+      "sign",
+      "빼기",
+      "기호"
+    ]
+  },
+  {
+    "char": "➗",
+    "tags": [
+      "division",
+      "sign",
+      "나누기",
+      "기호"
+    ]
+  },
+  {
+    "char": "✖️",
+    "tags": [
+      "multiply",
+      "sign",
+      "곱하기",
+      "기호"
+    ]
+  },
+  {
+    "char": "♾️",
+    "tags": [
+      "infinity",
+      "무한",
+      "기호"
+    ]
+  },
+  {
+    "char": "💱",
+    "tags": [
+      "currency",
+      "exchange",
+      "환전",
+      "기호"
+    ]
+  },
+  {
+    "char": "💲",
+    "tags": [
+      "heavy",
+      "dollar",
+      "sign",
+      "달러",
+      "기호"
+    ]
+  },
+  {
+    "char": "©️",
+    "tags": [
+      "copyright",
+      "저작권",
+      "기호"
+    ]
+  },
+  {
+    "char": "®️",
+    "tags": [
+      "registered",
+      "등록",
+      "기호"
+    ]
+  },
+  {
+    "char": "™️",
+    "tags": [
+      "trade",
+      "mark",
+      "상표",
+      "기호"
+    ]
+  },
+  {
+    "char": "#️⃣",
+    "tags": [
+      "keycap",
+      "hashtag",
+      "해시태그",
+      "기호"
+    ]
+  },
+  {
+    "char": "*️⃣",
+    "tags": [
+      "keycap",
+      "asterisk",
+      "별표",
+      "기호"
+    ]
+  },
+  {
+    "char": "0️⃣",
+    "tags": [
+      "keycap",
+      "digit",
+      "zero",
+      "0",
+      "기호"
+    ]
+  },
+  {
+    "char": "1️⃣",
+    "tags": [
+      "keycap",
+      "digit",
+      "one",
+      "1",
+      "기호"
+    ]
+  },
+  {
+    "char": "2️⃣",
+    "tags": [
+      "keycap",
+      "digit",
+      "two",
+      "2",
+      "기호"
+    ]
+  },
+  {
+    "char": "3️⃣",
+    "tags": [
+      "keycap",
+      "digit",
+      "three",
+      "3",
+      "기호"
+    ]
+  },
+  {
+    "char": "4️⃣",
+    "tags": [
+      "keycap",
+      "digit",
+      "four",
+      "4",
+      "기호"
+    ]
+  },
+  {
+    "char": "5️⃣",
+    "tags": [
+      "keycap",
+      "digit",
+      "five",
+      "5",
+      "기호"
+    ]
+  },
+  {
+    "char": "6️⃣",
+    "tags": [
+      "keycap",
+      "digit",
+      "six",
+      "6",
+      "기호"
+    ]
+  },
+  {
+    "char": "7️⃣",
+    "tags": [
+      "keycap",
+      "digit",
+      "seven",
+      "7",
+      "기호"
+    ]
+  },
+  {
+    "char": "8️⃣",
+    "tags": [
+      "keycap",
+      "digit",
+      "eight",
+      "8",
+      "기호"
+    ]
+  },
+  {
+    "char": "9️⃣",
+    "tags": [
+      "keycap",
+      "digit",
+      "nine",
+      "9",
+      "기호"
+    ]
+  },
+  {
+    "char": "🔟",
+    "tags": [
+      "keycap",
+      "digit",
+      "ten",
+      "10",
+      "기호"
     ]
   }
 ]

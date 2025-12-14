@@ -1,619 +1,1166 @@
 [
   {
     "char": "⌚",
-    "tags": ["watch", "시계"]
+    "tags": [
+      "watch",
+      "시계"
+    ]
   },
   {
     "char": "⌛",
-    "tags": ["hourglass", "done", "모래시계"]
+    "tags": [
+      "hourglass",
+      "done",
+      "모래시계"
+    ]
   },
   {
     "char": "⌨️",
-    "tags": ["keyboard", "키보드"]
+    "tags": [
+      "keyboard",
+      "키보드"
+    ]
   },
   {
     "char": "⏰",
-    "tags": ["alarm", "clock", "알람"]
+    "tags": [
+      "alarm",
+      "clock",
+      "알람"
+    ]
   },
   {
     "char": "⏱️",
-    "tags": ["stopwatch", "스톱워치"]
+    "tags": [
+      "stopwatch",
+      "스톱워치"
+    ]
   },
   {
     "char": "⏲️",
-    "tags": ["timer", "clock", "타이머"]
+    "tags": [
+      "timer",
+      "clock",
+      "타이머"
+    ]
   },
   {
     "char": "⏳",
-    "tags": ["hourglass", "not", "done", "모래시계"]
+    "tags": [
+      "hourglass",
+      "not",
+      "done",
+      "모래시계"
+    ]
   },
   {
     "char": "☎️",
-    "tags": ["telephone", "전화"]
+    "tags": [
+      "telephone",
+      "전화"
+    ]
   },
   {
     "char": "⚒️",
-    "tags": ["hammer", "pick", "망치"]
+    "tags": [
+      "hammer",
+      "pick",
+      "망치"
+    ]
   },
   {
     "char": "⚔️",
-    "tags": ["crossed", "swords", "검"]
+    "tags": [
+      "crossed",
+      "swords",
+      "검"
+    ]
   },
   {
     "char": "⚖️",
-    "tags": ["balance", "scale", "저울"]
+    "tags": [
+      "balance",
+      "scale",
+      "저울"
+    ]
   },
   {
     "char": "⚗️",
-    "tags": ["alembic", "앰플"]
+    "tags": [
+      "alembic",
+      "앰플"
+    ]
   },
   {
     "char": "⚙️",
-    "tags": ["gear", "기어"]
+    "tags": [
+      "gear",
+      "기어"
+    ]
   },
   {
     "char": "⚰️",
-    "tags": ["coffin", "관"]
+    "tags": [
+      "coffin",
+      "관"
+    ]
   },
   {
     "char": "⚱️",
-    "tags": ["funeral", "urn", "항아리"]
+    "tags": [
+      "funeral",
+      "urn",
+      "항아리"
+    ]
   },
   {
     "char": "⛏️",
-    "tags": ["pick", "곡괭이"]
+    "tags": [
+      "pick",
+      "곡괭이"
+    ]
   },
   {
     "char": "⛓️",
-    "tags": ["chains", "쇠사슬"]
+    "tags": [
+      "chains",
+      "쇠사슬"
+    ]
   },
   {
     "char": "🎙️",
-    "tags": ["studio", "microphone", "마이크"]
+    "tags": [
+      "studio",
+      "microphone",
+      "마이크"
+    ]
   },
   {
     "char": "🎚️",
-    "tags": ["level", "slider", "슬라이더"]
+    "tags": [
+      "level",
+      "slider",
+      "슬라이더"
+    ]
   },
   {
     "char": "🎛️",
-    "tags": ["control", "knobs", "컨트롤"]
+    "tags": [
+      "control",
+      "knobs",
+      "컨트롤"
+    ]
   },
   {
     "char": "🎞️",
-    "tags": ["film", "frames", "필름"]
+    "tags": [
+      "film",
+      "frames",
+      "필름"
+    ]
   },
   {
     "char": "🎥",
-    "tags": ["movie", "camera", "영화"]
+    "tags": [
+      "movie",
+      "camera",
+      "영화"
+    ]
   },
   {
     "char": "🏺",
-    "tags": ["amphora", "항아리"]
+    "tags": [
+      "amphora",
+      "항아리"
+    ]
   },
   {
     "char": "💈",
-    "tags": ["barber", "pole", "이발소"]
+    "tags": [
+      "barber",
+      "pole",
+      "이발소"
+    ]
   },
   {
     "char": "💎",
-    "tags": ["gem", "다이아몬드"]
+    "tags": [
+      "gem",
+      "다이아몬드"
+    ]
   },
   {
     "char": "💡",
-    "tags": ["light", "bulb", "전구"]
+    "tags": [
+      "light",
+      "bulb",
+      "전구"
+    ]
   },
   {
     "char": "💣",
-    "tags": ["bomb", "폭탄"]
+    "tags": [
+      "bomb",
+      "폭탄"
+    ]
   },
   {
     "char": "💰",
-    "tags": ["money", "bag", "돈"]
+    "tags": [
+      "money",
+      "bag",
+      "돈"
+    ]
   },
   {
     "char": "💳",
-    "tags": ["credit", "card", "신용카드"]
+    "tags": [
+      "credit",
+      "card",
+      "신용카드"
+    ]
   },
   {
     "char": "💴",
-    "tags": ["yen", "banknote", "엔"]
+    "tags": [
+      "yen",
+      "banknote",
+      "엔"
+    ]
   },
   {
     "char": "💵",
-    "tags": ["dollar", "banknote", "달러"]
+    "tags": [
+      "dollar",
+      "banknote",
+      "달러"
+    ]
   },
   {
     "char": "💶",
-    "tags": ["euro", "banknote", "유로"]
+    "tags": [
+      "euro",
+      "banknote",
+      "유로"
+    ]
   },
   {
     "char": "💷",
-    "tags": ["pound", "banknote", "파운드"]
+    "tags": [
+      "pound",
+      "banknote",
+      "파운드"
+    ]
   },
   {
     "char": "💸",
-    "tags": ["money", "wings", "돈"]
+    "tags": [
+      "money",
+      "wings",
+      "돈"
+    ]
   },
   {
     "char": "💻",
-    "tags": ["laptop", "노트북"]
+    "tags": [
+      "laptop",
+      "노트북"
+    ]
   },
   {
     "char": "💾",
-    "tags": ["floppy", "disk", "디스크"]
+    "tags": [
+      "floppy",
+      "disk",
+      "디스크"
+    ]
   },
   {
     "char": "💿",
-    "tags": ["optical", "disk", "CD"]
+    "tags": [
+      "optical",
+      "disk",
+      "CD"
+    ]
   },
   {
     "char": "📀",
-    "tags": ["dvd", "DVD"]
+    "tags": [
+      "dvd",
+      "DVD"
+    ]
   },
   {
     "char": "📞",
-    "tags": ["telephone", "receiver", "전화"]
+    "tags": [
+      "telephone",
+      "receiver",
+      "전화"
+    ]
   },
   {
     "char": "📟",
-    "tags": ["pager", "호출기"]
+    "tags": [
+      "pager",
+      "호출기"
+    ]
   },
   {
     "char": "📠",
-    "tags": ["fax", "machine", "팩스"]
+    "tags": [
+      "fax",
+      "machine",
+      "팩스"
+    ]
   },
   {
     "char": "📡",
-    "tags": ["satellite", "antenna", "위성"]
+    "tags": [
+      "satellite",
+      "antenna",
+      "위성"
+    ]
   },
   {
     "char": "📱",
-    "tags": ["mobile", "phone", "스마트폰"]
+    "tags": [
+      "mobile",
+      "phone",
+      "스마트폰"
+    ]
   },
   {
     "char": "📲",
-    "tags": ["mobile", "phone", "arrow", "스마트폰"]
+    "tags": [
+      "mobile",
+      "phone",
+      "arrow",
+      "스마트폰"
+    ]
   },
   {
     "char": "📷",
-    "tags": ["camera", "카메라"]
+    "tags": [
+      "camera",
+      "카메라"
+    ]
   },
   {
     "char": "📸",
-    "tags": ["camera", "flash", "카메라"]
+    "tags": [
+      "camera",
+      "flash",
+      "카메라"
+    ]
   },
   {
     "char": "📹",
-    "tags": ["video", "camera", "비디오"]
+    "tags": [
+      "video",
+      "camera",
+      "비디오"
+    ]
   },
   {
     "char": "📺",
-    "tags": ["television", "TV"]
+    "tags": [
+      "television",
+      "TV"
+    ]
   },
   {
     "char": "📻",
-    "tags": ["radio", "라디오"]
+    "tags": [
+      "radio",
+      "라디오"
+    ]
   },
   {
     "char": "📼",
-    "tags": ["videocassette", "비디오"]
+    "tags": [
+      "videocassette",
+      "비디오"
+    ]
   },
   {
     "char": "📽️",
-    "tags": ["film", "projector", "프로젝터"]
+    "tags": [
+      "film",
+      "projector",
+      "프로젝터"
+    ]
   },
   {
     "char": "📿",
-    "tags": ["prayer", "beads", "염주"]
+    "tags": [
+      "prayer",
+      "beads",
+      "염주"
+    ]
   },
   {
     "char": "🔋",
-    "tags": ["battery", "배터리"]
+    "tags": [
+      "battery",
+      "배터리"
+    ]
   },
   {
     "char": "🔌",
-    "tags": ["electric", "plug", "플러그"]
+    "tags": [
+      "electric",
+      "plug",
+      "플러그"
+    ]
   },
   {
     "char": "🔦",
-    "tags": ["flashlight", "손전등"]
+    "tags": [
+      "flashlight",
+      "손전등"
+    ]
   },
   {
     "char": "🔧",
-    "tags": ["wrench", "렌치"]
+    "tags": [
+      "wrench",
+      "렌치"
+    ]
   },
   {
     "char": "🔨",
-    "tags": ["hammer", "망치"]
+    "tags": [
+      "hammer",
+      "망치"
+    ]
   },
   {
     "char": "🔩",
-    "tags": ["nut", "bolt", "나사"]
+    "tags": [
+      "nut",
+      "bolt",
+      "나사"
+    ]
   },
   {
     "char": "🔪",
-    "tags": ["kitchen", "knife", "칼"]
+    "tags": [
+      "kitchen",
+      "knife",
+      "칼"
+    ]
   },
   {
     "char": "🔫",
-    "tags": ["pistol", "총"]
+    "tags": [
+      "pistol",
+      "총"
+    ]
   },
   {
     "char": "🔬",
-    "tags": ["microscope", "현미경"]
+    "tags": [
+      "microscope",
+      "현미경"
+    ]
   },
   {
     "char": "🔭",
-    "tags": ["telescope", "망원경"]
+    "tags": [
+      "telescope",
+      "망원경"
+    ]
   },
   {
     "char": "🔮",
-    "tags": ["crystal", "ball", "수정구슬"]
+    "tags": [
+      "crystal",
+      "ball",
+      "수정구슬"
+    ]
   },
   {
     "char": "🕯️",
-    "tags": ["candle", "양초"]
+    "tags": [
+      "candle",
+      "양초"
+    ]
   },
   {
     "char": "🕰️",
-    "tags": ["mantelpiece", "clock", "시계"]
+    "tags": [
+      "mantelpiece",
+      "clock",
+      "시계"
+    ]
   },
   {
     "char": "🕳️",
-    "tags": ["hole", "구멍"]
+    "tags": [
+      "hole",
+      "구멍"
+    ]
   },
   {
     "char": "🕹️",
-    "tags": ["joystick", "조이스틱"]
+    "tags": [
+      "joystick",
+      "조이스틱"
+    ]
   },
   {
     "char": "🖥️",
-    "tags": ["desktop", "computer", "컴퓨터"]
+    "tags": [
+      "desktop",
+      "computer",
+      "컴퓨터"
+    ]
   },
   {
     "char": "🖨️",
-    "tags": ["printer", "프린터"]
+    "tags": [
+      "printer",
+      "프린터"
+    ]
   },
   {
     "char": "🖱️",
-    "tags": ["computer", "mouse", "마우스"]
+    "tags": [
+      "computer",
+      "mouse",
+      "마우스"
+    ]
   },
   {
     "char": "🖲️",
-    "tags": ["trackball", "트랙볼"]
+    "tags": [
+      "trackball",
+      "트랙볼"
+    ]
   },
   {
     "char": "🗜️",
-    "tags": ["clamp", "클램프"]
+    "tags": [
+      "clamp",
+      "클램프"
+    ]
   },
   {
     "char": "🗡️",
-    "tags": ["dagger", "단검"]
+    "tags": [
+      "dagger",
+      "단검"
+    ]
   },
   {
     "char": "🧨",
-    "tags": ["firecracker", "폭죽"]
+    "tags": [
+      "firecracker",
+      "폭죽"
+    ]
   },
   {
     "char": "🧭",
-    "tags": ["compass", "나침반"]
+    "tags": [
+      "compass",
+      "나침반"
+    ]
   },
   {
     "char": "🧯",
-    "tags": ["fire", "extinguisher", "소화기"]
+    "tags": [
+      "fire",
+      "extinguisher",
+      "소화기"
+    ]
   },
   {
     "char": "🧰",
-    "tags": ["toolbox", "도구상자"]
+    "tags": [
+      "toolbox",
+      "도구상자"
+    ]
   },
   {
     "char": "🧱",
-    "tags": ["brick", "벽돌"]
+    "tags": [
+      "brick",
+      "벽돌"
+    ]
   },
   {
     "char": "🧲",
-    "tags": ["magnet", "자석"]
+    "tags": [
+      "magnet",
+      "자석"
+    ]
   },
   {
     "char": "🧴",
-    "tags": ["lotion", "bottle", "병"]
+    "tags": [
+      "lotion",
+      "bottle",
+      "병"
+    ]
   },
   {
     "char": "🧷",
-    "tags": ["safety", "pin", "안전핀"]
+    "tags": [
+      "safety",
+      "pin",
+      "안전핀"
+    ]
   },
   {
     "char": "🧹",
-    "tags": ["broom", "빗자루"]
+    "tags": [
+      "broom",
+      "빗자루"
+    ]
   },
   {
     "char": "🧺",
-    "tags": ["basket", "바구니"]
+    "tags": [
+      "basket",
+      "바구니"
+    ]
   },
   {
     "char": "🧻",
-    "tags": ["roll", "paper", "휴지"]
+    "tags": [
+      "roll",
+      "paper",
+      "휴지"
+    ]
   },
   {
     "char": "🧼",
-    "tags": ["soap", "비누"]
+    "tags": [
+      "soap",
+      "비누"
+    ]
   },
   {
     "char": "🧽",
-    "tags": ["sponge", "스펀지"]
+    "tags": [
+      "sponge",
+      "스펀지"
+    ]
   },
   {
     "char": "🧿",
-    "tags": ["nazar", "amulet", "부적"]
+    "tags": [
+      "nazar",
+      "amulet",
+      "부적"
+    ]
   },
   {
     "char": "🩹",
-    "tags": ["adhesive", "bandage", "반창고"]
+    "tags": [
+      "adhesive",
+      "bandage",
+      "반창고"
+    ]
   },
   {
     "char": "🩺",
-    "tags": ["stethoscope", "청진기"]
+    "tags": [
+      "stethoscope",
+      "청진기"
+    ]
   },
   {
     "char": "🪒",
-    "tags": ["razor", "면도기"]
+    "tags": [
+      "razor",
+      "면도기"
+    ]
   },
   {
     "char": "🪔",
-    "tags": ["diya", "lamp", "램프"]
+    "tags": [
+      "diya",
+      "lamp",
+      "램프"
+    ]
   },
   {
     "char": "🪚",
-    "tags": ["carpentry", "saw", "톱"]
+    "tags": [
+      "carpentry",
+      "saw",
+      "톱"
+    ]
   },
   {
     "char": "🪛",
-    "tags": ["screwdriver", "드라이버"]
+    "tags": [
+      "screwdriver",
+      "드라이버"
+    ]
   },
   {
     "char": "🪜",
-    "tags": ["ladder", "사다리"]
+    "tags": [
+      "ladder",
+      "사다리"
+    ]
   },
   {
     "char": "🪝",
-    "tags": ["hook", "갈고리"]
+    "tags": [
+      "hook",
+      "갈고리"
+    ]
   },
   {
     "char": "🪢",
-    "tags": ["knot", "매듭"]
+    "tags": [
+      "knot",
+      "매듭"
+    ]
   },
   {
     "char": "🪣",
-    "tags": ["bucket", "양동이"]
+    "tags": [
+      "bucket",
+      "양동이"
+    ]
   },
   {
     "char": "🪤",
-    "tags": ["mouse", "trap", "쥐덫"]
+    "tags": [
+      "mouse",
+      "trap",
+      "쥐덫"
+    ]
   },
   {
     "char": "🪥",
-    "tags": ["toothbrush", "칫솔"]
+    "tags": [
+      "toothbrush",
+      "칫솔"
+    ]
   },
   {
     "char": "🪦",
-    "tags": ["headstone", "비석"]
+    "tags": [
+      "headstone",
+      "비석"
+    ]
   },
   {
     "char": "🚪",
-    "tags": ["door", "문"]
+    "tags": [
+      "door",
+      "문"
+    ]
   },
   {
     "char": "🚬",
-    "tags": ["cigarette", "담배"]
+    "tags": [
+      "cigarette",
+      "담배"
+    ]
   },
   {
     "char": "🚽",
-    "tags": ["toilet", "변기"]
+    "tags": [
+      "toilet",
+      "변기"
+    ]
   },
   {
     "char": "🚿",
-    "tags": ["shower", "샤워"]
+    "tags": [
+      "shower",
+      "샤워"
+    ]
   },
   {
     "char": "🛁",
-    "tags": ["bathtub", "욕조"]
+    "tags": [
+      "bathtub",
+      "욕조"
+    ]
   },
   {
     "char": "🛋️",
-    "tags": ["couch", "lamp", "소파"]
+    "tags": [
+      "couch",
+      "lamp",
+      "소파"
+    ]
   },
   {
     "char": "🛏️",
-    "tags": ["bed", "침대"]
+    "tags": [
+      "bed",
+      "침대"
+    ]
   },
   {
     "char": "🛒",
-    "tags": ["shopping", "cart", "쇼핑카트"]
+    "tags": [
+      "shopping",
+      "cart",
+      "쇼핑카트"
+    ]
   },
   {
     "char": "🛠️",
-    "tags": ["hammer", "wrench", "망치"]
+    "tags": [
+      "hammer",
+      "wrench",
+      "망치"
+    ]
   },
   {
     "char": "🛡️",
-    "tags": ["shield", "방패"]
+    "tags": [
+      "shield",
+      "방패"
+    ]
   },
   {
     "char": "🛢️",
-    "tags": ["oil", "drum", "기름"]
+    "tags": [
+      "oil",
+      "drum",
+      "기름"
+    ]
   },
   {
     "char": "🪑",
-    "tags": ["chair", "의자", "사물"]
+    "tags": [
+      "chair",
+      "의자",
+      "사물"
+    ]
   },
   {
     "char": "🪟",
-    "tags": ["window", "창문", "사물"]
+    "tags": [
+      "window",
+      "창문",
+      "사물"
+    ]
   },
   {
     "char": "🪞",
-    "tags": ["mirror", "거울", "사물"]
+    "tags": [
+      "mirror",
+      "거울",
+      "사물"
+    ]
   },
   {
     "char": "🪠",
-    "tags": ["plunger", "배수구", "사물"]
-  },
-  {
-    "char": "🪣",
-    "tags": ["bucket", "양동이", "사물"]
-  },
-  {
-    "char": "🪤",
-    "tags": ["mouse", "trap", "쥐덫", "사물"]
-  },
-  {
-    "char": "🪥",
-    "tags": ["toothbrush", "칫솔", "사물"]
-  },
-  {
-    "char": "🪦",
-    "tags": ["headstone", "비석", "사물"]
+    "tags": [
+      "plunger",
+      "배수구",
+      "사물"
+    ]
   },
   {
     "char": "🪧",
-    "tags": ["placard", "표지판", "사물"]
+    "tags": [
+      "placard",
+      "표지판",
+      "사물"
+    ]
   },
   {
     "char": "🪨",
-    "tags": ["rock", "돌", "사물"]
+    "tags": [
+      "rock",
+      "돌",
+      "사물"
+    ]
   },
   {
     "char": "🪩",
-    "tags": ["mirror", "ball", "미러볼", "사물"]
+    "tags": [
+      "mirror",
+      "ball",
+      "미러볼",
+      "사물"
+    ]
   },
   {
     "char": "🪪",
-    "tags": ["identification", "card", "신분증", "사물"]
+    "tags": [
+      "identification",
+      "card",
+      "신분증",
+      "사물"
+    ]
   },
   {
     "char": "🪫",
-    "tags": ["low", "battery", "배터리부족", "사물"]
+    "tags": [
+      "low",
+      "battery",
+      "배터리부족",
+      "사물"
+    ]
   },
   {
     "char": "🪬",
-    "tags": ["hamsa", "부적", "사물"]
+    "tags": [
+      "hamsa",
+      "부적",
+      "사물"
+    ]
   },
   {
     "char": "🪰",
-    "tags": ["fly", "파리", "사물"]
+    "tags": [
+      "fly",
+      "파리",
+      "사물"
+    ]
   },
   {
     "char": "🪱",
-    "tags": ["worm", "벌레", "사물"]
+    "tags": [
+      "worm",
+      "벌레",
+      "사물"
+    ]
   },
   {
     "char": "🪲",
-    "tags": ["beetle", "딱정벌레", "사물"]
+    "tags": [
+      "beetle",
+      "딱정벌레",
+      "사물"
+    ]
   },
   {
     "char": "🪳",
-    "tags": ["cockroach", "바퀴벌레", "사물"]
+    "tags": [
+      "cockroach",
+      "바퀴벌레",
+      "사물"
+    ]
   },
   {
     "char": "🪴",
-    "tags": ["potted", "plant", "화분", "사물"]
+    "tags": [
+      "potted",
+      "plant",
+      "화분",
+      "사물"
+    ]
   },
   {
     "char": "🪵",
-    "tags": ["wood", "나무", "사물"]
+    "tags": [
+      "wood",
+      "나무",
+      "사물"
+    ]
   },
   {
     "char": "🪶",
-    "tags": ["feather", "깃털", "사물"]
+    "tags": [
+      "feather",
+      "깃털",
+      "사물"
+    ]
   },
   {
     "char": "🪷",
-    "tags": ["lotus", "연꽃", "사물"]
+    "tags": [
+      "lotus",
+      "연꽃",
+      "사물"
+    ]
   },
   {
     "char": "🪸",
-    "tags": ["coral", "산호", "사물"]
+    "tags": [
+      "coral",
+      "산호",
+      "사물"
+    ]
   },
   {
     "char": "🪹",
-    "tags": ["empty", "nest", "빈둥지", "사물"]
+    "tags": [
+      "empty",
+      "nest",
+      "빈둥지",
+      "사물"
+    ]
   },
   {
     "char": "🪺",
-    "tags": ["nest", "with", "eggs", "둥지", "사물"]
+    "tags": [
+      "nest",
+      "with",
+      "eggs",
+      "둥지",
+      "사물"
+    ]
   },
   {
     "char": "🫀",
-    "tags": ["anatomical", "heart", "해부학적심장", "사물"]
+    "tags": [
+      "anatomical",
+      "heart",
+      "해부학적심장",
+      "사물"
+    ]
   },
   {
     "char": "🫁",
-    "tags": ["lungs", "폐", "사물"]
+    "tags": [
+      "lungs",
+      "폐",
+      "사물"
+    ]
   },
   {
     "char": "🫂",
-    "tags": ["people", "hugging", "포옹", "사물"]
+    "tags": [
+      "people",
+      "hugging",
+      "포옹",
+      "사물"
+    ]
   },
   {
     "char": "🫃",
-    "tags": ["pregnant", "man", "임신남성", "사물"]
+    "tags": [
+      "pregnant",
+      "man",
+      "임신남성",
+      "사물"
+    ]
   },
   {
     "char": "🫄",
-    "tags": ["pregnant", "person", "임신한사람", "사물"]
+    "tags": [
+      "pregnant",
+      "person",
+      "임신한사람",
+      "사물"
+    ]
   },
   {
     "char": "🫅",
-    "tags": ["person", "crown", "왕관", "사물"]
+    "tags": [
+      "person",
+      "crown",
+      "왕관",
+      "사물"
+    ]
   },
   {
     "char": "🫖",
-    "tags": ["teapot", "찻주전자", "사물"]
+    "tags": [
+      "teapot",
+      "찻주전자",
+      "사물"
+    ]
   },
   {
     "char": "🫗",
-    "tags": ["pouring", "liquid", "액체붓기", "사물"]
+    "tags": [
+      "pouring",
+      "liquid",
+      "액체붓기",
+      "사물"
+    ]
   },
   {
     "char": "🫘",
-    "tags": ["beans", "콩", "사물"]
+    "tags": [
+      "beans",
+      "콩",
+      "사물"
+    ]
   },
   {
     "char": "🫙",
-    "tags": ["jar", "병", "사물"]
+    "tags": [
+      "jar",
+      "병",
+      "사물"
+    ]
   },
   {
     "char": "🫚",
-    "tags": ["ginger", "root", "생강", "사물"]
+    "tags": [
+      "ginger",
+      "root",
+      "생강",
+      "사물"
+    ]
   },
   {
     "char": "🫛",
-    "tags": ["pea", "pod", "완두콩", "사물"]
+    "tags": [
+      "pea",
+      "pod",
+      "완두콩",
+      "사물"
+    ]
   },
   {
     "char": "🫜",
-    "tags": ["maracas", "마라카스", "사물"]
+    "tags": [
+      "maracas",
+      "마라카스",
+      "사물"
+    ]
   },
   {
     "char": "🫝",
-    "tags": ["flute", "플루트", "사물"]
+    "tags": [
+      "flute",
+      "플루트",
+      "사물"
+    ]
   },
   {
     "char": "🫞",
-    "tags": ["cup", "straw", "빨대컵", "사물"]
+    "tags": [
+      "cup",
+      "straw",
+      "빨대컵",
+      "사물"
+    ]
   },
   {
     "char": "🫟",
-    "tags": ["bubble", "tea", "버블티", "사물"]
+    "tags": [
+      "bubble",
+      "tea",
+      "버블티",
+      "사물"
+    ]
   },
   {
     "char": "🫠",
-    "tags": ["melting", "face", "녹는얼굴", "사물"]
+    "tags": [
+      "melting",
+      "face",
+      "녹는얼굴",
+      "사물"
+    ]
   },
   {
     "char": "🫡",
-    "tags": ["saluting", "face", "경례", "사물"]
+    "tags": [
+      "saluting",
+      "face",
+      "경례",
+      "사물"
+    ]
   },
   {
     "char": "🫢",
@@ -630,174 +1177,364 @@
   },
   {
     "char": "🫣",
-    "tags": ["face", "peeking", "eye", "엿보기", "사물"]
+    "tags": [
+      "face",
+      "peeking",
+      "eye",
+      "엿보기",
+      "사물"
+    ]
   },
   {
     "char": "🫤",
-    "tags": ["face", "diagonal", "mouth", "대각선입", "사물"]
+    "tags": [
+      "face",
+      "diagonal",
+      "mouth",
+      "대각선입",
+      "사물"
+    ]
   },
   {
     "char": "🫥",
-    "tags": ["dotted", "line", "face", "점선얼굴", "사물"]
+    "tags": [
+      "dotted",
+      "line",
+      "face",
+      "점선얼굴",
+      "사물"
+    ]
   },
   {
     "char": "🫦",
-    "tags": ["biting", "lip", "입술깨물기", "사물"]
+    "tags": [
+      "biting",
+      "lip",
+      "입술깨물기",
+      "사물"
+    ]
   },
   {
     "char": "🫧",
-    "tags": ["bubbles", "거품", "사물"]
+    "tags": [
+      "bubbles",
+      "거품",
+      "사물"
+    ]
   },
   {
     "char": "🫰",
-    "tags": ["hand", "index", "thumb", "crossed", "손가락교차", "사물"]
+    "tags": [
+      "hand",
+      "index",
+      "thumb",
+      "crossed",
+      "손가락교차",
+      "사물"
+    ]
   },
   {
     "char": "🫱",
-    "tags": ["rightwards", "hand", "오른손", "사물"]
+    "tags": [
+      "rightwards",
+      "hand",
+      "오른손",
+      "사물"
+    ]
   },
   {
     "char": "🫲",
-    "tags": ["leftwards", "hand", "왼손", "사물"]
+    "tags": [
+      "leftwards",
+      "hand",
+      "왼손",
+      "사물"
+    ]
   },
   {
     "char": "🫳",
-    "tags": ["palm", "down", "hand", "손바닥아래", "사물"]
+    "tags": [
+      "palm",
+      "down",
+      "hand",
+      "손바닥아래",
+      "사물"
+    ]
   },
   {
     "char": "🫴",
-    "tags": ["palm", "up", "hand", "손바닥위", "사물"]
+    "tags": [
+      "palm",
+      "up",
+      "hand",
+      "손바닥위",
+      "사물"
+    ]
   },
   {
     "char": "🫵",
-    "tags": ["index", "pointing", "at", "viewer", "가리키기", "사물"]
+    "tags": [
+      "index",
+      "pointing",
+      "at",
+      "viewer",
+      "가리키기",
+      "사물"
+    ]
   },
   {
     "char": "🫶",
-    "tags": ["heart", "hands", "하트손", "사물"]
+    "tags": [
+      "heart",
+      "hands",
+      "하트손",
+      "사물"
+    ]
   },
   {
     "char": "🛝",
-    "tags": ["playground", "slide", "미끄럼틀", "사물"]
+    "tags": [
+      "playground",
+      "slide",
+      "미끄럼틀",
+      "사물"
+    ]
   },
   {
     "char": "🛞",
-    "tags": ["wheel", "바퀴", "사물"]
+    "tags": [
+      "wheel",
+      "바퀴",
+      "사물"
+    ]
   },
   {
     "char": "🛟",
-    "tags": ["ring", "buoy", "구명고리", "사물"]
-  },
-  {
-    "char": "🛠️",
-    "tags": ["hammer", "wrench", "망치", "렌치", "사물"]
-  },
-  {
-    "char": "🛡️",
-    "tags": ["shield", "방패", "사물"]
-  },
-  {
-    "char": "🛢️",
-    "tags": ["oil", "drum", "기름", "사물"]
+    "tags": [
+      "ring",
+      "buoy",
+      "구명고리",
+      "사물"
+    ]
   },
   {
     "char": "🛣️",
-    "tags": ["motorway", "고속도로", "사물"]
+    "tags": [
+      "motorway",
+      "고속도로",
+      "사물"
+    ]
   },
   {
     "char": "🛤️",
-    "tags": ["railway", "track", "철도", "사물"]
+    "tags": [
+      "railway",
+      "track",
+      "철도",
+      "사물"
+    ]
   },
   {
     "char": "🛥️",
-    "tags": ["motor", "boat", "모터보트", "사물"]
+    "tags": [
+      "motor",
+      "boat",
+      "모터보트",
+      "사물"
+    ]
   },
   {
     "char": "🛩️",
-    "tags": ["small", "airplane", "작은비행기", "사물"]
+    "tags": [
+      "small",
+      "airplane",
+      "작은비행기",
+      "사물"
+    ]
   },
   {
     "char": "🛫",
-    "tags": ["airplane", "departure", "비행기출발", "사물"]
+    "tags": [
+      "airplane",
+      "departure",
+      "비행기출발",
+      "사물"
+    ]
   },
   {
     "char": "🛬",
-    "tags": ["airplane", "arrival", "비행기도착", "사물"]
+    "tags": [
+      "airplane",
+      "arrival",
+      "비행기도착",
+      "사물"
+    ]
   },
   {
     "char": "🛰️",
-    "tags": ["satellite", "위성", "사물"]
+    "tags": [
+      "satellite",
+      "위성",
+      "사물"
+    ]
   },
   {
     "char": "🛱️",
-    "tags": ["oncoming", "fire", "engine", "소방차", "사물"]
+    "tags": [
+      "oncoming",
+      "fire",
+      "engine",
+      "소방차",
+      "사물"
+    ]
   },
   {
     "char": "🛲",
-    "tags": ["diesel", "locomotive", "디젤기관차", "사물"]
+    "tags": [
+      "diesel",
+      "locomotive",
+      "디젤기관차",
+      "사물"
+    ]
   },
   {
     "char": "🛳️",
-    "tags": ["passenger", "ship", "여객선", "사물"]
+    "tags": [
+      "passenger",
+      "ship",
+      "여객선",
+      "사물"
+    ]
   },
   {
     "char": "🛴",
-    "tags": ["scooter", "스쿠터", "사물"]
+    "tags": [
+      "scooter",
+      "스쿠터",
+      "사물"
+    ]
   },
   {
     "char": "🛵",
-    "tags": ["motor", "scooter", "오토바이", "사물"]
+    "tags": [
+      "motor",
+      "scooter",
+      "오토바이",
+      "사물"
+    ]
   },
   {
     "char": "🛶",
-    "tags": ["canoe", "카누", "사물"]
+    "tags": [
+      "canoe",
+      "카누",
+      "사물"
+    ]
   },
   {
     "char": "🛷",
-    "tags": ["sled", "썰매", "사물"]
+    "tags": [
+      "sled",
+      "썰매",
+      "사물"
+    ]
   },
   {
     "char": "🛸",
-    "tags": ["flying", "saucer", "UFO", "사물"]
+    "tags": [
+      "flying",
+      "saucer",
+      "UFO",
+      "사물"
+    ]
   },
   {
     "char": "🛹",
-    "tags": ["skateboard", "스케이트보드", "사물"]
+    "tags": [
+      "skateboard",
+      "스케이트보드",
+      "사물"
+    ]
   },
   {
     "char": "🛺",
-    "tags": ["auto", "rickshaw", "삼륜차", "사물"]
+    "tags": [
+      "auto",
+      "rickshaw",
+      "삼륜차",
+      "사물"
+    ]
   },
   {
     "char": "🟠",
-    "tags": ["orange", "circle", "주황원", "사물"]
+    "tags": [
+      "orange",
+      "circle",
+      "주황원",
+      "사물"
+    ]
   },
   {
     "char": "🟡",
-    "tags": ["yellow", "circle", "노랑원", "사물"]
+    "tags": [
+      "yellow",
+      "circle",
+      "노랑원",
+      "사물"
+    ]
   },
   {
     "char": "🟢",
-    "tags": ["green", "circle", "초록원", "사물"]
+    "tags": [
+      "green",
+      "circle",
+      "초록원",
+      "사물"
+    ]
   },
   {
     "char": "🔵",
-    "tags": ["blue", "circle", "파랑원", "사물"]
+    "tags": [
+      "blue",
+      "circle",
+      "파랑원",
+      "사물"
+    ]
   },
   {
     "char": "🟣",
-    "tags": ["purple", "circle", "보라원", "사물"]
+    "tags": [
+      "purple",
+      "circle",
+      "보라원",
+      "사물"
+    ]
   },
   {
     "char": "🟤",
-    "tags": ["brown", "circle", "갈색원", "사물"]
+    "tags": [
+      "brown",
+      "circle",
+      "갈색원",
+      "사물"
+    ]
   },
   {
     "char": "⚫",
-    "tags": ["black", "circle", "검정원", "사물"]
+    "tags": [
+      "black",
+      "circle",
+      "검정원",
+      "사물"
+    ]
   },
   {
     "char": "⚪",
-    "tags": ["white", "circle", "하양원", "사물"]
+    "tags": [
+      "white",
+      "circle",
+      "하양원",
+      "사물"
+    ]
   }
 ]
