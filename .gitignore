@@ -8,6 +8,7 @@ modules.yaml
 /.history
 # build output
 dist/
+/dist.zip
 
 # logs
 npm-debug.log*
