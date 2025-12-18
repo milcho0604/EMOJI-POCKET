@@ -1,3 +1,5 @@
+import { i18n } from './i18n/i18n';
+
 // 데이터 소스: 카테고리별 분할 JSON (emotion/animals/foods/objects/nature/symbols/hands/hearts/events 등)
 type Emoji = { char: string; tags: string[]; category: string }; // category 한국어명 고정
 type Kaomoji = { char: string; tags: string[] };
@@ -144,6 +146,13 @@ chrome.storage.onChanged.addListener((changes, area) => {
     THEME = (changes.theme.newValue as ThemeMode) || 'light';
     applyTheme();
   }
+  if (changes.language) {
+    i18n.setLanguage(changes.language.newValue);
+    i18n.updatePageText();
+    updateLanguageButton();
+    renderCats();
+    needRender = true;
+  }
 
   if (needRender) {
     render();
@@ -162,6 +171,9 @@ const $insertBtn = document.getElementById(
 const $cats = document.getElementById('cats') as HTMLDivElement;
 const $themeToggle = document.getElementById(
   'themeToggle'
+) as HTMLButtonElement;
+const $languageToggle = document.getElementById(
+  'languageToggle'
 ) as HTMLButtonElement;
 const $html = document.documentElement;
 const $addEmojiBtn = document.getElementById(
@@ -265,6 +277,33 @@ async function toggleTheme() {
   await setTheme(next);
 }
 
+// ======== 언어 (i18n) ========
+async function initLanguage() {
+  try {
+    await i18n.loadLanguage();
+    i18n.updatePageText();
+    updateLanguageButton();
+  } catch (error) {
+    console.error('Failed to initialize language:', error);
+  }
+}
+
+function updateLanguageButton() {
+  const langBtn = $languageToggle.querySelector('span');
+  if (langBtn) {
+    langBtn.textContent = i18n.t('language.current');
+  }
+}
+
+async function toggleLanguage() {
+  i18n.toggleLanguage();
+  await i18n.saveLanguage();
+  i18n.updatePageText();
+  updateLanguageButton();
+  renderCats();
+  render();
+}
+
 // 토스트
 function toast(msg: string) {
   $toast.textContent = msg;
@@ -296,9 +335,13 @@ function filterItems(
     if (category === '추가') {
       // '추가' 카테고리는 CUSTOM_EMOJIS 또는 CUSTOM_KAOMOJI만 표시
       if (isKaomoji) {
-        list = list.filter((it) => CUSTOM_KAOMOJI.some((custom) => custom.char === it.char));
+        list = list.filter((it) =>
+          CUSTOM_KAOMOJI.some((custom) => custom.char === it.char)
+        );
       } else {
-        list = list.filter((it) => CUSTOM_EMOJIS.some((custom) => custom.char === it.char));
+        list = list.filter((it) =>
+          CUSTOM_EMOJIS.some((custom) => custom.char === it.char)
+        );
       }
     } else if (isKaomoji) {
       // Kaomoji는 태그로 필터링
@@ -408,6 +451,21 @@ async function render() {
   // 즐겨찾기나 최근 탭이면 모든 카테고리 로드
   if (activeTab === 'favorites' || activeTab === 'recent') {
     await ensureAllItemsLoaded();
+  }
+
+  // 이모지 탭일 때 카테고리 로드
+  if (activeTab === 'emoji') {
+    if ($q.value.trim()) {
+      // 검색어가 있으면 모든 카테고리 로드
+      await ensureAllCategoriesLoaded();
+    } else {
+      // 검색어가 없을 때는 선택된 카테고리만 로드
+      if (ACTIVE_CAT === '전체') {
+        await ensureAllCategoriesLoaded();
+      } else if (ACTIVE_CAT !== '추가') {
+        await ensureCategoryLoaded(ACTIVE_CAT);
+      }
+    }
   }
 
   let list: Item[] = [];
@@ -545,6 +603,11 @@ $themeToggle.addEventListener('click', () => {
   toggleTheme();
 });
 
+// 언어 토글
+$languageToggle.addEventListener('click', () => {
+  toggleLanguage();
+});
+
 // 개발자 블로그 링크
 $devBlogLink.addEventListener('click', () => {
   window.open(
@@ -637,6 +700,34 @@ $insertBtn?.addEventListener('click', async () => {
   }
 });
 
+// 카테고리 이름 매핑 (한국어 -> i18n 키)
+const CATEGORY_I18N_KEYS: Record<string, string> = {
+  전체: 'category.all',
+  표정: 'category.emotion',
+  손: 'category.hands',
+  하트: 'category.hearts',
+  동물: 'category.animals',
+  음식: 'category.foods',
+  사물: 'category.objects',
+  자연: 'category.nature',
+  기호: 'category.symbols',
+  기타: 'category.events',
+  추가: 'category.custom',
+};
+
+const KAOMOJI_I18N_KEYS: Record<string, string> = {
+  전체: 'category.all',
+  기쁨: 'kaomoji.joy',
+  슬픔: 'kaomoji.sad',
+  화남: 'kaomoji.angry',
+  사랑: 'kaomoji.love',
+  응원: 'kaomoji.cheer',
+  당황: 'kaomoji.confused',
+  무심: 'kaomoji.indifferent',
+  피곤: 'kaomoji.tired',
+  추가: 'kaomoji.custom',
+};
+
 // 카테고리 바 렌더
 function renderCats() {
   const isKaomoji = activeTab === 'kaomoji';
@@ -644,12 +735,14 @@ function renderCats() {
     ? ['전체', ...KAOMOJI_CATEGORIES]
     : ['전체', ...CATEGORY_ORDER];
 
+  const i18nKeys = isKaomoji ? KAOMOJI_I18N_KEYS : CATEGORY_I18N_KEYS;
+
   $cats.innerHTML = all
     .map(
       (c) =>
         `<div class="cat ${
           c === ACTIVE_CAT ? 'active' : ''
-        }" data-cat="${c}">${c}</div>`
+        }" data-cat="${c}">${i18n.t(i18nKeys[c] || c)}</div>`
     )
     .join('');
 
@@ -688,9 +781,18 @@ function renderCats() {
 // 카테고리 JSON 로드
 async function loadCategory(cat: string): Promise<Emoji[]> {
   const path = CATEGORY_FILES[cat];
+  if (!path) {
+    throw new Error(`Category "${cat}" not found in CATEGORY_FILES`);
+  }
   const url = chrome.runtime.getURL(path);
   const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+  }
   const data: Emoji[] = await res.json();
+  if (!Array.isArray(data)) {
+    throw new Error(`Invalid data format for category "${cat}"`);
+  }
   // 안전하게 category 필드 보정
   return data.map((d) => ({ ...d, category: cat }));
 }
@@ -698,16 +800,23 @@ async function loadCategory(cat: string): Promise<Emoji[]> {
 async function ensureCategoryLoaded(cat: string) {
   if (cat === '전체') return;
   if (LOADED_CATS.has(cat)) return;
-  const part = await loadCategory(cat);
-  EMOJIS = EMOJIS.concat(part);
-  LOADED_CATS.add(cat);
+  try {
+    const part = await loadCategory(cat);
+    EMOJIS = EMOJIS.concat(part);
+    LOADED_CATS.add(cat);
+  } catch (error) {
+    console.error(`Failed to load category "${cat}":`, error);
+  }
 }
 
 async function ensureAllCategoriesLoaded() {
-  const tasks = CATEGORY_ORDER.filter((c) => c !== '추가' && !LOADED_CATS.has(c)).map((c) =>
-    ensureCategoryLoaded(c)
+  const categoriesToLoad = CATEGORY_ORDER.filter(
+    (c) => c !== '추가' && !LOADED_CATS.has(c)
   );
-  if (tasks.length) await Promise.all(tasks);
+  const tasks = categoriesToLoad.map((c) => ensureCategoryLoaded(c));
+  if (tasks.length) {
+    await Promise.allSettled(tasks);
+  }
 }
 
 // 모달 관리
@@ -716,16 +825,34 @@ function openModal() {
   $emojiInput.value = '';
   $tagsInput.value = '';
 
+  // 모달 제목 업데이트
+  const $modalTitle = document.getElementById('modalTitle');
+  if ($modalTitle) {
+    if (activeTab === 'emoji') {
+      $modalTitle.textContent = i18n.t('modal.title.emoji');
+    } else if (activeTab === 'kaomoji') {
+      $modalTitle.textContent = i18n.t('modal.title.kaomoji');
+    }
+  }
+
+  // input placeholder 업데이트
+  if (activeTab === 'emoji') {
+    $emojiInput.placeholder = i18n.t('modal.input.emoji');
+  } else if (activeTab === 'kaomoji') {
+    $emojiInput.placeholder = i18n.t('modal.input.kaomoji');
+  }
+
   // 카테고리 옵션 생성
   $categorySelect.style.display = 'block';
   if (activeTab === 'emoji') {
-    $categorySelect.innerHTML = Object.keys(CATEGORY_FILES)
-      .map((cat) => `<option value="${cat}">${cat}</option>`)
-      .join('') + '<option value="추가">추가</option>';
+    $categorySelect.innerHTML =
+      Object.keys(CATEGORY_FILES)
+        .map((cat) => `<option value="${cat}">${i18n.t(CATEGORY_I18N_KEYS[cat] || cat)}</option>`)
+        .join('') + `<option value="추가">${i18n.t('category.custom')}</option>`;
   } else if (activeTab === 'kaomoji') {
-    $categorySelect.innerHTML = KAOMOJI_CATEGORIES
-      .map((cat) => `<option value="${cat}">${cat}</option>`)
-      .join('');
+    $categorySelect.innerHTML = KAOMOJI_CATEGORIES.map(
+      (cat) => `<option value="${cat}">${i18n.t(KAOMOJI_I18N_KEYS[cat] || cat)}</option>`
+    ).join('');
   } else {
     $categorySelect.style.display = 'none';
   }
@@ -772,9 +899,10 @@ $saveBtn.addEventListener('click', async () => {
   } else {
     const category = $categorySelect.value || '추가';
     // 카오모지는 태그 기반으로 카테고리 필터링하므로 카테고리를 태그 맨 앞에 추가
-    const kamojiTags = category !== '추가' && !tags.includes(category)
-      ? [category, ...tags]
-      : tags;
+    const kamojiTags =
+      category !== '추가' && !tags.includes(category)
+        ? [category, ...tags]
+        : tags;
     await saveCustomKaomoji(char, kamojiTags);
     toast('Kaomoji가 추가되었습니다');
   }
@@ -805,13 +933,21 @@ $tagsInput.addEventListener('keypress', (e) => {
   await loadFromSync();
   applyTheme();
 
-  // 2) Kaomoji 로드
+  // 2) 언어 초기화
+  await initLanguage();
+
+  // 3) Kaomoji 로드
   KAOMOJI = await loadKaomoji();
 
-  // 3) UI 렌더 준비
+  // 4) UI 렌더 준비
   renderCats();
-  await ensureCategoryLoaded('표정');
-  await ensureCategoryLoaded('하트');
+  // '전체' 선택 시 모든 카테고리 로드, 아니면 초기 카테고리만 로드
+  if (ACTIVE_CAT === '전체') {
+    await ensureAllCategoriesLoaded();
+  } else {
+    await ensureCategoryLoaded('표정');
+    await ensureCategoryLoaded('하트');
+  }
   render();
 })();
 

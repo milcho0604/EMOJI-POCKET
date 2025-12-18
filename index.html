@@ -77,7 +77,8 @@
         border-color: var(--active-bg);
       }
 
-      .theme-toggle {
+      .theme-toggle,
+      .language-toggle {
         width: 32px;
         height: 32px;
         border: 1px solid var(--border);
@@ -90,8 +91,15 @@
         font-size: 18px;
         transition: all 0.2s;
       }
-      .theme-toggle:hover {
+      .theme-toggle:hover,
+      .language-toggle:hover {
         background: var(--hover);
+      }
+      .language-toggle {
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--text);
+        width: 36px;
       }
 
       .toolbar {
@@ -387,16 +395,19 @@
     <div class="wrap">
       <div class="header">
         <div class="tabs">
-          <div class="tab active" data-tab="emoji">Emoji</div>
-          <div class="tab" data-tab="kaomoji">Kaomoji</div>
-          <div class="tab" data-tab="favorites">⭐</div>
-          <div class="tab" data-tab="recent">최근에 사용한 이모티콘</div>
+          <div class="tab active" data-tab="emoji" data-i18n="tab.emoji">Emoji</div>
+          <div class="tab" data-tab="kaomoji" data-i18n="tab.kaomoji">Kaomoji</div>
+          <div class="tab" data-tab="favorites" data-i18n="tab.favorites">⭐</div>
+          <div class="tab" data-tab="recent" data-i18n="tab.recent">최근에 사용한 이모티콘</div>
         </div>
       </div>
 
       <div class="toolbar">
-        <input id="q" placeholder="검색 (예: heart, happy, (웃음))" />
-        <button id="themeToggle" class="theme-toggle" title="다크모드 전환">
+        <input id="q" placeholder="검색 (예: heart, happy, (웃음))" data-i18n-placeholder="search.placeholder" />
+        <button id="languageToggle" class="language-toggle" title="언어 전환 (한국어/English)" data-i18n-title="language.switch">
+          <span data-i18n="language.current">KO</span>
+        </button>
+        <button id="themeToggle" class="theme-toggle" title="다크모드 전환" data-i18n-title="theme.toggle">
           🌙
         </button>
         <!-- <button id="insertBtn" title="현재 커서 위치에 삽입">커서삽입</button> -->
@@ -410,18 +421,18 @@
       <div id="grid-scroll" class="grid-scroll">
         <div id="grid" class="grid"></div>
       </div>
-      <div class="hint">항목 클릭: 클립보드 복사</div>
-      <button id="addEmojiBtn" class="add-emoji-btn">
+      <div class="hint" data-i18n="hint.click">항목 클릭: 클립보드 복사</div>
+      <button id="addEmojiBtn" class="add-emoji-btn" data-i18n="button.addEmoji">
         + 사용자 이모티콘 추가
       </button>
-      <button id="dev-blog-link" class="add-emoji-btn">개발자 블로그</button>
+      <button id="dev-blog-link" class="add-emoji-btn" data-i18n="button.devBlog">개발자 블로그</button>
     </div>
 
     <!-- 모달 -->
     <div id="emojiModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
-          <div class="modal-title">이모티콘 추가</div>
+          <div class="modal-title" id="modalTitle" data-i18n="modal.title.emoji">이모티콘 추가</div>
           <button class="close-btn" id="closeModal">&times;</button>
         </div>
         <div class="modal-body">
@@ -430,6 +441,7 @@
             id="emojiInput"
             class="modal-input"
             placeholder="이모티콘 (예: 😊)"
+            data-i18n-placeholder="modal.input.emoji"
             maxlength="10"
           />
           <select id="categorySelect" class="modal-input">
@@ -440,16 +452,17 @@
             id="tagsInput"
             class="modal-input tags"
             placeholder="태그 (쉼표로 구분, 예: 기쁨,웃음,happy)"
+            data-i18n-placeholder="modal.input.tags"
           />
           <div class="modal-actions">
-            <button class="modal-btn" id="cancelBtn">취소</button>
-            <button class="modal-btn primary" id="saveBtn">저장</button>
+            <button class="modal-btn" id="cancelBtn" data-i18n="modal.button.cancel">취소</button>
+            <button class="modal-btn primary" id="saveBtn" data-i18n="modal.button.save">저장</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div id="toast" class="toast">Copied</div>
+    <div id="toast" class="toast" data-i18n="toast.copied">Copied</div>
     <script type="module" src="/src/popup.ts"></script>
   </body>
 </html>
