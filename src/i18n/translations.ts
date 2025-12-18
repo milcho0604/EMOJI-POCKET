@@ -76,23 +76,23 @@ export const translations: Translations = {
     'tab.recent': 'Recently Used',
 
     // Search
-    'search.placeholder': 'Search (e.g., heart, happy, smile)',
+    'search.placeholder': 'Search (e.g., happy, smile)',
 
     // Theme
     'theme.toggle': 'Toggle Dark Mode',
 
     // Categories - Emoji
     'category.all': 'All',
-    'category.emotion': 'Emotion',
-    'category.hands': 'Hands',
-    'category.hearts': 'Hearts',
-    'category.animals': 'Animals',
-    'category.foods': 'Foods',
-    'category.objects': 'Objects',
-    'category.nature': 'Nature',
-    'category.symbols': 'Symbols',
-    'category.events': 'Events',
-    'category.custom': 'Custom',
+    'category.emotion': 'Mood',
+    'category.hands': 'Hand',
+    'category.hearts': 'Heart',
+    'category.animals': 'Pet',
+    'category.foods': 'Food',
+    'category.objects': 'Item',
+    'category.nature': 'Plant',
+    'category.symbols': 'Sign',
+    'category.events': 'Event',
+    'category.custom': 'Add',
 
     // Categories - Kaomoji
     'kaomoji.joy': 'Joy',
@@ -100,10 +100,10 @@ export const translations: Translations = {
     'kaomoji.angry': 'Angry',
     'kaomoji.love': 'Love',
     'kaomoji.cheer': 'Cheer',
-    'kaomoji.confused': 'Confused',
-    'kaomoji.indifferent': 'Indifferent',
+    'kaomoji.confused': 'Panic',
+    'kaomoji.indifferent': 'Calm',
     'kaomoji.tired': 'Tired',
-    'kaomoji.custom': 'Custom',
+    'kaomoji.custom': 'Add',
 
     // Hint
     'hint.click': 'Click to copy to clipboard',
