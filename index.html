@@ -418,6 +418,109 @@
         background-color: #ffd700;
         color: #111;
       }
+
+      /* 스킨톤 선택기 */
+      .skin-tone-selector {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 8px;
+        margin-top: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        animation: fadeIn 0.2s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      [data-theme='dark'] .skin-tone-selector {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      }
+
+      .skin-tone-options {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 6px;
+      }
+
+      .skin-tone-option {
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--border-light);
+        border-radius: 6px;
+        background: var(--bg);
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        padding: 0;
+      }
+
+      .skin-tone-option:hover {
+        background: var(--hover);
+        border-color: #667eea;
+        transform: scale(1.1);
+      }
+
+      .skin-tone-actions {
+        border-top: 1px solid var(--border-light);
+        padding-top: 6px;
+      }
+
+      .skin-tone-set-default {
+        width: 100%;
+        padding: 4px 8px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--bg);
+        color: var(--text);
+        font-size: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .skin-tone-set-default:hover {
+        background: var(--hover);
+        border-color: var(--text-secondary);
+      }
+
+      /* 스킨톤 선택기가 표시된 셀 */
+      .cell.has-skin-tone-selector {
+        z-index: 50;
+        position: relative;
+      }
+
+      /* 스킨톤 지원 이모지 표시 (작은 점) */
+      .cell.has-skin-tone::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        right: 4px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #667eea;
+        opacity: 0.6;
+      }
+
+      .cell.has-skin-tone:hover::after {
+        opacity: 1;
+      }
     </style>
   </head>
   <body>

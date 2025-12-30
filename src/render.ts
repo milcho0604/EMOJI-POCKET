@@ -22,6 +22,9 @@ import { ensureAllCategoriesLoaded, ensureCategoryLoaded } from './category';
 import { resetFocus, setGridColumns } from './keyboard';
 import { highlightTags } from './highlight';
 import { calculateVisibleRange, calculateTotalHeight } from './virtualScroll';
+import { supportsSkinTone, applySkinTone } from './skinTone';
+import { showSkinToneSelector, hideSkinToneSelector } from './skinToneSelector';
+import { SKIN_TONE_PREFERENCE } from './state';
 
 // DOM 요소 참조
 const $grid = document.getElementById('grid') as HTMLDivElement;
@@ -168,10 +171,17 @@ export async function render() {
     .map((it, idx) => {
       const actualIdx = start + idx;
       const isFav = favorites.has(it.char);
-      const cellClass = isKaomojiTab ? 'cell kaomoji' : 'cell';
+
+      // 스킨톤 지원 여부 및 기본 스킨톤 적용
+      const supportsSkin = !isKaomojiTab && supportsSkinTone(it.char);
+      const displayChar = supportsSkin && SKIN_TONE_PREFERENCE
+        ? applySkinTone(it.char, SKIN_TONE_PREFERENCE)
+        : it.char;
+
+      const cellClass = isKaomojiTab ? 'cell kaomoji' : supportsSkin ? 'cell has-skin-tone' : 'cell';
       const content = isKaomojiTab
         ? `<span class="kaomoji-text">${it.char}</span>`
-        : it.char;
+        : displayChar;
 
       // 검색어 하이라이팅 적용
       const highlightedTags = highlightTags(it.tags || [], searchQuery);
@@ -203,10 +213,28 @@ export async function render() {
       const idx = Number(el.dataset.i);
       if (idx >= list.length) return; // 가상 스크롤로 인한 인덱스 오류 방지
       const ch = list[idx].char;
-      copyToClipboard(ch);
 
-      if (activeTab === 'favorites' || activeTab === 'recent') {
-        render();
+      // 스킨톤 선택기가 열려있지 않은 경우에만 복사
+      if (!el.querySelector('.skin-tone-selector')) {
+        copyToClipboard(ch);
+
+        if (activeTab === 'favorites' || activeTab === 'recent') {
+          render();
+        }
+      }
+    });
+
+    // 우클릭으로 스킨톤 선택기 열기
+    el.addEventListener('contextmenu', (e) => {
+      const idx = Number(el.dataset.i);
+      if (idx >= list.length) return;
+      const ch = list[idx].char;
+
+      // 스킨톤을 지원하는 이모지만 처리
+      if (!isKaomojiTab && supportsSkinTone(ch)) {
+        e.preventDefault();
+        hideSkinToneSelector();
+        showSkinToneSelector(el, ch);
       }
     });
   });

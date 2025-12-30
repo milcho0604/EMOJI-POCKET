@@ -1,11 +1,13 @@
 import { i18n } from './i18n/i18n';
 import type { Item, TabType } from './types';
+import type { SkinToneType } from './skinTone';
 import {
   setFavorites,
   setRecent,
   setCustomEmojis,
   setCustomKaomoji,
   setTheme,
+  setSkinTonePreference,
   setActiveTab,
   setActiveCat,
   setKaomoji,
@@ -55,6 +57,10 @@ chrome.storage.onChanged.addListener((changes, area) => {
   if (changes.theme) {
     setTheme(changes.theme.newValue || 'light');
     applyTheme();
+  }
+  if (changes.skinTonePreference) {
+    setSkinTonePreference(changes.skinTonePreference.newValue as SkinToneType);
+    needRender = true;
   }
   if (changes.language) {
     i18n.setLanguage(changes.language.newValue);

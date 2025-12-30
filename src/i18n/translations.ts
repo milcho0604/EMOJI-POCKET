@@ -67,6 +67,9 @@ export const translations: Translations = {
     // 언어 전환
     'language.current': 'KO',
     'language.switch': '언어 전환 (한국어/English)',
+
+    // 스킨톤
+    'skinTone.setDefault': '기본값으로 설정',
   },
   en: {
     // Tabs
@@ -127,5 +130,8 @@ export const translations: Translations = {
     // Language switch
     'language.current': 'EN',
     'language.switch': 'Switch Language (한국어/English)',
+
+    // Skin Tone
+    'skinTone.setDefault': 'Set as default',
   },
 };

@@ -1,5 +1,7 @@
 import type { Emoji, Kaomoji, Item, ThemeMode, TabType } from './types';
 import { syncGet } from './storage';
+import type { SkinToneType } from './skinTone';
+import { SKIN_TONES } from './skinTone';
 
 // ======== 전역 상태 ========
 export let EMOJIS: Emoji[] = [];
@@ -13,6 +15,7 @@ export let RECENT: string[] = [];
 export let CUSTOM_EMOJIS: Item[] = [];
 export let CUSTOM_KAOMOJI: Item[] = [];
 export let THEME: ThemeMode = 'light';
+export let SKIN_TONE_PREFERENCE: SkinToneType = SKIN_TONES.DEFAULT;
 
 export let activeTab: TabType = 'emoji';
 
@@ -61,6 +64,10 @@ export function setTheme(theme: ThemeMode) {
   THEME = theme;
 }
 
+export function setSkinTonePreference(skinTone: SkinToneType) {
+  SKIN_TONE_PREFERENCE = skinTone;
+}
+
 export function setActiveTab(tab: TabType) {
   activeTab = tab;
 }
@@ -73,18 +80,21 @@ export async function loadFromSync() {
     theme = 'light',
     customEmojis = [],
     customKaomoji = [],
+    skinTonePreference = SKIN_TONES.DEFAULT,
   } = await syncGet<{
     favorites?: string[];
     recent?: string[];
     theme?: ThemeMode;
     customEmojis?: Item[];
     customKaomoji?: Item[];
+    skinTonePreference?: SkinToneType;
   }>({
     favorites: [],
     recent: [],
     theme: 'light',
     customEmojis: [],
     customKaomoji: [],
+    skinTonePreference: SKIN_TONES.DEFAULT,
   });
 
   FAVORITES = new Set<string>(favorites);
@@ -92,4 +102,5 @@ export async function loadFromSync() {
   CUSTOM_EMOJIS = Array.isArray(customEmojis) ? customEmojis : [];
   CUSTOM_KAOMOJI = Array.isArray(customKaomoji) ? customKaomoji : [];
   THEME = theme === 'dark' ? 'dark' : 'light';
+  SKIN_TONE_PREFERENCE = skinTonePreference || SKIN_TONES.DEFAULT;
 }
