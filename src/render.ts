@@ -21,6 +21,7 @@ import { filterItems, copyToClipboard } from './utils';
 import { ensureAllCategoriesLoaded, ensureCategoryLoaded } from './category';
 import { resetFocus, setGridColumns } from './keyboard';
 import { highlightTags } from './highlight';
+import { calculateVisibleRange, calculateTotalHeight } from './virtualScroll';
 
 // DOM 요소 참조
 const $grid = document.getElementById('grid') as HTMLDivElement;
@@ -136,8 +137,36 @@ export async function render() {
 
   const searchQuery = $q.value.trim();
 
-  $grid.innerHTML = list
+  // 가상 스크롤 설정
+  const ITEM_HEIGHT = isKaomojiTab ? 50 : 60; // 셀 높이 (padding, border 포함)
+  const CONTAINER_HEIGHT = 200; // grid-scroll의 max-height
+  const OVERSCAN = 2; // 추가 렌더링 행 수
+
+  const scrollTop = $gridScroll.scrollTop || 0;
+  const totalItems = list.length;
+
+  // 가상 스크롤: 보이는 영역만 렌더링
+  const { start, end, offsetY } = calculateVisibleRange(
+    scrollTop,
+    totalItems,
+    cols,
+    {
+      itemHeight: ITEM_HEIGHT,
+      containerHeight: CONTAINER_HEIGHT,
+      overscan: OVERSCAN,
+    }
+  );
+
+  const visibleList = list.slice(start, end);
+  const totalHeight = calculateTotalHeight(totalItems, cols, ITEM_HEIGHT);
+
+  // 상단 빈 공간과 전체 높이 설정
+  $grid.style.paddingTop = `${offsetY}px`;
+  $grid.style.height = `${totalHeight}px`;
+
+  $grid.innerHTML = visibleList
     .map((it, idx) => {
+      const actualIdx = start + idx;
       const isFav = favorites.has(it.char);
       const cellClass = isKaomojiTab ? 'cell kaomoji' : 'cell';
       const content = isKaomojiTab
@@ -148,7 +177,7 @@ export async function render() {
       const highlightedTags = highlightTags(it.tags || [], searchQuery);
 
       return `
-        <div class="${cellClass}" data-i="${idx}" data-char="${it.char.replace(
+        <div class="${cellClass}" data-i="${actualIdx}" data-char="${it.char.replace(
         /"/g,
         '&quot;'
       )}" title="${highlightedTags}">
@@ -172,6 +201,7 @@ export async function render() {
         return;
       }
       const idx = Number(el.dataset.i);
+      if (idx >= list.length) return; // 가상 스크롤로 인한 인덱스 오류 방지
       const ch = list[idx].char;
       copyToClipboard(ch);
 

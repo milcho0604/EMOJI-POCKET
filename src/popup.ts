@@ -102,6 +102,17 @@ $q.addEventListener('input', () => {
   render();
 });
 
+// 가상 스크롤: 스크롤 이벤트 처리
+const $gridScroll = document.getElementById('grid-scroll') as HTMLDivElement;
+let scrollTimeout: number;
+$gridScroll.addEventListener('scroll', () => {
+  // 디바운싱: 스크롤 멈춘 후 렌더링
+  clearTimeout(scrollTimeout);
+  scrollTimeout = window.setTimeout(() => {
+    render();
+  }, 16); // ~60fps
+});
+
 // 테마 토글
 $themeToggle.addEventListener('click', () => {
   toggleTheme();
