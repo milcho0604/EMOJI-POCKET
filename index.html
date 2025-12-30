@@ -196,8 +196,14 @@
         cursor: pointer;
         user-select: none;
         background: var(--bg);
-        transition: background 0.2s;
+        transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
         position: relative;
+        outline: none;
+      }
+      .cell.focused {
+        border: 2px solid #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        background: var(--hover);
       }
       .cell.kaomoji {
         font-size: 14px;
@@ -397,6 +403,20 @@
       .dev-blog-link:hover {
         background: var(--hover);
         border-color: var(--text-secondary);
+      }
+
+      /* 검색어 하이라이트 */
+      .highlight {
+        background-color: #ffd700;
+        color: #111;
+        padding: 1px 2px;
+        border-radius: 2px;
+        font-weight: 600;
+      }
+
+      [data-theme='dark'] .highlight {
+        background-color: #ffd700;
+        color: #111;
       }
     </style>
   </head>
