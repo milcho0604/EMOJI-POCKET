@@ -1,4 +1,5 @@
 import { i18n } from './i18n/i18n';
+import type { Item } from './types';
 import {
   CATEGORY_FILES,
   KAOMOJI_CATEGORIES,
@@ -6,7 +7,7 @@ import {
   KAOMOJI_I18N_KEYS,
 } from './constants';
 import { activeTab } from './state';
-import { saveCustomEmoji, saveCustomKaomoji } from './custom';
+import { saveCustomEmoji, saveCustomKaomoji, updateCustomEmoji, updateCustomKaomoji } from './custom';
 import { toast } from './utils';
 import { render } from './render';
 
@@ -18,16 +19,31 @@ const $categorySelect = document.getElementById(
   'categorySelect'
 ) as HTMLSelectElement;
 
+// 편집 모드 상태
+let editMode: 'add' | 'edit' = 'add';
+let editingItem: Item | null = null;
+
 // 모달 관리
-export function openModal() {
+export function openModal(mode: 'add' | 'edit' = 'add', item?: Item) {
+  editMode = mode;
+  editingItem = item || null;
   $emojiModal.classList.add('show');
-  $emojiInput.value = '';
-  $tagsInput.value = '';
+
+  // 편집 모드일 때 기존 데이터 채우기
+  if (mode === 'edit' && item) {
+    $emojiInput.value = item.char;
+    $tagsInput.value = item.tags.join(', ');
+  } else {
+    $emojiInput.value = '';
+    $tagsInput.value = '';
+  }
 
   // 모달 제목 업데이트
   const $modalTitle = document.getElementById('modalTitle');
   if ($modalTitle) {
-    if (activeTab === 'emoji') {
+    if (mode === 'edit') {
+      $modalTitle.textContent = i18n.getCurrentLanguage() === 'ko' ? '이모티콘 수정' : 'Edit Emoji';
+    } else if (activeTab === 'emoji') {
       $modalTitle.textContent = i18n.t('modal.title.emoji');
     } else if (activeTab === 'kaomoji') {
       $modalTitle.textContent = i18n.t('modal.title.kaomoji');
@@ -48,6 +64,11 @@ export function openModal() {
       Object.keys(CATEGORY_FILES)
         .map((cat) => `<option value="${cat}">${i18n.t(CATEGORY_I18N_KEYS[cat] || cat)}</option>`)
         .join('') + `<option value="추가">${i18n.t('category.custom')}</option>`;
+
+    // 편집 모드일 때 카테고리 선택
+    if (mode === 'edit' && item?.category) {
+      $categorySelect.value = item.category;
+    }
   } else if (activeTab === 'kaomoji') {
     $categorySelect.innerHTML = KAOMOJI_CATEGORIES.map(
       (cat) => `<option value="${cat}">${i18n.t(KAOMOJI_I18N_KEYS[cat] || cat)}</option>`
@@ -82,18 +103,36 @@ export async function handleSave() {
         .filter((t) => t)
     : [];
 
-  if (activeTab === 'emoji') {
-    const category = $categorySelect.value || '추가';
-    await saveCustomEmoji(char, tags, category);
-    toast('이모티콘이 추가되었습니다');
+  if (editMode === 'edit' && editingItem) {
+    // 편집 모드
+    if (activeTab === 'emoji') {
+      const category = $categorySelect.value || '추가';
+      await updateCustomEmoji(editingItem.char, char, tags, category);
+      toast('이모티콘이 수정되었습니다');
+    } else {
+      const category = $categorySelect.value || '추가';
+      const kamojiTags =
+        category !== '추가' && !tags.includes(category)
+          ? [category, ...tags]
+          : tags;
+      await updateCustomKaomoji(editingItem.char, char, kamojiTags);
+      toast('Kaomoji가 수정되었습니다');
+    }
   } else {
-    const category = $categorySelect.value || '추가';
-    const kamojiTags =
-      category !== '추가' && !tags.includes(category)
-        ? [category, ...tags]
-        : tags;
-    await saveCustomKaomoji(char, kamojiTags);
-    toast('Kaomoji가 추가되었습니다');
+    // 추가 모드
+    if (activeTab === 'emoji') {
+      const category = $categorySelect.value || '추가';
+      await saveCustomEmoji(char, tags, category);
+      toast('이모티콘이 추가되었습니다');
+    } else {
+      const category = $categorySelect.value || '추가';
+      const kamojiTags =
+        category !== '추가' && !tags.includes(category)
+          ? [category, ...tags]
+          : tags;
+      await saveCustomKaomoji(char, kamojiTags);
+      toast('Kaomoji가 추가되었습니다');
+    }
   }
 
   closeModal();

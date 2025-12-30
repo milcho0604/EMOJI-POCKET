@@ -25,6 +25,8 @@ import { calculateVisibleRange, calculateTotalHeight } from './virtualScroll';
 import { supportsSkinTone, applySkinTone } from './skinTone';
 import { showSkinToneSelector, hideSkinToneSelector } from './skinToneSelector';
 import { SKIN_TONE_PREFERENCE } from './state';
+import { isCustomEmoji, isCustomKaomoji, deleteCustomEmoji, deleteCustomKaomoji } from './custom';
+import { openModal } from './modal';
 
 // DOM 요소 참조
 const $grid = document.getElementById('grid') as HTMLDivElement;
@@ -178,6 +180,9 @@ export async function render() {
         ? applySkinTone(it.char, SKIN_TONE_PREFERENCE)
         : it.char;
 
+      // 커스텀 이모티콘 여부 확인
+      const isCustom = isKaomojiTab ? isCustomKaomoji(it.char) : isCustomEmoji(it.char);
+
       const cellClass = isKaomojiTab ? 'cell kaomoji' : supportsSkin ? 'cell has-skin-tone' : 'cell';
       const content = isKaomojiTab
         ? `<span class="kaomoji-text">${it.char}</span>`
@@ -199,6 +204,14 @@ export async function render() {
       }">
             ${isFav ? '⭐' : '☆'}
           </button>
+          ${isCustom ? `
+            <button class="edit-btn" data-char="${it.char.replace(/"/g, '&quot;')}" title="수정">
+              ✏️
+            </button>
+            <button class="delete-btn" data-char="${it.char.replace(/"/g, '&quot;')}" title="삭제">
+              🗑️
+            </button>
+          ` : ''}
         </div>
       `;
     })
@@ -258,6 +271,42 @@ export async function render() {
       if (activeTab === 'favorites') {
         render();
       }
+    });
+  });
+
+  // 수정 버튼 클릭
+  $grid.querySelectorAll<HTMLButtonElement>('.edit-btn').forEach((btn) => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const char = btn.dataset.char || '';
+      const idx = Number((btn.closest('.cell') as HTMLElement)?.dataset.i);
+      if (idx < list.length) {
+        const item = list[idx];
+        // 모달을 열고 편집 모드로 설정
+        openModal('edit', item);
+      }
+    });
+  });
+
+  // 삭제 버튼 클릭
+  $grid.querySelectorAll<HTMLButtonElement>('.delete-btn').forEach((btn) => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const char = btn.dataset.char || '';
+
+      // 삭제 확인
+      const confirmed = confirm(`"${char}"를 삭제하시겠습니까?`);
+      if (!confirmed) return;
+
+      // 타입에 따라 삭제
+      if (isKaomojiTab || isCustomKaomoji(char)) {
+        await deleteCustomKaomoji(char);
+      } else {
+        await deleteCustomEmoji(char);
+      }
+
+      // 재렌더링
+      render();
     });
   });
 }
