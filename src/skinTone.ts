@@ -107,6 +107,28 @@ export async function loadSkinTonePreference(): Promise<SkinToneType> {
   return data.skinTonePreference || SKIN_TONES.DEFAULT;
 }
 
+// 개별 이모지에 대한 스킨톤 선택 저장 (이모지 → 스킨톤 맵)
+export async function saveEmojiSkinTone(baseEmoji: string, skinTone: SkinToneType): Promise<void> {
+  const data = await syncGet<{ emojiSkinTones?: Record<string, SkinToneType> }>(['emojiSkinTones']);
+  const emojiSkinTones = data.emojiSkinTones || {};
+
+  emojiSkinTones[baseEmoji] = skinTone;
+  await syncSet({ emojiSkinTones });
+}
+
+// 개별 이모지에 대한 스킨톤 선택 로드
+export async function loadEmojiSkinTones(): Promise<Record<string, SkinToneType>> {
+  const data = await syncGet<{ emojiSkinTones?: Record<string, SkinToneType> }>(['emojiSkinTones']);
+  return data.emojiSkinTones || {};
+}
+
+// 특정 이모지의 스킨톤 가져오기
+export function getEmojiSkinTone(baseEmoji: string, emojiSkinTones: Record<string, SkinToneType>): SkinToneType {
+  // 스킨톤 모디파이어 제거하여 기본 이모지 추출
+  const base = baseEmoji.replace(/[\u{1F3FB}-\u{1F3FF}]/gu, '');
+  return emojiSkinTones[base] || SKIN_TONES.DEFAULT;
+}
+
 // 스킨톤 옵션 생성 (UI 렌더링용)
 export function getSkinToneOptions(baseEmoji: string): Array<{ tone: SkinToneType; emoji: string; name: { ko: string; en: string } }> {
   return Object.values(SKIN_TONES).map(tone => ({

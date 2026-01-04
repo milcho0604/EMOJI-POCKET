@@ -1,10 +1,11 @@
 // 스킨톤 선택기 UI 컴포넌트
 
-import { getSkinToneOptions, applySkinTone, saveSkinTonePreference, supportsSkinTone } from './skinTone';
+import { getSkinToneOptions, applySkinTone, saveSkinTonePreference, supportsSkinTone, saveEmojiSkinTone } from './skinTone';
 import type { SkinToneType } from './skinTone';
 import { i18n } from './i18n/i18n';
 import { copyToClipboard } from './utils';
-import { setSkinTonePreference } from './state';
+import { setSkinTonePreference, setEmojiSkinTones, EMOJI_SKIN_TONES } from './state';
+import { render } from './render';
 
 let activeSelectorCell: HTMLElement | null = null;
 
@@ -105,11 +106,22 @@ export function showSkinToneSelector(cell: HTMLElement, emoji: string) {
       const tone = btn.dataset.tone as SkinToneType;
       const emojiWithTone = applySkinTone(emoji, tone);
 
+      // 개별 이모지 스킨톤 저장
+      const baseEmoji = emoji.replace(/[\u{1F3FB}-\u{1F3FF}]/gu, '');
+      await saveEmojiSkinTone(baseEmoji, tone);
+
+      // 로컬 상태 업데이트
+      const updatedSkinTones = { ...EMOJI_SKIN_TONES, [baseEmoji]: tone };
+      setEmojiSkinTones(updatedSkinTones);
+
       // 클립보드에 복사
       await copyToClipboard(emojiWithTone);
 
       // 선택기 닫기
       hideSkinToneSelector();
+
+      // UI 업데이트 (선택한 스킨톤으로 표시)
+      await render();
     });
   });
 

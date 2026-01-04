@@ -16,6 +16,7 @@ export let CUSTOM_EMOJIS: Item[] = [];
 export let CUSTOM_KAOMOJI: Item[] = [];
 export let THEME: ThemeMode = 'light';
 export let SKIN_TONE_PREFERENCE: SkinToneType = SKIN_TONES.DEFAULT;
+export let EMOJI_SKIN_TONES: Record<string, SkinToneType> = {};
 
 export let activeTab: TabType = 'emoji';
 
@@ -68,6 +69,10 @@ export function setSkinTonePreference(skinTone: SkinToneType) {
   SKIN_TONE_PREFERENCE = skinTone;
 }
 
+export function setEmojiSkinTones(skinTones: Record<string, SkinToneType>) {
+  EMOJI_SKIN_TONES = skinTones;
+}
+
 export function setActiveTab(tab: TabType) {
   activeTab = tab;
 }
@@ -81,6 +86,7 @@ export async function loadFromSync() {
     customEmojis = [],
     customKaomoji = [],
     skinTonePreference = SKIN_TONES.DEFAULT,
+    emojiSkinTones = {},
   } = await syncGet<{
     favorites?: string[];
     recent?: string[];
@@ -88,6 +94,7 @@ export async function loadFromSync() {
     customEmojis?: Item[];
     customKaomoji?: Item[];
     skinTonePreference?: SkinToneType;
+    emojiSkinTones?: Record<string, SkinToneType>;
   }>({
     favorites: [],
     recent: [],
@@ -95,6 +102,7 @@ export async function loadFromSync() {
     customEmojis: [],
     customKaomoji: [],
     skinTonePreference: SKIN_TONES.DEFAULT,
+    emojiSkinTones: {},
   });
 
   FAVORITES = new Set<string>(favorites);
@@ -103,4 +111,5 @@ export async function loadFromSync() {
   CUSTOM_KAOMOJI = Array.isArray(customKaomoji) ? customKaomoji : [];
   THEME = theme === 'dark' ? 'dark' : 'light';
   SKIN_TONE_PREFERENCE = skinTonePreference || SKIN_TONES.DEFAULT;
+  EMOJI_SKIN_TONES = emojiSkinTones || {};
 }

@@ -8,6 +8,7 @@ import {
   setCustomKaomoji,
   setTheme,
   setSkinTonePreference,
+  setEmojiSkinTones,
   setActiveTab,
   setActiveCat,
   setKaomoji,
@@ -60,6 +61,10 @@ chrome.storage.onChanged.addListener((changes, area) => {
   }
   if (changes.skinTonePreference) {
     setSkinTonePreference(changes.skinTonePreference.newValue as SkinToneType);
+    needRender = true;
+  }
+  if (changes.emojiSkinTones) {
+    setEmojiSkinTones((changes.emojiSkinTones.newValue as Record<string, SkinToneType>) || {});
     needRender = true;
   }
   if (changes.language) {

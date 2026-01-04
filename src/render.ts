@@ -21,9 +21,9 @@ import { filterItems, copyToClipboard } from './utils';
 import { ensureAllCategoriesLoaded, ensureCategoryLoaded } from './category';
 import { resetFocus, setGridColumns } from './keyboard';
 import { calculateVisibleRange, calculateTotalHeight } from './virtualScroll';
-import { supportsSkinTone, applySkinTone } from './skinTone';
+import { supportsSkinTone, applySkinTone, getEmojiSkinTone } from './skinTone';
 import { showSkinToneSelector, hideSkinToneSelector } from './skinToneSelector';
-import { SKIN_TONE_PREFERENCE } from './state';
+import { SKIN_TONE_PREFERENCE, EMOJI_SKIN_TONES } from './state';
 import { isCustomEmoji, isCustomKaomoji, deleteCustomEmoji, deleteCustomKaomoji } from './custom';
 import { openModal } from './modal';
 
@@ -176,11 +176,20 @@ export async function render() {
       const actualIdx = start + idx;
       const isFav = favorites.has(it.char);
 
-      // 스킨톤 지원 여부 및 기본 스킨톤 적용
+      // 스킨톤 지원 여부 및 저장된 스킨톤 적용
       const supportsSkin = !isKaomojiTab && supportsSkinTone(it.char);
-      const displayChar = supportsSkin && SKIN_TONE_PREFERENCE
-        ? applySkinTone(it.char, SKIN_TONE_PREFERENCE)
-        : it.char;
+
+      // 개별 이모지에 저장된 스킨톤이 있으면 사용, 없으면 기본 스킨톤 사용
+      let displayChar = it.char;
+      if (supportsSkin) {
+        const baseEmoji = it.char.replace(/[\u{1F3FB}-\u{1F3FF}]/gu, '');
+        const savedSkinTone = getEmojiSkinTone(baseEmoji, EMOJI_SKIN_TONES);
+        const skinToneToApply = savedSkinTone || SKIN_TONE_PREFERENCE;
+
+        if (skinToneToApply) {
+          displayChar = applySkinTone(it.char, skinToneToApply);
+        }
+      }
 
       // 커스텀 이모티콘 여부 확인
       const isCustom = isKaomojiTab ? isCustomKaomoji(it.char) : isCustomEmoji(it.char);
@@ -230,7 +239,19 @@ export async function render() {
 
       // 스킨톤 선택기가 열려있지 않은 경우에만 복사
       if (!el.querySelector('.skin-tone-selector')) {
-        copyToClipboard(ch);
+        // 저장된 스킨톤 적용하여 복사
+        let charToCopy = ch;
+        if (!isKaomojiTab && supportsSkinTone(ch)) {
+          const baseEmoji = ch.replace(/[\u{1F3FB}-\u{1F3FF}]/gu, '');
+          const savedSkinTone = getEmojiSkinTone(baseEmoji, EMOJI_SKIN_TONES);
+          const skinToneToApply = savedSkinTone || SKIN_TONE_PREFERENCE;
+
+          if (skinToneToApply) {
+            charToCopy = applySkinTone(ch, skinToneToApply);
+          }
+        }
+
+        copyToClipboard(charToCopy);
 
         if (activeTab === 'favorites' || activeTab === 'recent') {
           render();
