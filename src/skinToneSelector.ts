@@ -10,7 +10,7 @@ let activeSelectorCell: HTMLElement | null = null;
 
 // 스킨톤 선택기 HTML 생성
 function createSkinToneSelectorHTML(baseEmoji: string): string {
-  const options = getSkinToneOptions();
+  const options = getSkinToneOptions(baseEmoji);
   const lang = i18n.getLanguage();
 
   return `
@@ -59,9 +59,43 @@ export function showSkinToneSelector(cell: HTMLElement, emoji: string) {
   cell.insertAdjacentHTML('beforeend', selectorHTML);
 
   const selector = cell.querySelector('.skin-tone-selector') as HTMLElement;
-  if (!selector) return;
+  if (!selector) {
+    return;
+  }
 
   activeSelectorCell = cell;
+  cell.classList.add('has-skin-tone-selector');
+
+  // 선택기 위치 조정 (팝업 창을 벗어나지 않도록)
+  setTimeout(() => {
+    const cellRect = cell.getBoundingClientRect();
+    const selectorRect = selector.getBoundingClientRect();
+    const wrap = document.querySelector('.wrap') as HTMLElement;
+    const wrapRect = wrap?.getBoundingClientRect();
+
+    if (!wrapRect) return;
+
+    const padding = 8; // 양옆 여백
+    const gap = 4; // 셀과 선택창 사이 간격
+
+    // 선택창의 중앙을 셀의 중앙에 맞추되, 팝업 밖으로 나가지 않도록 조정
+    let left = cellRect.left + (cellRect.width / 2) - (selectorRect.width / 2);
+
+    // 왼쪽으로 나가면 왼쪽 여백에 맞춤
+    if (left < wrapRect.left + padding) {
+      left = wrapRect.left + padding;
+    }
+    // 오른쪽으로 나가면 오른쪽 여백에 맞춤
+    else if (left + selectorRect.width > wrapRect.right - padding) {
+      left = wrapRect.right - selectorRect.width - padding;
+    }
+
+    // 셀 위쪽에 위치
+    const top = cellRect.top - selectorRect.height - gap;
+
+    selector.style.left = `${left}px`;
+    selector.style.top = `${top}px`;
+  }, 0);
 
   // 스킨톤 옵션 클릭 핸들러
   const options = selector.querySelectorAll<HTMLButtonElement>('.skin-tone-option');
@@ -117,6 +151,7 @@ export function hideSkinToneSelector() {
     if (selector) {
       selector.remove();
     }
+    activeSelectorCell.classList.remove('has-skin-tone-selector');
     activeSelectorCell = null;
   }
 

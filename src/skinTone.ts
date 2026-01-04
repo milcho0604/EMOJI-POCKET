@@ -107,14 +107,11 @@ export async function loadSkinTonePreference(): Promise<SkinToneType> {
   return data.skinTonePreference || SKIN_TONES.DEFAULT;
 }
 
-// 스킨톤 선택기 UI용 샘플 이모지
-export const SKIN_TONE_SAMPLE_EMOJI = '✋';
-
 // 스킨톤 옵션 생성 (UI 렌더링용)
-export function getSkinToneOptions(): Array<{ tone: SkinToneType; emoji: string; name: { ko: string; en: string } }> {
+export function getSkinToneOptions(baseEmoji: string): Array<{ tone: SkinToneType; emoji: string; name: { ko: string; en: string } }> {
   return Object.values(SKIN_TONES).map(tone => ({
     tone,
-    emoji: applySkinTone(SKIN_TONE_SAMPLE_EMOJI, tone),
+    emoji: applySkinTone(baseEmoji, tone),
     name: SKIN_TONE_NAMES[tone],
   }));
 }

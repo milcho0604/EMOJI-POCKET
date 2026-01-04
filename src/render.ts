@@ -240,12 +240,21 @@ export async function render() {
 
     // 우클릭으로 스킨톤 선택기 열기
     el.addEventListener('contextmenu', (e) => {
+      // 버튼 클릭 시 무시
+      const target = e.target as HTMLElement;
+      if (target.classList.contains('favorite-btn') ||
+          target.classList.contains('edit-btn') ||
+          target.classList.contains('delete-btn')) {
+        return;
+      }
+
       const ch = el.dataset.char || '';
       if (!ch) return;
 
       // 스킨톤을 지원하는 이모지만 처리
       if (!isKaomojiTab && supportsSkinTone(ch)) {
         e.preventDefault();
+        e.stopPropagation();
         hideSkinToneSelector();
         showSkinToneSelector(el, ch);
       }
