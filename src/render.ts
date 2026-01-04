@@ -20,7 +20,6 @@ import { getRecent } from './recent';
 import { filterItems, copyToClipboard } from './utils';
 import { ensureAllCategoriesLoaded, ensureCategoryLoaded } from './category';
 import { resetFocus, setGridColumns } from './keyboard';
-import { highlightTags } from './highlight';
 import { calculateVisibleRange, calculateTotalHeight } from './virtualScroll';
 import { supportsSkinTone, applySkinTone } from './skinTone';
 import { showSkinToneSelector, hideSkinToneSelector } from './skinToneSelector';
@@ -78,9 +77,7 @@ function getItemsForTab(): Item[] {
 }
 
 async function ensureAllItemsLoaded() {
-  if (!ensureCategoryLoaded) {
-    await ensureAllCategoriesLoaded();
-  }
+  await ensureAllCategoriesLoaded();
 }
 
 export async function render() {
@@ -143,7 +140,7 @@ export async function render() {
   const searchQuery = $q.value.trim();
 
   // 가상 스크롤 설정
-  const ITEM_HEIGHT = isKaomojiTab ? 50 : 60; // 셀 높이 (padding, border 포함)
+  const ITEM_HEIGHT = isKaomojiTab ? 46 : 50; // 셀 높이 (height + gap)
   const CONTAINER_HEIGHT = 200; // grid-scroll의 max-height
   const OVERSCAN = 2; // 추가 렌더링 행 수
 
@@ -165,9 +162,14 @@ export async function render() {
   const visibleList = list.slice(start, end);
   const totalHeight = calculateTotalHeight(totalItems, cols, ITEM_HEIGHT);
 
-  // 상단 빈 공간과 전체 높이 설정
+  // 실제 렌더링되는 아이템들의 높이 계산
+  const visibleRows = Math.ceil(visibleList.length / cols);
+  const visibleHeight = visibleRows * ITEM_HEIGHT;
+
+  // 상단과 하단 빈 공간 설정
   $grid.style.paddingTop = `${offsetY}px`;
-  $grid.style.height = `${totalHeight}px`;
+  $grid.style.paddingBottom = `${Math.max(0, totalHeight - offsetY - visibleHeight)}px`;
+  $grid.style.height = 'auto';
 
   $grid.innerHTML = visibleList
     .map((it, idx) => {
@@ -188,14 +190,14 @@ export async function render() {
         ? `<span class="kaomoji-text">${it.char}</span>`
         : displayChar;
 
-      // 검색어 하이라이팅 적용
-      const highlightedTags = highlightTags(it.tags || [], searchQuery);
+      // title에는 일반 텍스트로 태그 표시 (하이라이팅 없이)
+      const plainTags = (it.tags || []).join(', ');
 
       return `
         <div class="${cellClass}" data-i="${actualIdx}" data-char="${it.char.replace(
         /"/g,
         '&quot;'
-      )}" title="${highlightedTags}">
+      )}" title="${plainTags}">
           ${content}
           <button class="favorite-btn ${
             isFav ? 'favorited' : ''
@@ -223,9 +225,8 @@ export async function render() {
       if ((e.target as HTMLElement).classList.contains('favorite-btn')) {
         return;
       }
-      const idx = Number(el.dataset.i);
-      if (idx >= list.length) return; // 가상 스크롤로 인한 인덱스 오류 방지
-      const ch = list[idx].char;
+      const ch = el.dataset.char || '';
+      if (!ch) return;
 
       // 스킨톤 선택기가 열려있지 않은 경우에만 복사
       if (!el.querySelector('.skin-tone-selector')) {
@@ -239,9 +240,8 @@ export async function render() {
 
     // 우클릭으로 스킨톤 선택기 열기
     el.addEventListener('contextmenu', (e) => {
-      const idx = Number(el.dataset.i);
-      if (idx >= list.length) return;
-      const ch = list[idx].char;
+      const ch = el.dataset.char || '';
+      if (!ch) return;
 
       // 스킨톤을 지원하는 이모지만 처리
       if (!isKaomojiTab && supportsSkinTone(ch)) {
@@ -279,9 +279,11 @@ export async function render() {
     btn.addEventListener('click', async (e) => {
       e.stopPropagation();
       const char = btn.dataset.char || '';
-      const idx = Number((btn.closest('.cell') as HTMLElement)?.dataset.i);
-      if (idx < list.length) {
-        const item = list[idx];
+      if (!char) return;
+
+      // char로 아이템 찾기
+      const item = list.find(it => it.char === char);
+      if (item) {
         // 모달을 열고 편집 모드로 설정
         openModal('edit', item);
       }

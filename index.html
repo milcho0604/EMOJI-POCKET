@@ -163,6 +163,7 @@
       .grid-scroll {
         max-height: 200px;
         overflow-y: auto;
+        overflow-x: hidden;
         padding-right: 4px;
       }
       .grid-scroll::-webkit-scrollbar {
@@ -188,9 +189,12 @@
       }
       .cell {
         font-size: 20px;
-        display: grid;
-        place-items: center;
-        padding: 8px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 44px;
+        width: 100%;
+        min-width: 0;
         border: 1px solid var(--border-lighter);
         border-radius: 8px;
         cursor: pointer;
@@ -199,6 +203,7 @@
         transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
         position: relative;
         outline: none;
+        overflow: hidden;
       }
       .cell.focused {
         border: 2px solid #667eea;
@@ -207,7 +212,8 @@
       }
       .cell.kaomoji {
         font-size: 14px;
-        padding: 8px 4px;
+        height: 40px;
+        padding: 0 4px;
         display: flex;
         align-items: center;
         justify-content: center;
