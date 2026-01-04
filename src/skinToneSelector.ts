@@ -11,7 +11,7 @@ let activeSelectorCell: HTMLElement | null = null;
 // 스킨톤 선택기 HTML 생성
 function createSkinToneSelectorHTML(baseEmoji: string): string {
   const options = getSkinToneOptions();
-  const lang = i18n.getCurrentLanguage();
+  const lang = i18n.getLanguage();
 
   return `
     <div class="skin-tone-selector">
@@ -93,7 +93,7 @@ export function showSkinToneSelector(cell: HTMLElement, emoji: string) {
         setSkinTonePreference(tone);
 
         // 피드백 표시
-        const lang = i18n.getCurrentLanguage();
+        const lang = i18n.getLanguage();
         const toast = document.getElementById('toast') as HTMLDivElement;
         toast.textContent = lang === 'ko' ? '기본 스킨톤이 설정되었습니다' : 'Default skin tone set';
         toast.classList.add('show');

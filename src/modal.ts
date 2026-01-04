@@ -42,7 +42,7 @@ export function openModal(mode: 'add' | 'edit' = 'add', item?: Item) {
   const $modalTitle = document.getElementById('modalTitle');
   if ($modalTitle) {
     if (mode === 'edit') {
-      $modalTitle.textContent = i18n.getCurrentLanguage() === 'ko' ? '이모티콘 수정' : 'Edit Emoji';
+      $modalTitle.textContent = i18n.getLanguage() === 'ko' ? '이모티콘 수정' : 'Edit Emoji';
     } else if (activeTab === 'emoji') {
       $modalTitle.textContent = i18n.t('modal.title.emoji');
     } else if (activeTab === 'kaomoji') {
