@@ -33,6 +33,11 @@ const $gridScroll = document.getElementById('grid-scroll') as HTMLDivElement;
 const $q = document.getElementById('q') as HTMLInputElement;
 const $cats = document.getElementById('cats') as HTMLDivElement;
 
+// 카오모지 판단 함수
+function isKaomojiItem(char: string): boolean {
+  return KAOMOJI.some(k => k.char === char) || CUSTOM_KAOMOJI.some(k => k.char === char);
+}
+
 // 탭별 아이템 가져오기
 function getItemsForTab(): Item[] {
   if (activeTab === 'emoji') {
@@ -176,8 +181,11 @@ export async function render() {
       const actualIdx = start + idx;
       const isFav = favorites.has(it.char);
 
-      // 스킨톤 지원 여부 및 저장된 스킨톤 적용
-      const supportsSkin = !isKaomojiTab && supportsSkinTone(it.char);
+      // 현재 아이템이 카오모지인지 확인 (최근/즐겨찾기 탭에서도 판단)
+      const isKaomoji = isKaomojiTab || isKaomojiItem(it.char);
+
+      // 스킨톤 지원 여부 및 저장된 스킨톤 적용 (이모지만)
+      const supportsSkin = !isKaomoji && supportsSkinTone(it.char);
 
       // 개별 이모지에 저장된 스킨톤이 있으면 사용, 없으면 기본 스킨톤 사용
       let displayChar = it.char;
@@ -192,10 +200,21 @@ export async function render() {
       }
 
       // 커스텀 이모티콘 여부 확인
-      const isCustom = isKaomojiTab ? isCustomKaomoji(it.char) : isCustomEmoji(it.char);
+      const isCustom = isKaomoji ? isCustomKaomoji(it.char) : isCustomEmoji(it.char);
 
-      const cellClass = isKaomojiTab ? 'cell kaomoji' : supportsSkin ? 'cell has-skin-tone' : 'cell';
-      const content = isKaomojiTab
+      // 셀 클래스 계산
+      let cellClass = 'cell';
+      if (isKaomoji) {
+        cellClass += ' kaomoji';
+        // 최근/즐겨찾기 탭일 때 카오모지가 충분한 공간을 차지하도록
+        if (activeTab === 'favorites' || activeTab === 'recent') {
+          cellClass += ' kaomoji-wide';
+        }
+      } else if (supportsSkin) {
+        cellClass += ' has-skin-tone';
+      }
+
+      const content = isKaomoji
         ? `<span class="kaomoji-text">${it.char}</span>`
         : displayChar;
 
@@ -241,7 +260,8 @@ export async function render() {
       if (!el.querySelector('.skin-tone-selector')) {
         // 저장된 스킨톤 적용하여 복사
         let charToCopy = ch;
-        if (!isKaomojiTab && supportsSkinTone(ch)) {
+        const itemIsKaomoji = isKaomojiItem(ch);
+        if (!itemIsKaomoji && supportsSkinTone(ch)) {
           const baseEmoji = ch.replace(/[\u{1F3FB}-\u{1F3FF}]/gu, '');
           const savedSkinTone = getEmojiSkinTone(baseEmoji, EMOJI_SKIN_TONES);
           const skinToneToApply = savedSkinTone || SKIN_TONE_PREFERENCE;
@@ -273,7 +293,8 @@ export async function render() {
       if (!ch) return;
 
       // 스킨톤을 지원하는 이모지만 처리
-      if (!isKaomojiTab && supportsSkinTone(ch)) {
+      const itemIsKaomoji = isKaomojiItem(ch);
+      if (!itemIsKaomoji && supportsSkinTone(ch)) {
         e.preventDefault();
         e.stopPropagation();
         hideSkinToneSelector();
@@ -331,7 +352,8 @@ export async function render() {
       if (!confirmed) return;
 
       // 타입에 따라 삭제
-      if (isKaomojiTab || isCustomKaomoji(char)) {
+      const itemIsKaomoji = isKaomojiItem(char);
+      if (itemIsKaomoji || isCustomKaomoji(char)) {
         await deleteCustomKaomoji(char);
       } else {
         await deleteCustomEmoji(char);
