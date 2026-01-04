@@ -144,7 +144,7 @@ $devBlogLink.addEventListener('click', () => {
 });
 
 // 사용자 이모티콘 추가 버튼
-$addEmojiBtn.addEventListener('click', openModal);
+$addEmojiBtn.addEventListener('click', () => openModal());
 
 // 모달 이벤트 설정
 setupModalEvents();

@@ -57,7 +57,7 @@ export function supportsSkinTone(emoji: string): boolean {
 
 // 이모지에 스킨톤 적용
 export function applySkinTone(emoji: string, skinTone: SkinToneType): string {
-  if (!skinTone || skinTone === SKIN_TONES.DEFAULT) {
+  if (!skinTone) {
     // 기본 스킨톤: 기존 스킨톤 모디파이어 제거
     return emoji.replace(/[\u{1F3FB}-\u{1F3FF}]/gu, '');
   }
