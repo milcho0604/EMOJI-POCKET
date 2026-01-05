@@ -44,7 +44,15 @@
 - ✅ **다크 모드**: 눈에 편안한 다크/라이트 테마 지원
 
 ---
+### ➡️ What's new in 1.3.0
 
+### ➡️ What's new in 1.2.0
+- English version support (Multi-language)
+- Advanced search filters
+
+### ➡️ What's new in 1.1.1
+- New emojis added
+- 
 ## 🎯 주요 기능
 
 ### 📚 풍부한 이모지 컬렉션
