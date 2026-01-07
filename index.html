@@ -210,24 +210,35 @@
         background: var(--hover);
       }
       .cell.kaomoji {
-        font-size: 14px;
-        height: 40px;
-        padding: 0 4px;
+        font-size: 12px;
+        height: 44px;
+        padding: 0;
         display: flex;
         align-items: center;
         justify-content: center;
         min-width: 0;
+        overflow: visible;
+        position: relative;
       }
       /* 최근/즐겨찾기 탭에서 카오모지가 충분한 공간을 차지하도록 */
       .cell.kaomoji-wide {
         grid-column: span 3;
       }
       .cell.kaomoji .kaomoji-text {
-        overflow: hidden;
-        text-overflow: ellipsis;
+        overflow: visible;
+        text-overflow: clip;
         white-space: nowrap;
+        width: 100%;
         max-width: 100%;
         display: block;
+        word-break: keep-all;
+        overflow-wrap: normal;
+        text-align: center;
+        line-height: 1.2;
+        padding: 0 2px;
+        box-sizing: border-box;
+        transform: scale(0.9);
+        transform-origin: center;
       }
       .cell:hover {
         background: var(--hover);
