@@ -62,7 +62,6 @@
 ### ➡️ What's new in 1.1.1
 
 - New emojis added
--
 
 ## 🎯 주요 기능
 
