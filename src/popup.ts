@@ -141,8 +141,8 @@ $openWindowBtn.addEventListener('click', async () => {
     await chrome.windows.create({
       url: chrome.runtime.getURL('index.html'),
       type: 'popup',
-      width: 420,
-      height: 600,
+      width: 360,
+      height: 520,
     });
   } catch (error) {
     console.error('Failed to open new window:', error);
