@@ -21,6 +21,9 @@ export const translations: Translations = {
     // 테마
     'theme.toggle': '다크모드 전환',
 
+    // 창 관리
+    'window.open': '새 창으로 열기',
+
     // 카테고리 - Emoji
     'category.all': '전체',
     'category.emotion': '표정',
@@ -83,6 +86,9 @@ export const translations: Translations = {
 
     // Theme
     'theme.toggle': 'Toggle Dark Mode',
+
+    // Window Management
+    'window.open': 'Open in New Window',
 
     // Categories - Emoji
     'category.all': 'All',

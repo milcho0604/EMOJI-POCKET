@@ -28,6 +28,7 @@ const $tabs = Array.from(document.querySelectorAll<HTMLDivElement>('.tab'));
 const $q = document.getElementById('q') as HTMLInputElement;
 const $themeToggle = document.getElementById('themeToggle') as HTMLButtonElement;
 const $languageToggle = document.getElementById('languageToggle') as HTMLButtonElement;
+const $openWindowBtn = document.getElementById('openWindowBtn') as HTMLButtonElement;
 const $devBlogLink = document.getElementById('dev-blog-link') as HTMLButtonElement;
 const $addEmojiBtn = document.getElementById('addEmojiBtn') as HTMLButtonElement;
 const $cats = document.getElementById('cats') as HTMLDivElement;
@@ -132,6 +133,20 @@ $themeToggle.addEventListener('click', () => {
 // 언어 토글
 $languageToggle.addEventListener('click', () => {
   toggleLanguage();
+});
+
+// 새 창으로 열기
+$openWindowBtn.addEventListener('click', async () => {
+  try {
+    await chrome.windows.create({
+      url: chrome.runtime.getURL('index.html'),
+      type: 'popup',
+      width: 420,
+      height: 600,
+    });
+  } catch (error) {
+    console.error('Failed to open new window:', error);
+  }
 });
 
 // 개발자 블로그 링크

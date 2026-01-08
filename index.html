@@ -78,7 +78,8 @@
       }
 
       .theme-toggle,
-      .language-toggle {
+      .language-toggle,
+      .open-window-btn {
         width: 32px;
         height: 32px;
         border: 1px solid var(--border);
@@ -92,7 +93,8 @@
         transition: all 0.2s;
       }
       .theme-toggle:hover,
-      .language-toggle:hover {
+      .language-toggle:hover,
+      .open-window-btn:hover {
         background: var(--hover);
       }
       .language-toggle {
@@ -591,6 +593,9 @@
 
       <div class="toolbar">
         <input id="q" placeholder="검색 (예: heart, happy, (웃음))" data-i18n-placeholder="search.placeholder" />
+        <button id="openWindowBtn" class="open-window-btn" title="새 창으로 열기" data-i18n-title="window.open">
+          🗗
+        </button>
         <button id="languageToggle" class="language-toggle" title="언어 전환 (한국어/English)" data-i18n-title="language.switch">
           <span data-i18n="language.current">KO</span>
         </button>
