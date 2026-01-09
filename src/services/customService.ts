@@ -1,6 +1,6 @@
-import type { Item } from './types';
-import { CUSTOM_EMOJIS, CUSTOM_KAOMOJI, setCustomEmojis, setCustomKaomoji } from './state';
-import { syncSet } from './storage';
+import type { Item } from '../core/types';
+import { CUSTOM_EMOJIS, CUSTOM_KAOMOJI, setCustomEmojis, setCustomKaomoji } from '../core/state';
+import { syncSet } from './storageService';
 
 // ======== 사용자 정의 이모티콘 (캐시 기반 동기화) ========
 export function getCustomEmojis(): Item[] {

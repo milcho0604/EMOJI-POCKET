@@ -1,6 +1,6 @@
-import type { Item, Emoji } from './types';
-import { CATEGORY_ORDER } from './constants';
-import { addToRecent } from './recent';
+import type { Item, Emoji } from '../core/types';
+import { CATEGORY_ORDER } from '../core/constants';
+import { addToRecent } from '../services/recentService';
 
 // 토스트 메시지 표시
 export function toast(msg: string) {

@@ -1,5 +1,5 @@
-import { FAVORITES, setFavorites } from './state';
-import { syncSet } from './storage';
+import { FAVORITES, setFavorites } from '../core/state';
+import { syncSet } from './storageService';
 
 // ======== 즐겨찾기 (캐시 기반 동기화) ========
 export function getFavorites(): Set<string> {

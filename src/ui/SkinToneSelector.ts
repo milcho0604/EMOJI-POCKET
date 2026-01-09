@@ -1,11 +1,11 @@
 // 스킨톤 선택기 UI 컴포넌트
 
-import { getSkinToneOptions, applySkinTone, saveSkinTonePreference, supportsSkinTone, saveEmojiSkinTone } from './skinTone';
-import type { SkinToneType } from './skinTone';
-import { i18n } from './i18n/i18n';
-import { copyToClipboard } from './utils';
-import { setSkinTonePreference, setEmojiSkinTones, EMOJI_SKIN_TONES } from './state';
-import { render } from './render';
+import { getSkinToneOptions, applySkinTone, saveSkinTonePreference, supportsSkinTone, saveEmojiSkinTone } from '../services/skinToneService';
+import type { SkinToneType } from '../services/skinToneService';
+import { i18n } from '../i18n/i18n';
+import { copyToClipboard } from '../utils/utils';
+import { setSkinTonePreference, setEmojiSkinTones, EMOJI_SKIN_TONES } from '../core/state';
+import { render } from './renderer';
 
 let activeSelectorCell: HTMLElement | null = null;
 
@@ -19,7 +19,7 @@ function createSkinToneSelectorHTML(baseEmoji: string): string {
       <div class="skin-tone-options">
         ${options
           .map(
-            (opt) => `
+            (opt: { tone: SkinToneType; emoji: string; name: { ko: string; en: string } }) => `
           <button
             class="skin-tone-option"
             data-tone="${opt.tone}"

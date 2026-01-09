@@ -1,6 +1,6 @@
 import type { ThemeMode } from './types';
 import { THEME, setTheme as setThemeState } from './state';
-import { syncSet } from './storage';
+import { syncSet } from '../services/storageService';
 
 // ======== 테마 (캐시 기반 동기화) ========
 export function applyTheme() {

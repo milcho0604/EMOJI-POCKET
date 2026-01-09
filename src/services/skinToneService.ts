@@ -1,6 +1,6 @@
 // 이모지 스킨톤 선택 기능
 
-import { syncGet, syncSet } from './storage';
+import { syncGet, syncSet } from './storageService';
 
 // 스킨톤 모디파이어 (Unicode Fitzpatrick Scale)
 export const SKIN_TONES = {

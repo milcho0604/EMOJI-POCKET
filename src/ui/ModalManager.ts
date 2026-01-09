@@ -1,15 +1,15 @@
-import { i18n } from './i18n/i18n';
-import type { Item } from './types';
+import { i18n } from '../i18n/i18n';
+import type { Item } from '../core/types';
 import {
   CATEGORY_FILES,
   KAOMOJI_CATEGORIES,
   CATEGORY_I18N_KEYS,
   KAOMOJI_I18N_KEYS,
-} from './constants';
-import { activeTab } from './state';
-import { saveCustomEmoji, saveCustomKaomoji, updateCustomEmoji, updateCustomKaomoji } from './custom';
-import { toast } from './utils';
-import { render } from './render';
+} from '../core/constants';
+import { activeTab } from '../core/state';
+import { saveCustomEmoji, saveCustomKaomoji, updateCustomEmoji, updateCustomKaomoji } from '../services/customService';
+import { toast } from '../utils/utils';
+import { render } from './renderer';
 
 // DOM 요소
 const $emojiModal = document.getElementById('emojiModal') as HTMLDivElement;

@@ -1,5 +1,5 @@
-import { RECENT, setRecent } from './state';
-import { syncSet } from './storage';
+import { RECENT, setRecent } from '../core/state';
+import { syncSet } from './storageService';
 
 // ======== 최근 사용 (캐시 기반 동기화) ========
 export function getRecent(): string[] {

@@ -1,6 +1,6 @@
-import type { Emoji, Kaomoji } from './types';
-import { CATEGORY_FILES, CATEGORY_ORDER } from './constants';
-import { LOADED_CATS, addEmojis, addLoadedCat } from './state';
+import type { Emoji, Kaomoji } from '../core/types';
+import { CATEGORY_FILES, CATEGORY_ORDER } from '../core/constants';
+import { LOADED_CATS, addEmojis, addLoadedCat } from '../core/state';
 
 // 카테고리 JSON 로드
 export async function loadCategory(cat: string): Promise<Emoji[]> {

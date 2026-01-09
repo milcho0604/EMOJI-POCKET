@@ -1,7 +1,7 @@
 import type { Emoji, Kaomoji, Item, ThemeMode, TabType } from './types';
-import { syncGet } from './storage';
-import type { SkinToneType } from './skinTone';
-import { SKIN_TONES } from './skinTone';
+import { syncGet } from '../services/storageService';
+import type { SkinToneType } from '../services/skinToneService';
+import { SKIN_TONES } from '../services/skinToneService';
 
 // ======== 전역 상태 ========
 export let EMOJIS: Emoji[] = [];

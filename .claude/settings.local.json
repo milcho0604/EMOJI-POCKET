@@ -5,7 +5,9 @@
       "Bash(npx tsc:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(tree:*)",
+      "Bash(pnpm run clean:*)"
     ],
     "deny": [],
     "ask": []

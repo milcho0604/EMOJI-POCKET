@@ -1,5 +1,5 @@
-import type { Item } from './types';
-import { i18n } from './i18n/i18n';
+import type { Item } from '../core/types';
+import { i18n } from '../i18n/i18n';
 import {
   EMOJIS,
   KAOMOJI,
@@ -8,24 +8,24 @@ import {
   ACTIVE_CAT,
   activeTab,
   setActiveCat,
-} from './state';
+} from '../core/state';
 import {
   CATEGORY_ORDER,
   KAOMOJI_CATEGORIES,
   CATEGORY_I18N_KEYS,
   KAOMOJI_I18N_KEYS,
-} from './constants';
-import { getFavorites, addToFavorites, removeFromFavorites, isFavorite } from './favorites';
-import { getRecent } from './recent';
-import { filterItems, copyToClipboard } from './utils';
-import { ensureAllCategoriesLoaded, ensureCategoryLoaded } from './category';
-import { resetFocus, setGridColumns } from './keyboard';
-import { calculateVisibleRange, calculateTotalHeight } from './virtualScroll';
-import { supportsSkinTone, applySkinTone, getEmojiSkinTone } from './skinTone';
-import { showSkinToneSelector, hideSkinToneSelector } from './skinToneSelector';
-import { SKIN_TONE_PREFERENCE, EMOJI_SKIN_TONES } from './state';
-import { isCustomEmoji, isCustomKaomoji, deleteCustomEmoji, deleteCustomKaomoji } from './custom';
-import { openModal } from './modal';
+} from '../core/constants';
+import { getFavorites, addToFavorites, removeFromFavorites, isFavorite } from '../services/favoritesService';
+import { getRecent } from '../services/recentService';
+import { filterItems, copyToClipboard } from '../utils/utils';
+import { ensureAllCategoriesLoaded, ensureCategoryLoaded } from '../services/categoryService';
+import { resetFocus, setGridColumns } from '../utils/keyboard';
+import { calculateVisibleRange, calculateTotalHeight } from '../utils/virtualScroll';
+import { supportsSkinTone, applySkinTone, getEmojiSkinTone } from '../services/skinToneService';
+import { showSkinToneSelector, hideSkinToneSelector } from './SkinToneSelector';
+import { SKIN_TONE_PREFERENCE, EMOJI_SKIN_TONES } from '../core/state';
+import { isCustomEmoji, isCustomKaomoji, deleteCustomEmoji, deleteCustomKaomoji } from '../services/customService';
+import { openModal } from './ModalManager';
 
 // DOM 요소 참조
 const $grid = document.getElementById('grid') as HTMLDivElement;

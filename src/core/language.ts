@@ -1,5 +1,5 @@
-import { i18n } from './i18n/i18n';
-import { renderCats, render } from './render';
+import { i18n } from '../i18n/i18n';
+import { renderCats, render } from '../ui/renderer';
 
 // ======== 언어 (i18n) ========
 export async function initLanguage() {
