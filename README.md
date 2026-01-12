@@ -47,7 +47,7 @@
 
 ### ➡️ What's new in 1.3.0
 
-- Add a button to open a popup
+- Add a button to open a popup (+ button)
 - Improved Kaomoji UI display and alignment
 - Fixed Kaomoji text truncation issues
 - Enhanced Kaomoji grid layout to match emoji list style
