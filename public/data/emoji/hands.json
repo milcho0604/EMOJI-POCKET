@@ -1,258 +1,501 @@
 [
   {
     "char": "☝️",
-    "tags": ["index", "pointing", "up", "손", "위"]
+    "tags": [
+      "index",
+      "pointing",
+      "up",
+      "손",
+      "위"
+    ]
   },
   {
     "char": "✊",
-    "tags": ["raised", "fist", "주먹"]
+    "tags": [
+      "raised",
+      "fist",
+      "주먹"
+    ]
   },
   {
     "char": "✋",
-    "tags": ["raised", "hand", "손"]
+    "tags": [
+      "raised",
+      "hand",
+      "손"
+    ]
   },
   {
     "char": "✌️",
-    "tags": ["victory", "hand", "승리", "V"]
+    "tags": [
+      "victory",
+      "hand",
+      "승리",
+      "V"
+    ]
   },
   {
     "char": "✍️",
-    "tags": ["writing", "hand", "손", "글쓰기"]
+    "tags": [
+      "writing",
+      "hand",
+      "손",
+      "글쓰기"
+    ]
   },
   {
     "char": "👀",
-    "tags": ["eyes", "눈"]
+    "tags": [
+      "eyes",
+      "눈"
+    ]
   },
   {
     "char": "👁️",
-    "tags": ["eye", "눈"]
+    "tags": [
+      "eye",
+      "눈"
+    ]
   },
   {
     "char": "👂",
-    "tags": ["ear", "귀"]
+    "tags": [
+      "ear",
+      "귀"
+    ]
   },
   {
     "char": "👃",
-    "tags": ["nose", "코"]
+    "tags": [
+      "nose",
+      "코"
+    ]
   },
   {
     "char": "👄",
-    "tags": ["mouth", "입"]
+    "tags": [
+      "mouth",
+      "입"
+    ]
   },
   {
     "char": "👅",
-    "tags": ["tongue", "혀"]
+    "tags": [
+      "tongue",
+      "혀"
+    ]
   },
   {
     "char": "👆",
-    "tags": ["point", "up", "손", "위"]
+    "tags": [
+      "point",
+      "up",
+      "손",
+      "위"
+    ]
   },
   {
     "char": "👇",
-    "tags": ["point", "down", "손", "아래"]
+    "tags": [
+      "point",
+      "down",
+      "손",
+      "아래"
+    ]
   },
   {
     "char": "👈",
-    "tags": ["point", "left", "손", "왼쪽"]
+    "tags": [
+      "point",
+      "left",
+      "손",
+      "왼쪽"
+    ]
   },
   {
     "char": "👉",
-    "tags": ["point", "right", "손", "오른쪽"]
+    "tags": [
+      "point",
+      "right",
+      "손",
+      "오른쪽"
+    ]
   },
   {
     "char": "👊",
-    "tags": ["oncoming", "fist", "주먹"]
+    "tags": [
+      "oncoming",
+      "fist",
+      "주먹"
+    ]
   },
   {
     "char": "👋",
-    "tags": ["wave", "hand", "손", "인사"]
+    "tags": [
+      "wave",
+      "hand",
+      "손",
+      "인사"
+    ]
   },
   {
     "char": "👌",
-    "tags": ["ok", "hand", "ok", "좋음"]
+    "tags": [
+      "ok",
+      "hand",
+      "ok",
+      "좋음"
+    ]
   },
   {
     "char": "👍",
-    "tags": ["thumb", "up", "ok", "좋음", "엄지"]
+    "tags": [
+      "thumb",
+      "up",
+      "ok",
+      "좋음",
+      "엄지"
+    ]
   },
   {
     "char": "👎",
-    "tags": ["thumb", "down", "no", "나쁨", "엄지"]
+    "tags": [
+      "thumb",
+      "down",
+      "no",
+      "나쁨",
+      "엄지"
+    ]
   },
   {
     "char": "👏",
-    "tags": ["clapping", "hands", "clap", "good", "박수"]
+    "tags": [
+      "clapping",
+      "hands",
+      "clap",
+      "good",
+      "박수"
+    ]
   },
   {
     "char": "👐",
-    "tags": ["open", "hands", "손", "벌림"]
+    "tags": [
+      "open",
+      "hands",
+      "손",
+      "벌림"
+    ]
   },
   {
     "char": "💅",
-    "tags": ["nail", "polish", "손톱", "네일"]
+    "tags": [
+      "nail",
+      "polish",
+      "손톱",
+      "네일"
+    ]
   },
   {
     "char": "💪",
-    "tags": ["flexed", "biceps", "muscle", "힘", "근육"]
+    "tags": [
+      "flexed",
+      "biceps",
+      "muscle",
+      "힘",
+      "근육"
+    ]
   },
   {
     "char": "🖐️",
-    "tags": ["hand", "fingers", "splayed", "손"]
+    "tags": [
+      "hand",
+      "fingers",
+      "splayed",
+      "손"
+    ]
   },
   {
     "char": "🖕",
-    "tags": ["middle", "finger", "손"]
+    "tags": [
+      "middle",
+      "finger",
+      "손"
+    ]
   },
   {
     "char": "🖖",
-    "tags": ["vulcan", "salute", "손"]
+    "tags": [
+      "vulcan",
+      "salute",
+      "손"
+    ]
   },
   {
     "char": "🤏",
-    "tags": ["pinching", "hand", "손"]
+    "tags": [
+      "pinching",
+      "hand",
+      "손"
+    ]
   },
   {
     "char": "🤘",
-    "tags": ["sign", "horns", "손"]
+    "tags": [
+      "sign",
+      "horns",
+      "손"
+    ]
   },
   {
     "char": "🤙",
-    "tags": ["call", "me", "hand", "손", "전화"]
+    "tags": [
+      "call",
+      "me",
+      "hand",
+      "손",
+      "전화"
+    ]
   },
   {
     "char": "🤚",
-    "tags": ["raised", "back", "hand", "손"]
+    "tags": [
+      "raised",
+      "back",
+      "hand",
+      "손"
+    ]
   },
   {
     "char": "🤛",
-    "tags": ["left", "facing", "fist", "주먹", "왼쪽"]
+    "tags": [
+      "left",
+      "facing",
+      "fist",
+      "주먹",
+      "왼쪽"
+    ]
   },
   {
     "char": "🤜",
-    "tags": ["right", "facing", "fist", "주먹", "오른쪽"]
+    "tags": [
+      "right",
+      "facing",
+      "fist",
+      "주먹",
+      "오른쪽"
+    ]
   },
   {
     "char": "🤝",
-    "tags": ["handshake", "악수"]
+    "tags": [
+      "handshake",
+      "악수"
+    ]
   },
   {
     "char": "🤞",
-    "tags": ["crossed", "fingers", "손", "행운"]
+    "tags": [
+      "crossed",
+      "fingers",
+      "손",
+      "행운"
+    ]
   },
   {
     "char": "🤟",
-    "tags": ["love", "you", "gesture", "손", "사랑"]
+    "tags": [
+      "love",
+      "you",
+      "gesture",
+      "손",
+      "사랑"
+    ]
   },
   {
     "char": "🤲",
-    "tags": ["palms", "together", "손", "합장"]
+    "tags": [
+      "palms",
+      "together",
+      "손",
+      "합장"
+    ]
   },
   {
     "char": "🤳",
-    "tags": ["selfie", "셀카"]
+    "tags": [
+      "selfie",
+      "셀카"
+    ]
   },
   {
     "char": "🦴",
-    "tags": ["bone", "뼈"]
+    "tags": [
+      "bone",
+      "뼈"
+    ]
   },
   {
     "char": "🦵",
-    "tags": ["leg", "다리"]
+    "tags": [
+      "leg",
+      "다리"
+    ]
   },
   {
     "char": "🦶",
-    "tags": ["foot", "발"]
+    "tags": [
+      "foot",
+      "발"
+    ]
   },
   {
     "char": "🦷",
-    "tags": ["tooth", "이"]
+    "tags": [
+      "tooth",
+      "이"
+    ]
   },
   {
     "char": "🦻",
-    "tags": ["ear", "hearing", "aid", "귀", "보청기"]
+    "tags": [
+      "ear",
+      "hearing",
+      "aid",
+      "귀",
+      "보청기"
+    ]
   },
   {
     "char": "🦾",
-    "tags": ["mechanical", "arm", "로봇", "팔"]
+    "tags": [
+      "mechanical",
+      "arm",
+      "로봇",
+      "팔"
+    ]
   },
   {
     "char": "🦿",
-    "tags": ["mechanical", "leg", "로봇", "다리"]
+    "tags": [
+      "mechanical",
+      "leg",
+      "로봇",
+      "다리"
+    ]
   },
   {
     "char": "🧠",
-    "tags": ["brain", "뇌"]
+    "tags": [
+      "brain",
+      "뇌"
+    ]
   },
   {
     "char": "🫱",
-    "tags": ["rightwards", "hand", "손", "오른쪽"]
+    "tags": [
+      "rightwards",
+      "hand",
+      "손",
+      "오른쪽"
+    ]
   },
   {
     "char": "🫲",
-    "tags": ["leftwards", "hand", "손", "왼쪽"]
+    "tags": [
+      "leftwards",
+      "hand",
+      "손",
+      "왼쪽"
+    ]
   },
   {
     "char": "🫳",
-    "tags": ["palm", "down", "hand", "손", "아래"]
+    "tags": [
+      "palm",
+      "down",
+      "hand",
+      "손",
+      "아래"
+    ]
   },
   {
     "char": "🫴",
-    "tags": ["palm", "up", "hand", "손", "위"]
+    "tags": [
+      "palm",
+      "up",
+      "hand",
+      "손",
+      "위"
+    ]
   },
   {
     "char": "🫷",
-    "tags": ["leftwards", "pushing", "hand", "손", "밀기"]
+    "tags": [
+      "leftwards",
+      "pushing",
+      "hand",
+      "손",
+      "밀기"
+    ]
   },
   {
     "char": "🫸",
-    "tags": ["rightwards", "pushing", "hand", "손", "밀기"]
+    "tags": [
+      "rightwards",
+      "pushing",
+      "hand",
+      "손",
+      "밀기"
+    ]
   },
   {
     "char": "🙌",
-    "tags": ["raising", "hands", "yay", "celebrate", "기쁨"]
+    "tags": [
+      "raising",
+      "hands",
+      "yay",
+      "celebrate",
+      "기쁨"
+    ]
   },
   {
     "char": "🙏",
-    "tags": ["folded", "hands", "pray", "please", "thanks", "기도", "감사"]
+    "tags": [
+      "folded",
+      "hands",
+      "pray",
+      "please",
+      "thanks",
+      "기도",
+      "감사"
+    ]
   },
   {
     "char": "🫰",
-    "tags": ["index", "thumb", "crossed", "손가락하트", "돈"]
+    "tags": [
+      "index",
+      "thumb",
+      "crossed",
+      "손가락하트",
+      "돈"
+    ]
   },
   {
     "char": "🫵",
-    "tags": ["pointing", "viewer", "가리키기", "너"]
+    "tags": [
+      "pointing",
+      "viewer",
+      "가리키기",
+      "너"
+    ]
   },
   {
-    "char": "🫶",
-    "tags": ["heart", "hands", "하트손", "사랑"]
-  },
-  {
-    "char": "🫲",
-    "tags": ["leftwards", "hand", "왼손", "방향"]
-  },
-  {
-    "char": "🫱",
-    "tags": ["rightwards", "hand", "오른손", "방향"]
-  },
-  {
-    "char": "🫳",
-    "tags": ["palm", "down", "손바닥아래", "내려놓기"]
-  },
-  {
-    "char": "🫴",
-    "tags": ["palm", "up", "손바닥위", "받기"]
-  },
-  {
-    "char": "🫷",
-    "tags": ["pushing", "left", "밀기", "왼쪽"]
-  },
-  {
-    "char": "🫸",
-    "tags": ["pushing", "right", "밀기", "오른쪽"]
-  },
-  {
-    "char": "🦴",
-    "tags": ["bone", "뼈", "해골"]
+    "char": "🤌",
+    "tags": [
+      "pinched",
+      "fingers",
+      "손가락",
+      "이탈리아"
+    ]
   }
 ]
