@@ -56,6 +56,8 @@ export const translations: Translations = {
 
     // 버튼
     'button.addEmoji': '+ 사용자 이모티콘 추가',
+    'button.exportData': '데이터 백업',
+    'button.importData': '데이터 복원',
     'button.devBlog': '개발자 블로그',
 
     // 모달
@@ -69,6 +71,9 @@ export const translations: Translations = {
 
     // 토스트
     'toast.copied': 'Copied',
+    'toast.backup.exported': '백업 파일을 다운로드했습니다',
+    'toast.backup.imported': '백업 데이터를 복원했습니다',
+    'toast.backup.failed': '백업 파일 형식이 올바르지 않습니다',
 
     // 언어 전환
     'language.current': 'KO',
@@ -125,6 +130,8 @@ export const translations: Translations = {
 
     // Buttons
     'button.addEmoji': '+ Add Custom Emoji',
+    'button.exportData': 'Backup Data',
+    'button.importData': 'Restore Data',
     'button.devBlog': 'Developer Blog',
 
     // Modal
@@ -138,6 +145,9 @@ export const translations: Translations = {
 
     // Toast
     'toast.copied': 'Copied',
+    'toast.backup.exported': 'Backup file downloaded',
+    'toast.backup.imported': 'Backup restored',
+    'toast.backup.failed': 'Invalid backup file format',
 
     // Language switch
     'language.current': 'EN',

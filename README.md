@@ -5,7 +5,7 @@
 **한 번의 클릭으로 이모지를 복사하세요!**
 
 [![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Download-blue?logo=googlechrome)](https://chromewebstore.google.com/detail/%EC%9D%B4%EB%AA%A8%EC%A7%80-%ED%8F%AC%EC%BC%93/nopjdllffljcogdfcilmhhbjjjanoccj?hl=ko)
-[![Version](https://img.shields.io/badge/version-1.3.0-green.svg)](https://github.com/yourusername/emoji-pocket)
+[![Version](https://img.shields.io/badge/version-1.3.3-green.svg)](https://github.com/yourusername/emoji-pocket)
 [![License](https://img.shields.io/badge/license-CC%20BY--NC-orange.svg)](LICENSE)
 
 다양한 이모지와 카오모지를 한 곳에서 쉽게 찾고 복사할 수 있는 Chrome 확장 프로그램입니다.
@@ -45,13 +45,22 @@
 
 ---
 
+### ➡️ What's new in 1.3.3
+
+- Added custom data backup export to JSON
+- Added custom data restore import from JSON
+- Added backup/restore controls in the popup UI
+
 ### ➡️ What's new in 1.3.2
 
 - Improved search quality with weighted tag ranking (exact/prefix/partial match)
 - Added typo-tolerant search using Levenshtein distance
 - Added multi-token query support (space/comma-separated keywords)
 - Added recent search history with input suggestions
+- Added keyboard navigation for search suggestions (ArrowUp/ArrowDown/Enter/Escape)
+- Added per-query delete and clear-all controls for recent searches
 - Synced search history across devices via Chrome Storage Sync
+- Fixed search input layout overflow in toolbar
 
 ### ➡️ What's new in 1.3.1
 - Add new emojis

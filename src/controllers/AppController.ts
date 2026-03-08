@@ -7,7 +7,10 @@ import { applyTheme, toggleTheme } from '../core/theme';
 import { initLanguage, toggleLanguage } from '../core/language';
 import { render, renderCats } from '../ui/renderer';
 import { loadKaomoji, ensureCategoryLoaded } from '../services/categoryService';
+import { createCustomDataBackup, restoreCustomDataBackup } from '../services/backupService';
 import { openModal, setupModalEvents } from '../ui/ModalManager';
+import { i18n } from '../i18n/i18n';
+import { toast } from '../utils/utils';
 import {
   WindowManager,
   TabManager,
@@ -29,6 +32,9 @@ export class AppController {
   private languageToggle: HTMLButtonElement;
   private devBlogLink: HTMLButtonElement;
   private addEmojiBtn: HTMLButtonElement;
+  private exportDataBtn: HTMLButtonElement;
+  private importDataBtn: HTMLButtonElement;
+  private importDataInput: HTMLInputElement;
 
   constructor() {
     this.windowManager = new WindowManager();
@@ -42,6 +48,9 @@ export class AppController {
     this.languageToggle = document.getElementById('languageToggle') as HTMLButtonElement;
     this.devBlogLink = document.getElementById('dev-blog-link') as HTMLButtonElement;
     this.addEmojiBtn = document.getElementById('addEmojiBtn') as HTMLButtonElement;
+    this.exportDataBtn = document.getElementById('exportDataBtn') as HTMLButtonElement;
+    this.importDataBtn = document.getElementById('importDataBtn') as HTMLButtonElement;
+    this.importDataInput = document.getElementById('importDataInput') as HTMLInputElement;
   }
 
   async initialize(): Promise<void> {
@@ -95,7 +104,43 @@ export class AppController {
     // 사용자 이모티콘 추가 버튼
     this.addEmojiBtn.addEventListener('click', () => openModal());
 
+    // 커스텀 데이터 백업/복원
+    this.exportDataBtn.addEventListener('click', () => this.handleExportCustomData());
+    this.importDataBtn.addEventListener('click', () => this.importDataInput.click());
+    this.importDataInput.addEventListener('change', () => {
+      void this.handleImportCustomData();
+    });
+
     // 모달 이벤트 설정
     setupModalEvents();
+  }
+
+  private handleExportCustomData(): void {
+    const backupText = createCustomDataBackup();
+    const blob = new Blob([backupText], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+    a.href = url;
+    a.download = `emoji-pocket-custom-backup-${stamp}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast(i18n.t('toast.backup.exported'));
+  }
+
+  private async handleImportCustomData(): Promise<void> {
+    const file = this.importDataInput.files?.[0];
+    this.importDataInput.value = '';
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      await restoreCustomDataBackup(text);
+      await render();
+      toast(i18n.t('toast.backup.imported'));
+    } catch (error) {
+      console.error('Failed to import custom backup:', error);
+      toast(i18n.t('toast.backup.failed'));
+    }
   }
 }

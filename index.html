@@ -562,6 +562,25 @@
         background: var(--hover);
         border-color: var(--text-secondary);
       }
+      .data-actions {
+        margin-top: 8px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .data-action-btn {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--bg);
+        color: var(--text);
+        cursor: pointer;
+        font-size: 12px;
+      }
+      .data-action-btn:hover {
+        background: var(--hover);
+      }
 
       /* 검색어 하이라이트 */
       .highlight {
@@ -724,6 +743,11 @@
       <button id="addEmojiBtn" class="add-emoji-btn" data-i18n="button.addEmoji">
         + 사용자 이모티콘 추가
       </button>
+      <div class="data-actions">
+        <button id="exportDataBtn" class="data-action-btn" data-i18n="button.exportData">데이터 백업</button>
+        <button id="importDataBtn" class="data-action-btn" data-i18n="button.importData">데이터 복원</button>
+        <input id="importDataInput" type="file" accept=".json,application/json" style="display: none;" />
+      </div>
       <button id="dev-blog-link" class="add-emoji-btn" data-i18n="button.devBlog">개발자 블로그</button>
     </div>
 

@@ -7,6 +7,7 @@ export * from './favoritesService';
 export * from './recentService';
 export * from './skinToneService';
 export * from './searchHistoryService';
+export * from './backupService';
 export * from './storageService';
 
 // 타입 명시적 export
@@ -41,6 +42,7 @@ export {
   removeSearchQuery,
   clearSearchHistory,
 } from './searchHistoryService';
+export { createCustomDataBackup, restoreCustomDataBackup } from './backupService';
 export {
   SKIN_TONES,
   SKIN_TONE_NAMES,
