@@ -45,6 +45,14 @@
 
 ---
 
+### ➡️ What's new in 1.3.2
+
+- Improved search quality with weighted tag ranking (exact/prefix/partial match)
+- Added typo-tolerant search using Levenshtein distance
+- Added multi-token query support (space/comma-separated keywords)
+- Added recent search history with input suggestions
+- Synced search history across devices via Chrome Storage Sync
+
 ### ➡️ What's new in 1.3.1
 - Add new emojis
 
