@@ -6,6 +6,7 @@ import type { Item } from '../core/types';
 import {
   setFavorites,
   setRecent,
+  setSearchHistory,
   setCustomEmojis,
   setCustomKaomoji,
   setTheme,
@@ -33,6 +34,10 @@ export class StorageSyncManager {
       if (changes.recent) {
         setRecent((changes.recent.newValue as string[]) || []);
         needRender = true;
+      }
+
+      if (changes.searchHistory) {
+        setSearchHistory((changes.searchHistory.newValue as string[]) || []);
       }
 
       if (changes.customEmojis) {

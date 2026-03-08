@@ -17,6 +17,78 @@ export async function copyToClipboard(text: string) {
   toast('복사됨');
 }
 
+function splitQueryTokens(query: string): string[] {
+  return query
+    .trim()
+    .toLowerCase()
+    .split(/[\s,]+/)
+    .map((it) => it.trim())
+    .filter(Boolean);
+}
+
+function levenshteinWithin(a: string, b: string, maxDistance: number): number {
+  const aLen = a.length;
+  const bLen = b.length;
+
+  if (Math.abs(aLen - bLen) > maxDistance) return maxDistance + 1;
+  if (a === b) return 0;
+
+  let prev = new Array<number>(bLen + 1);
+  for (let j = 0; j <= bLen; j += 1) prev[j] = j;
+
+  for (let i = 1; i <= aLen; i += 1) {
+    const curr = new Array<number>(bLen + 1);
+    curr[0] = i;
+    let rowMin = curr[0];
+
+    for (let j = 1; j <= bLen; j += 1) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      curr[j] = Math.min(
+        prev[j] + 1,
+        curr[j - 1] + 1,
+        prev[j - 1] + cost
+      );
+      if (curr[j] < rowMin) rowMin = curr[j];
+    }
+
+    if (rowMin > maxDistance) return maxDistance + 1;
+    prev = curr;
+  }
+
+  return prev[bLen];
+}
+
+function getTokenScore(token: string, item: Item): number {
+  let best = 0;
+
+  const charLower = item.char.toLowerCase();
+  if (charLower === token) best = Math.max(best, 420);
+  else if (charLower.includes(token)) best = Math.max(best, 280);
+
+  for (const tag of item.tags) {
+    const t = tag.toLowerCase();
+    if (t === token) {
+      best = Math.max(best, 360);
+      continue;
+    }
+    if (t.startsWith(token)) {
+      best = Math.max(best, 260);
+      continue;
+    }
+    if (t.includes(token)) {
+      best = Math.max(best, 180);
+      continue;
+    }
+
+    const dist = levenshteinWithin(token, t, 2);
+    if (dist <= 2) {
+      best = Math.max(best, 140 - dist * 30);
+    }
+  }
+
+  return best;
+}
+
 // 검색 + 카테고리 필터
 export function filterItems(
   q: string,
@@ -57,8 +129,22 @@ export function filterItems(
 
   if (!s) return list;
 
-  return list.filter(
-    (it) =>
-      it.char.includes(s) || it.tags.some((t) => t.toLowerCase().includes(s))
-  );
+  const tokens = splitQueryTokens(s);
+  if (!tokens.length) return list;
+
+  return list
+    .map((item) => {
+      let totalScore = 0;
+      for (const token of tokens) {
+        const tokenScore = getTokenScore(token, item);
+        if (tokenScore <= 0) {
+          return null;
+        }
+        totalScore += tokenScore;
+      }
+      return { item, score: totalScore };
+    })
+    .filter((it): it is { item: Item; score: number } => it !== null)
+    .sort((a, b) => b.score - a.score || a.item.char.localeCompare(b.item.char))
+    .map((it) => it.item);
 }

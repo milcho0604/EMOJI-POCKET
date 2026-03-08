@@ -12,6 +12,7 @@ export let KAOMOJI: Kaomoji[] = [];
 // 캐시 (렌더 성능 및 동기화 반영 용이)
 export let FAVORITES = new Set<string>();
 export let RECENT: string[] = [];
+export let SEARCH_HISTORY: string[] = [];
 export let CUSTOM_EMOJIS: Item[] = [];
 export let CUSTOM_KAOMOJI: Item[] = [];
 export let THEME: ThemeMode = 'light';
@@ -53,6 +54,10 @@ export function setRecent(recent: string[]) {
   RECENT = recent;
 }
 
+export function setSearchHistory(searchHistory: string[]) {
+  SEARCH_HISTORY = searchHistory;
+}
+
 export function setCustomEmojis(emojis: Item[]) {
   CUSTOM_EMOJIS = emojis;
 }
@@ -82,6 +87,7 @@ export async function loadFromSync() {
   const {
     favorites = [],
     recent = [],
+    searchHistory = [],
     theme = 'light',
     customEmojis = [],
     customKaomoji = [],
@@ -90,6 +96,7 @@ export async function loadFromSync() {
   } = await syncGet<{
     favorites?: string[];
     recent?: string[];
+    searchHistory?: string[];
     theme?: ThemeMode;
     customEmojis?: Item[];
     customKaomoji?: Item[];
@@ -98,6 +105,7 @@ export async function loadFromSync() {
   }>({
     favorites: [],
     recent: [],
+    searchHistory: [],
     theme: 'light',
     customEmojis: [],
     customKaomoji: [],
@@ -107,6 +115,7 @@ export async function loadFromSync() {
 
   FAVORITES = new Set<string>(favorites);
   RECENT = Array.isArray(recent) ? recent : [];
+  SEARCH_HISTORY = Array.isArray(searchHistory) ? searchHistory : [];
   CUSTOM_EMOJIS = Array.isArray(customEmojis) ? customEmojis : [];
   CUSTOM_KAOMOJI = Array.isArray(customKaomoji) ? customKaomoji : [];
   THEME = theme === 'dark' ? 'dark' : 'light';

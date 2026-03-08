@@ -6,6 +6,7 @@ export * from './customService';
 export * from './favoritesService';
 export * from './recentService';
 export * from './skinToneService';
+export * from './searchHistoryService';
 export * from './storageService';
 
 // 타입 명시적 export
@@ -33,6 +34,7 @@ export {
   isFavorite
 } from './favoritesService';
 export { getRecent, addToRecent } from './recentService';
+export { getSearchHistory, addSearchQuery, getSearchSuggestions } from './searchHistoryService';
 export {
   SKIN_TONES,
   SKIN_TONE_NAMES,

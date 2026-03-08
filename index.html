@@ -595,7 +595,8 @@
       </div>
 
       <div class="toolbar">
-        <input id="q" placeholder="검색 (예: heart, happy, (웃음))" data-i18n-placeholder="search.placeholder" />
+        <input id="q" list="searchHistoryList" placeholder="검색 (예: heart, happy, (웃음))" data-i18n-placeholder="search.placeholder" />
+        <datalist id="searchHistoryList"></datalist>
         <button id="languageToggle" class="language-toggle" title="언어 전환 (한국어/English)" data-i18n-title="language.switch">
           <span data-i18n="language.current">KO</span>
         </button>
