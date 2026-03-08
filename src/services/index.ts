@@ -34,7 +34,13 @@ export {
   isFavorite
 } from './favoritesService';
 export { getRecent, addToRecent } from './recentService';
-export { getSearchHistory, addSearchQuery, getSearchSuggestions } from './searchHistoryService';
+export {
+  getSearchHistory,
+  addSearchQuery,
+  getSearchSuggestions,
+  removeSearchQuery,
+  clearSearchHistory,
+} from './searchHistoryService';
 export {
   SKIN_TONES,
   SKIN_TONE_NAMES,

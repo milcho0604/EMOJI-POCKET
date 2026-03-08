@@ -38,3 +38,20 @@ export function getSearchSuggestions(query: string, limit = 6): string[] {
   );
   return [...prefixMatches, ...includeMatches].slice(0, limit);
 }
+
+export async function removeSearchQuery(query: string): Promise<void> {
+  const normalized = normalizeQuery(query);
+  if (!normalized) return;
+
+  const next = SEARCH_HISTORY.filter((it) => it !== normalized);
+  if (next.length === SEARCH_HISTORY.length) return;
+
+  setSearchHistory(next);
+  await syncSet({ searchHistory: next });
+}
+
+export async function clearSearchHistory(): Promise<void> {
+  if (!SEARCH_HISTORY.length) return;
+  setSearchHistory([]);
+  await syncSet({ searchHistory: [] });
+}

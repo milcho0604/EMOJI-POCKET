@@ -108,14 +108,112 @@
         display: flex;
         gap: 8px;
         margin-bottom: 8px;
+        align-items: flex-start;
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 0;
       }
       .toolbar input {
-        flex: 1;
+        width: 100%;
+        box-sizing: border-box;
         padding: 8px;
         border: 1px solid var(--border);
         border-radius: var(--radius);
         background: var(--bg);
         color: var(--text);
+      }
+      .search-suggestions {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+        display: none;
+      }
+      [data-theme='dark'] .search-suggestions {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+      }
+      .search-suggestions.show {
+        display: block;
+      }
+      .search-suggestions-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 8px;
+        border-bottom: 1px solid var(--border-light);
+        font-size: 11px;
+        color: var(--text-secondary);
+      }
+      .search-suggestions-clear {
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        font-size: 11px;
+        cursor: pointer;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+      .search-suggestions-clear:hover {
+        background: var(--hover);
+        color: var(--text);
+      }
+      .search-suggestion-list {
+        max-height: 140px;
+        overflow-y: auto;
+      }
+      .search-suggestion-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 6px 8px;
+        border-bottom: 1px solid var(--border-lighter);
+      }
+      .search-suggestion-item:last-child {
+        border-bottom: none;
+      }
+      .search-suggestion-item.active {
+        background: var(--hover);
+      }
+      .search-suggestion-value {
+        flex: 1;
+        min-width: 0;
+        border: none;
+        background: transparent;
+        color: var(--text);
+        text-align: left;
+        cursor: pointer;
+        padding: 0;
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .search-suggestion-value:hover {
+        text-decoration: underline;
+      }
+      .search-suggestion-item.active .search-suggestion-value {
+        text-decoration: underline;
+      }
+      .search-suggestion-delete {
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-size: 12px;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+      .search-suggestion-delete:hover {
+        background: var(--hover);
+        color: #d33;
       }
       .toolbar button {
         padding: 8px 10px;
@@ -595,8 +693,16 @@
       </div>
 
       <div class="toolbar">
-        <input id="q" list="searchHistoryList" placeholder="검색 (예: heart, happy, (웃음))" data-i18n-placeholder="search.placeholder" />
-        <datalist id="searchHistoryList"></datalist>
+        <div class="search-wrap">
+          <input id="q" placeholder="검색 (예: heart, happy, (웃음))" data-i18n-placeholder="search.placeholder" />
+          <div id="searchSuggestions" class="search-suggestions">
+            <div class="search-suggestions-header">
+              <span data-i18n="search.recentTitle">최근 검색어</span>
+              <button id="clearSearchHistoryBtn" class="search-suggestions-clear" type="button" data-i18n="search.clearAll">전체 삭제</button>
+            </div>
+            <div id="searchSuggestionList" class="search-suggestion-list"></div>
+          </div>
+        </div>
         <button id="languageToggle" class="language-toggle" title="언어 전환 (한국어/English)" data-i18n-title="language.switch">
           <span data-i18n="language.current">KO</span>
         </button>

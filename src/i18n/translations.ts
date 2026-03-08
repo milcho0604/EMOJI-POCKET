@@ -17,6 +17,9 @@ export const translations: Translations = {
 
     // 검색
     'search.placeholder': '검색 (예: heart, happy, (웃음))',
+    'search.recentTitle': '최근 검색어',
+    'search.clearAll': '전체 삭제',
+    'search.deleteOne': '삭제',
 
     // 테마
     'theme.toggle': '다크모드 전환',
@@ -83,6 +86,9 @@ export const translations: Translations = {
 
     // Search
     'search.placeholder': 'Search (e.g., happy, smile)',
+    'search.recentTitle': 'Recent Searches',
+    'search.clearAll': 'Clear all',
+    'search.deleteOne': 'Delete',
 
     // Theme
     'theme.toggle': 'Toggle Dark Mode',
