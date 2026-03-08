@@ -45,6 +45,9 @@
 
 ---
 
+### ➡️ What's new in 1.3.1
+- Add new emojis
+
 ### ➡️ What's new in 1.3.0
 
 - Add a button to open a popup (+ button)
